@@ -59,11 +59,7 @@ public class Controller implements ActionListener{
 		
                 
 		break;
-		
-		
-		
-	
-		
+			
 		}
 		
   }
