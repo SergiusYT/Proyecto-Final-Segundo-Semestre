@@ -48,7 +48,7 @@ public class View extends JFrame{
 	
 	public void jugadores() {
 		
-        cardLayout.show(cardPanel, "jugadores"); // Cambia a la tarjeta de jugadores
+        cardLayout.show(cardPanel, "login"); // Cambia a la tarjeta de jugadores
 	}
 	
 	public Login getPanelInicio() {
