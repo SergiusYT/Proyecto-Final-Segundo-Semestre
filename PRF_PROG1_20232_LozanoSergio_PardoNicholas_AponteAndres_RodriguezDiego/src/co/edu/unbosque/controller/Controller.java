@@ -9,18 +9,17 @@ import java.awt.event.ActionListener;
 
 
 
-
 public class Controller implements ActionListener{
 	 
-	  private View vista;
-	  private Model modelo;
+	  private View view;
+	  private Model model;
 
 		
 	  
   public Controller(){
 	  
-	  vista= new View();   
-	  modelo= new Model();
+	  view= new View();   
+	  model= new Model();
 
 	  add_components();  
 	  ejecutar();
@@ -30,7 +29,8 @@ public class Controller implements ActionListener{
 
   public void ejecutar() {
 		
-
+     view.setVisible(true);
+	  
   }
   
   
