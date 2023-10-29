@@ -11,19 +11,27 @@ public class User_DAO {
 
 	public User_DAO() {
 		
-        cargarUsuariosDesdeArchivo(); // Cargar usuarios al iniciar la aplicación
+        cargarUsuariosDesdeArchivo(); // Cargar usuarios al iniciar el programa
     
 	}
 
+// -------------- metodo para agregar un usuario --------------------------------
+	
     public boolean agregarUsuario(User_DTO usuario) {
     	
-        if (buscarUsuario(usuario.getUsername()) == null) {
-            usuarios.add(usuario);
+    	// verifcar si el usuario ya existe
+    	
+        if (buscarUsuario(usuario.getUsername()) == null) {   // se llama el metodo de buscarUsario para ver si este se encuentra ya registrado
+            usuarios.add(usuario); 
             guardarUsuariosEnArchivo(); // Guardar la lista de usuarios en el archivo
             return true;
         }
         return false;
     }
+    
+    
+    
+    
 
     public User_DTO buscarUsuario(String username) {
         for (User_DTO usuario : usuarios) {
