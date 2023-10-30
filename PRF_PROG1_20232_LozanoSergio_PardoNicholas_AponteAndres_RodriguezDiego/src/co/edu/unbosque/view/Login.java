@@ -8,7 +8,7 @@ public class Login extends JPanel {
 	private static final long serialVersionUID = 1L;
 	private JLabel texto1, texto2;
     private JTextField entrada1 , entrada2, entrada3;
-    private JButton agregar,registrar;
+    private JButton iniciar_sesion,registrar;
 
     public Login() {
         setLayout(null);
@@ -19,8 +19,8 @@ public class Login extends JPanel {
         entrada1 = new JTextField(20); 
         entrada2 = new JTextField(30); 
 
-        agregar = new JButton("Agregar");
-        agregar.setBounds(400,280,120,80);
+        iniciar_sesion = new JButton("Iniciar Sesión");
+        iniciar_sesion.setBounds(400,280,120,80);
 
         registrar = new JButton("Registrar");
         registrar.setBounds(800,280,120,80);
@@ -37,7 +37,7 @@ public class Login extends JPanel {
         add(texto2);
         add(entrada1);
         add(entrada2);
-        add(agregar);
+        add(iniciar_sesion);
         add(registrar);
     }
 
@@ -53,7 +53,7 @@ public class Login extends JPanel {
 	}
 	
     public JButton getButton_Login() {
-        return agregar;
+        return iniciar_sesion;
     }
     public JButton getButton_Register() {
         return registrar;

@@ -8,7 +8,7 @@ public class Register extends JPanel {
 	private static final long serialVersionUID = 1L;
 	private JLabel texto1, texto2;
     private JTextField entrada1 , entrada2, entrada3;
-    private JButton agregar,registrar;
+    private JButton cancelar,registrar;
 
     public Register() {
         setLayout(null);
@@ -19,8 +19,8 @@ public class Register extends JPanel {
         entrada1 = new JTextField(20); 
         entrada2 = new JTextField(30); 
 
-        agregar = new JButton("Cancelar");
-        agregar.setBounds(400,280,120,80);
+        cancelar = new JButton("Cancelar");
+        cancelar.setBounds(400,280,120,80);
 
         registrar = new JButton("Crear Usuario");
         registrar.setBounds(800,280,120,80);
@@ -37,7 +37,7 @@ public class Register extends JPanel {
         add(texto2);
         add(entrada1);
         add(entrada2);
-        add(agregar);
+        add(cancelar);
         add(registrar);
     }
 
@@ -52,8 +52,8 @@ public class Register extends JPanel {
 		return entrada2;
 	}
 	
-    public JButton getButton_Login() {
-        return agregar;
+    public JButton getButton_Cancel() {
+        return cancelar;
     }
     public JButton getButton_Create_User() {
         return registrar;

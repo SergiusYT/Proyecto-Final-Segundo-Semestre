@@ -50,6 +50,16 @@ public class Model {
 
 	    }
 	    
+	    public boolean validarInicioSesion(String username, String password) {
+	        User_DTO usuario = buscarUsuario(username);
+	        if (usuario != null && usuario.getPassword().equals(password)) {
+	            return true; // Inicio de sesión exitoso
+	        }
+	        return false; // Inicio de sesión fallido
+	    }
+	    
+	 
+	    
 
 	
 	

@@ -46,6 +46,9 @@ public class Controller implements ActionListener{
 	  view.getLogin().getButton_Register().addActionListener(this);
 	  view.getLogin().getButton_Register().setActionCommand("sign_in");
 	  
+	  view.getRegister().getButton_Cancel().addActionListener(this);
+	  view.getRegister().getButton_Cancel().setActionCommand("cancel");
+	  
 	  view.getRegister().getButton_Create_User().addActionListener(this);
 	  view.getRegister().getButton_Create_User().setActionCommand("create_user");
 	 
@@ -70,9 +73,12 @@ public class Controller implements ActionListener{
 		    	 String username = view.getLogin().getUsername().getText();
 		    	 String password = view.getLogin().getPassword().getText();     // se trae el texto escrito por el usuario  
 				    	 
-		    	if (model.buscarUsuario(username) != null && model.usuario(username, password).getPassword().equals(password)) {
+		    	if (model.validarInicioSesion(username, password)) {
 		    		
 		    		view.mensaje("Inicio de sesion Exitoso");
+		    		
+		    		view.getLogin().getUsername().setText("");
+
 		    		
 
 		    	}else {
@@ -101,6 +107,9 @@ public class Controller implements ActionListener{
 		    		 
 			    		view.mensaje("Registro Exitoso");
 
+			    		view.getLogin().getUsername().setText("");
+			    		view.getLogin().getPassword().setText("");
+			    		
 			    		view.setLogin();
 		    	   
 		    	 }else {
@@ -113,6 +122,12 @@ public class Controller implements ActionListener{
 		    	 }
 			
 		     break;	
+		     
+		     case "cancel":  // caso donde devolvera al usuario al login si cancela la operacion de registro
+					
+		    		view.setLogin();
+		    	 
+		     break;
 			
 		}
 		
