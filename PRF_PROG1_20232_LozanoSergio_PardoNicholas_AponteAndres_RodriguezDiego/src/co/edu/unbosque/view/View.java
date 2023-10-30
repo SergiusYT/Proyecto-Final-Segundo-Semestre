@@ -56,6 +56,13 @@ public class View extends JFrame{
      
 	}
 	
+	
+	public void mensaje(String texto) {
+		
+		JOptionPane.showMessageDialog(null, texto);
+	}
+	
+	
 	//-------------------------------------- Getters y Setters --------------------------------------------------------
 	
 	

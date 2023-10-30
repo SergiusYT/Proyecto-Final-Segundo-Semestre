@@ -9,6 +9,7 @@ public class Model {
 	private User_DAO user_DAO;
 	private User_DTO user_DTO;
 
+
 //----------------------- contructor -------------------------------	
 	
     public Model() {
@@ -44,11 +45,12 @@ public class Model {
 	    
 	    public User_DTO usuario(String username, String password) {
 	    	
-	    	return user_DTO = new User_DTO( username , password );
+	    	 user_DTO = new User_DTO(username, password);
+	    	 return user_DTO;
 
 	    }
 	    
-	
+
 	
 	
 	

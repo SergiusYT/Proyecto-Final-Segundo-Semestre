@@ -1,6 +1,7 @@
 package co.edu.unbosque.controller;
 
 import co.edu.unbosque.model.*;
+import co.edu.unbosque.model.persistence.User_DAO;
 import co.edu.unbosque.view.*;
 
 import java.awt.event.ActionEvent;
@@ -72,10 +73,16 @@ public class Controller implements ActionListener{
 				    	 
 		    	if (model.buscarUsuario(username) != null && model.usuario(username, password).getPassword().equals(password)) {
 		    		
+		    		view.mensaje("Inicio de sesion Exitoso");
 		    		
+
 		    	}else {
 		    		
+		    		view.mensaje("Inicio de sesion Fallido. Verifique lo ingresado");
 		    		
+		    		
+		    		view.getLogin().getUsername().setText("");
+		    		view.getLogin().getPassword().setText("");
 		    	}
 		    	 
 		     break;
@@ -88,14 +95,21 @@ public class Controller implements ActionListener{
 		
 		     case "create_user": // caso donde permitira al usuario crear definitivamente el usuario en el software
 			
-		    	 String nuevousername = view.getLogin().getUsername().getText();
-		    	 String nuevopassword = view.getLogin().getPassword().getText();     // se trae el texto escrito por el usuario
+		    	 String nuevousername = view.getRegister().getNewUsername().getText();
+		    	 String nuevopassword = view.getRegister().getNewPassword().getText();     // se trae el texto escrito por el usuario
 		    	 
 		    	 if(model.agregarUsuario(model.usuario(nuevousername, nuevopassword))) {  
 		    		 
+			    		view.mensaje("Registro Exitoso");
+
 		    	   
 		    	 }else {
 		    		 
+			    		view.mensaje("El nombre de usuario ya está en uso. Elija otro");
+			    		
+			    		view.getLogin().getUsername().setText("");
+			    		view.getLogin().getPassword().setText("");
+
 		    	 }
 			
 		     break;	

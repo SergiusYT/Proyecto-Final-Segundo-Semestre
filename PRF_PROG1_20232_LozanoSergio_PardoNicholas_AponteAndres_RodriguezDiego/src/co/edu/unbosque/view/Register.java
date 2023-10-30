@@ -44,11 +44,11 @@ public class Register extends JPanel {
    
 
 
-	public JTextField getUsername() {
+	public JTextField getNewUsername() {
         return entrada1;
     }
 
-	public JTextField getPassword() {
+	public JTextField getNewPassword() {
 		return entrada2;
 	}
 	
