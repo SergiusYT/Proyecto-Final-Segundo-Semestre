@@ -38,7 +38,7 @@ public class Register extends JPanel {
         username.setBounds(400,40,200,50);
         password.setBounds(400,120,200,50);
         
-     
+     // cambio
 
         add(texto1);
         add(texto2);
