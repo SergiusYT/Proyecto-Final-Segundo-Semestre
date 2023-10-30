@@ -71,6 +71,7 @@ public class Controller implements ActionListener{
 	  
 	  view.getPrincipal().getButton_Chance().addActionListener(this);
 	  view.getPrincipal().getButton_Chance().setActionCommand("chance_button");
+	  
    //--------------------------------------------------------------------------	
 	 
 
@@ -126,8 +127,8 @@ public class Controller implements ActionListener{
 		    		 
 			    		view.mensaje("Registro Exitoso");
 
-			    		view.getLogin().getUsername().setText("");
-			    		view.getLogin().getPassword().setText("");
+			    		view.getRegister().getNewUsername().setText("");
+			    		view.getRegister().getNewPassword().setText("");
 			    		
 			    		view.setLogin();
 		    	   
@@ -135,8 +136,8 @@ public class Controller implements ActionListener{
 		    		 
 			    		view.mensaje("El nombre de usuario ya está en uso. Elija otro");
 			    		
-			    		view.getLogin().getUsername().setText("");
-			    		view.getLogin().getPassword().setText("");
+			    		view.getRegister().getNewUsername().setText("");
+			    		view.getRegister().getNewPassword().setText("");
 
 		    	 }
 			
@@ -145,6 +146,8 @@ public class Controller implements ActionListener{
 		     case "cancel":  // caso donde devolvera al usuario al login si cancela la operacion de registro
 					
 		    		view.setLogin();
+		    		view.getRegister().getNewUsername().setText("");
+		    		view.getRegister().getNewPassword().setText("");
 		    	 
 		     break;
 			
