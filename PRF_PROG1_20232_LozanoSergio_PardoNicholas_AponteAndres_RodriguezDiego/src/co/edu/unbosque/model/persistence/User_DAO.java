@@ -47,7 +47,8 @@ public class User_DAO {
     }
 
     // Método para cargar usuarios desde el archivo .dat
-    public void cargarUsuariosDesdeArchivo() {
+    @SuppressWarnings("unchecked")
+	public void cargarUsuariosDesdeArchivo() {
         try (ObjectInputStream inputStream = new ObjectInputStream(new FileInputStream(archivo))) { 
           
         	usuarios = (ArrayList<User_DTO>) inputStream.readObject(); // Deserializar el arraylist de usuarios

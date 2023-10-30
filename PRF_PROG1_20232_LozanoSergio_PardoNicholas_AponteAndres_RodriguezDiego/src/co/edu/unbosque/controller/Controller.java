@@ -1,7 +1,6 @@
 package co.edu.unbosque.controller;
 
 import co.edu.unbosque.model.*;
-import co.edu.unbosque.model.persistence.User_DAO;
 import co.edu.unbosque.view.*;
 
 import java.awt.event.ActionEvent;
