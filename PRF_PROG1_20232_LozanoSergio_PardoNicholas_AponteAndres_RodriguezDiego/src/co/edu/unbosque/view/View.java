@@ -62,12 +62,12 @@ public class View extends JFrame{
 	
 	public void setLogin() {
 		
-        cardLayout.show(cardPanel, "login"); // Cambia a la tarjeta de jugadores
+        cardLayout.show(cardPanel, "login"); // Cambia a la tarjeta de login
 	}
 	
     public void setRegister() {
 		
-        cardLayout.show(cardPanel, "register"); // Cambia a la tarjeta de jugadores
+        cardLayout.show(cardPanel, "register"); // Cambia a la tarjeta de register
 	}
 	
 	public Login getLogin() {

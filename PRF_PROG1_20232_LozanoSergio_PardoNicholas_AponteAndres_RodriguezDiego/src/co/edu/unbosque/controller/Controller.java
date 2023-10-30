@@ -43,11 +43,11 @@ public class Controller implements ActionListener{
 	  view.getLogin().getButton_Login().addActionListener(this);
 	  view.getLogin().getButton_Login().setActionCommand("validate_session");
 	  
-	  view.getRegister().getButton_Create_User().addActionListener(this);
-	  view.getRegister().getButton_Create_User().setActionCommand("sign_in");
-	  
 	  view.getLogin().getButton_Register().addActionListener(this);
-	  view.getLogin().getButton_Register().setActionCommand("create_user");
+	  view.getLogin().getButton_Register().setActionCommand("sign_in");
+	  
+	  view.getRegister().getButton_Create_User().addActionListener(this);
+	  view.getRegister().getButton_Create_User().setActionCommand("create_user");
 	 
    //--------------------------------------------------------------------------	
 	 
