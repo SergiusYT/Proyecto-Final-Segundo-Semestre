@@ -102,6 +102,7 @@ public class Controller implements ActionListener{
 		    		 
 			    		view.mensaje("Registro Exitoso");
 
+			    		view.setLogin();
 		    	   
 		    	 }else {
 		    		 
