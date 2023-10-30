@@ -6,7 +6,7 @@ import java.util.*;
 public class User_DAO {
  
 	private ArrayList<User_DTO> usuarios = new ArrayList<>();
-    private String archivo = "usuarios.dat";
+    private String archivo = "apostadores.dat";
 	
 
 	public User_DAO() {
