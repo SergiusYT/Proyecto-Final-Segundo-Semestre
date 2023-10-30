@@ -34,17 +34,16 @@ public class Controller implements ActionListener{
   }
   
   
+  //--------------------------- metodo donde manejaremos los alias para tomar y luego asignarle eventos a un objeto ------------------
   
   public void add_components() {           
 	  
-/*	 
+	//---------------------- Inicio de sesion -------------------------------- 
 	  
-	 vista.getPanelInicio().getJugador().addActionListener(this);
-	 vista.getPanelInicio().getJugador().setActionCommand("jugador");
+	  view.getLogin().getButton_Login().addActionListener(this);
+	  view.getLogin().getButton_Login().setActionCommand("validate_session");
 	 
-	 vista.getPanelJugadores().getButton().addActionListener(this);
-	 vista.getPanelJugadores().getButton().setActionCommand("validar");
-*/	 
+   //--------------------------------------------------------------------------	
 	 
 
    }
@@ -55,7 +54,7 @@ public class Controller implements ActionListener{
 		
 		switch(Eventos_Inicio.getActionCommand()) {
 		
-		case "jugador":
+		case "validate_session":
 		
                 
 		break;

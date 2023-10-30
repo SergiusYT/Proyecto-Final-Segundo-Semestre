@@ -64,7 +64,7 @@ public class Login extends JPanel {
         return entrada1;
     }
 
-    public JButton getButton() {
+    public JButton getButton_Login() {
         return agregar;
     }
 }

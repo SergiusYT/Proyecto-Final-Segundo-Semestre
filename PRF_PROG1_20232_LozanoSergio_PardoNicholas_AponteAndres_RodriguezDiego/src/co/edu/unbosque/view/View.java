@@ -63,7 +63,7 @@ public class View extends JFrame{
         cardLayout.show(cardPanel, "login"); // Cambia a la tarjeta de jugadores
 	}
 	
-	public Login getPanelInicio() {
+	public Login getLogin() {
         return login;
     }
 	

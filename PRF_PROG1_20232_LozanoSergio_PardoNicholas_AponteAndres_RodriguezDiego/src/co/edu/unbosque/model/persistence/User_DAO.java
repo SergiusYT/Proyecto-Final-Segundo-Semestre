@@ -24,41 +24,65 @@ public class User_DAO {
         if (buscarUsuario(usuario.getUsername()) == null) {   // se llama el metodo de buscarUsario para ver si este se encuentra ya registrado
             usuarios.add(usuario); 
             guardarUsuariosEnArchivo(); // Guardar la lista de usuarios en el archivo
-            return true;
+            return true; // Indicar que el usuario se agregó exitosamente
         }
-        return false;
+        
+        return false; // Indicar que el usuario ya existe y no se pudo agregar
+    
     }
     
     
     
     
-
+    // Buscar un usuario por su nombre de usuario
+    
     public User_DTO buscarUsuario(String username) {
         for (User_DTO usuario : usuarios) {
             if (usuario.getUsername().equals(username)) {
-                return usuario;
+                
+            	return usuario;// Devolver el usuario si se encuentra
             }
         }
-        return null;
+        return null; // Devolver null si el usuario no se encuentra
     }
 
     // Método para cargar usuarios desde el archivo .dat
-    private void cargarUsuariosDesdeArchivo() {
-        try (ObjectInputStream inputStream = new ObjectInputStream(new FileInputStream(archivo))) {
+    public void cargarUsuariosDesdeArchivo() {
+        try (ObjectInputStream inputStream = new ObjectInputStream(new FileInputStream(archivo))) { 
           
-        	usuarios = (ArrayList<User_DTO>) inputStream.readObject();
+        	usuarios = (ArrayList<User_DTO>) inputStream.readObject(); // Deserializar el arraylist de usuarios
         
         } catch (IOException | ClassNotFoundException e) {
             // Si hay un error al cargar, simplemente continuamos con la lista vacía
         }
     }
 
-    // Método para guardar la lista de usuarios en el archivo .dat
+    // Método para guardar el arraylist de los usuarios en el archivo .dat
     private void guardarUsuariosEnArchivo() {
         try (ObjectOutputStream outputStream = new ObjectOutputStream(new FileOutputStream(archivo))) {
-            outputStream.writeObject(usuarios);
+            outputStream.writeObject(usuarios); // Serializar y guardar el arraylist de usuarios
+     
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
+
+	public ArrayList<User_DTO> getUsuarios() {
+		return usuarios;
+	}
+
+	public void setUsuarios(ArrayList<User_DTO> usuarios) {
+		this.usuarios = usuarios;
+	}
+
+	public String getArchivo() {
+		return archivo;
+	}
+
+	public void setArchivo(String archivo) {
+		this.archivo = archivo;
+	}
+    
+    
+    
 }  
