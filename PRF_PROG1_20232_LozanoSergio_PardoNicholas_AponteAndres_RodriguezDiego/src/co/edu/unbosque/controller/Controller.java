@@ -63,7 +63,14 @@ public class Controller implements ActionListener{
 	  view.getPrincipal().getButton_SuperAstro().addActionListener(this);
 	  view.getPrincipal().getButton_SuperAstro().setActionCommand("superastro_button");
 
-	 
+	  view.getPrincipal().getButton_Baloto().addActionListener(this);
+	  view.getPrincipal().getButton_Baloto().setActionCommand("baloto_button");
+	  
+	  view.getPrincipal().getButton_BetPlay().addActionListener(this);
+	  view.getPrincipal().getButton_BetPlay().setActionCommand("betplay_button");
+	  
+	  view.getPrincipal().getButton_Chance().addActionListener(this);
+	  view.getPrincipal().getButton_Chance().setActionCommand("chance_button");
    //--------------------------------------------------------------------------	
 	 
 
