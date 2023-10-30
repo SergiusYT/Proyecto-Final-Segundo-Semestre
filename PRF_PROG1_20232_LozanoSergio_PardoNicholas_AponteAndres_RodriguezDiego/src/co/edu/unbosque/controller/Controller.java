@@ -55,10 +55,13 @@ public class Controller implements ActionListener{
 	  view.getRegister().getButton_Create_User().addActionListener(this);
 	  view.getRegister().getButton_Create_User().setActionCommand("create_user");
 	  
-    //---------------------- Registro -------------------------------- 
+    //---------------------- Ventana principal  -------------------------------- 
   
 	  view.getPrincipal().getButton_Loteria().addActionListener(this);
 	  view.getPrincipal().getButton_Loteria().setActionCommand("lotery_button");
+	  
+	  view.getPrincipal().getButton_SuperAstro().addActionListener(this);
+	  view.getPrincipal().getButton_SuperAstro().setActionCommand("superastro_button");
 
 	 
    //--------------------------------------------------------------------------	

@@ -15,7 +15,7 @@ public class Principal extends JPanel {
         texto1 = new JLabel("Bienvenido a Gold Magic:");
         texto2 = new JLabel("Casa de apuestas la mejor del pais");
 
-       
+//---------------- implementacion de los botones -------------------------       
 
         loteria = new JButton("Loteria");
         loteria.setBounds(400,280,120,80);

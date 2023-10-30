@@ -7,7 +7,7 @@ public class Register extends JPanel {
 
 	private static final long serialVersionUID = 1L;
 	private JLabel texto1, texto2;
-    private JTextField entrada1 , entrada2, entrada3;
+    private JTextField entrada1 , entrada2;
     private JButton cancelar,registrar;
 
     public Register() {
