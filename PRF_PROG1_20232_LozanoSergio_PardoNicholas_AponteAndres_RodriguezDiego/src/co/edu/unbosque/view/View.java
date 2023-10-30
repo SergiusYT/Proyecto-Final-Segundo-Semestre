@@ -13,6 +13,7 @@ public class View extends JFrame{
 	private JPanel cardPanel;
     private CardLayout cardLayout;
 	private Login login;
+	private Register register;
 	
 	
 	
@@ -31,7 +32,7 @@ public class View extends JFrame{
        //----------------------Inicializacion de objetos ------------------------------------------------------------
         
                 login = new Login();
-        
+                register = new Register();
         
         
        //------------------------ Actualizacion de paneles en el mismo JFrame----------------------------------------
@@ -46,6 +47,7 @@ public class View extends JFrame{
 		// estructura de paneles que usare en el JFrame( el panel que quiero poner, "nombre que que quiero que reconzca ese panel )"
 		 
 		 cardPanel.add(login, "login"); // "login" es el nombre de la tarjeta   
+		 cardPanel.add(register, "register"); // "register" es el nombre de la tarjeta   
 
 	     
 	     add(cardPanel);
@@ -58,15 +60,23 @@ public class View extends JFrame{
 	
 	
 	
-	public void jugadores() {
+	public void setLogin() {
 		
         cardLayout.show(cardPanel, "login"); // Cambia a la tarjeta de jugadores
+	}
+	
+    public void setRegister() {
+		
+        cardLayout.show(cardPanel, "register"); // Cambia a la tarjeta de jugadores
 	}
 	
 	public Login getLogin() {
         return login;
     }
 	
+	public Register getRegister() {
+        return register;
+    }
 	
 
 

@@ -2,7 +2,7 @@ package co.edu.unbosque.view;
 
 import javax.swing.*;
 
-public class Login extends JPanel {
+public class Register extends JPanel {
 
 
 	private static final long serialVersionUID = 1L;
@@ -10,19 +10,19 @@ public class Login extends JPanel {
     private JTextField entrada1 , entrada2, entrada3;
     private JButton agregar,registrar;
 
-    public Login() {
+    public Register() {
         setLayout(null);
 
-        texto1 = new JLabel("Usuario:");
-        texto2 = new JLabel("Contraseña:");
+        texto1 = new JLabel("Crea un Usuario:");
+        texto2 = new JLabel("Crea una Contraseña:");
 
         entrada1 = new JTextField(20); 
         entrada2 = new JTextField(30); 
 
-        agregar = new JButton("Agregar");
+        agregar = new JButton("Cancelar");
         agregar.setBounds(400,280,120,80);
 
-        registrar = new JButton("Registrar");
+        registrar = new JButton("Crear Usuario");
         registrar.setBounds(800,280,120,80);
         
         texto1.setBounds(30,40,130,50);
@@ -55,7 +55,7 @@ public class Login extends JPanel {
     public JButton getButton_Login() {
         return agregar;
     }
-    public JButton getButton_Register() {
+    public JButton getButton_Create_User() {
         return registrar;
     }
 }

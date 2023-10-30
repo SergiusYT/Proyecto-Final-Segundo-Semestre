@@ -7,6 +7,7 @@ import java.util.*;
 public class Model {
 
 	private User_DAO user_DAO;
+	private User_DTO user_DTO;
 
 //----------------------- contructor -------------------------------	
 	
@@ -36,11 +37,18 @@ public class Model {
 	
 	    // Obtener la lista de todos los usuarios
 	    public ArrayList<User_DTO> obtenerTodosLosUsuarios() {
-	        // Si es necesario, puedes implementar este método en UsuarioDAO
-	        // y luego llamarlo desde aquí
+	      
 	        return user_DAO.getUsuarios();
 	    }
+	    
+	    
+	    public User_DTO usuario(String username, String password) {
+	    	
+	    	return user_DTO = new User_DTO( username , password );
 
+	    }
+	    
+	
 	
 	
 	
