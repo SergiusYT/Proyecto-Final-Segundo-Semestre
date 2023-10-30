@@ -14,7 +14,8 @@ public class View extends JFrame{
     private CardLayout cardLayout;
 	private Login login;
 	private Register register;
-	
+	private Principal principal;
+
 	
 	
 	public View() {
@@ -33,7 +34,8 @@ public class View extends JFrame{
         
                 login = new Login();
                 register = new Register();
-        
+                principal = new Principal();
+
         
        //------------------------ Actualizacion de paneles en el mismo JFrame----------------------------------------
         
@@ -48,6 +50,7 @@ public class View extends JFrame{
 		 
 		 cardPanel.add(login, "login"); // "login" es el nombre de la tarjeta   
 		 cardPanel.add(register, "register"); // "register" es el nombre de la tarjeta   
+		 cardPanel.add(principal, "principal"); // "principal" es el nombre de la tarjeta   
 
 	     
 	     add(cardPanel);
@@ -76,6 +79,12 @@ public class View extends JFrame{
 		
         cardLayout.show(cardPanel, "register"); // Cambia a la tarjeta de register
 	}
+    
+    public void setPrincipal() {
+		
+        cardLayout.show(cardPanel, "principal"); // Cambia a la tarjeta de register
+	}
+    
 	
 	public Login getLogin() {
         return login;
@@ -83,6 +92,10 @@ public class View extends JFrame{
 	
 	public Register getRegister() {
         return register;
+    }
+	
+	public Principal getPrincipal() {
+        return principal;
     }
 	
 

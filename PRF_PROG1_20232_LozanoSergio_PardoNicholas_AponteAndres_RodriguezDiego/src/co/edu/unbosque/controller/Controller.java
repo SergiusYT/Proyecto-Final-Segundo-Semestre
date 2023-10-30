@@ -46,11 +46,20 @@ public class Controller implements ActionListener{
 	  view.getLogin().getButton_Register().addActionListener(this);
 	  view.getLogin().getButton_Register().setActionCommand("sign_in");
 	  
+	//---------------------- Registro -------------------------------- 
+	  
+	  
 	  view.getRegister().getButton_Cancel().addActionListener(this);
 	  view.getRegister().getButton_Cancel().setActionCommand("cancel");
 	  
 	  view.getRegister().getButton_Create_User().addActionListener(this);
 	  view.getRegister().getButton_Create_User().setActionCommand("create_user");
+	  
+    //---------------------- Registro -------------------------------- 
+  
+	  view.getPrincipal().getButton_Loteria().addActionListener(this);
+	  view.getPrincipal().getButton_Loteria().setActionCommand("lotery_button");
+
 	 
    //--------------------------------------------------------------------------	
 	 
@@ -79,7 +88,7 @@ public class Controller implements ActionListener{
 		    		
 		    		view.getLogin().getUsername().setText("");
 
-		    		
+		    		view.setPrincipal();
 
 		    	}else {
 		    		
