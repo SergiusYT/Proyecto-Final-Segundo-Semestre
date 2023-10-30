@@ -2,13 +2,16 @@ package co.edu.unbosque.view;
 
 import javax.swing.*;
 
+import com.toedter.calendar.JCalendar;
+
 public class Register extends JPanel {
 
 
 	private static final long serialVersionUID = 1L;
 	private JLabel texto1, texto2;
-    private JTextField  nombre, nacimiento, cedula, direccion, celular, username , password;
+    private JTextField  nombre, cedula, direccion, celular, username , password;
     private JComboBox<String> sede_apuesta;
+	private JCalendar nacimiento;
     private JButton cancelar,registrar;
 
     public Register() {
@@ -16,6 +19,9 @@ public class Register extends JPanel {
 
         texto1 = new JLabel("Crea un Usuario:");
         texto2 = new JLabel("Crea una Contraseña:");
+        
+        nacimiento = new JCalendar();
+        nacimiento.setBounds(40, 440, 500, 400); 
 
         username = new JTextField(20); 
         password = new JTextField(30); 
@@ -29,8 +35,8 @@ public class Register extends JPanel {
         texto1.setBounds(30,40,130,50);
         texto2.setBounds(30,120,130,50);
 
-        username.setBounds(130,40,200,50);
-        password.setBounds(130,120,200,50);
+        username.setBounds(400,40,200,50);
+        password.setBounds(400,120,200,50);
         
      
 
@@ -40,6 +46,7 @@ public class Register extends JPanel {
         add(password);
         add(cancelar);
         add(registrar);
+        add(nacimiento);
     }
 
    
