@@ -115,6 +115,8 @@ public class Controller implements ActionListener{
 		     case "sign_in":  // caso para dar un evento que permita el usuario entrar a un formulario y poder registrase
 			
 		    	 view.setRegister();
+		    	 view.getLogin().getPassword().setText("");
+
 		    	 
 		     break;
 		
