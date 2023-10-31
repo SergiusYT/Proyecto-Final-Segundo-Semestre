@@ -68,6 +68,9 @@ public class Register extends JPanel {
         nacimiento.setForeground(Color.black); // cambiara el color del texto que tenemos en el calendario
         nacimiento.setFont(new Font("Arial", Font.ITALIC, 15)); // Cambiar la fuente y tamaño
 
+        
+        
+        
         // JButtons
 
         cancelar.setBounds(600,280,120,80);
