@@ -1,8 +1,9 @@
 package co.edu.unbosque.view;
 
+import java.awt.*;
 import javax.swing.*;
+import com.toedter.calendar.*;
 
-import com.toedter.calendar.JCalendar;
 
 public class Register extends JPanel {
 
@@ -10,7 +11,7 @@ public class Register extends JPanel {
 	private static final long serialVersionUID = 1L;
 	private JLabel texto1, texto2, texto3, texto4, texto5, texto6, texto7, texto8, texto9;
     private JTextField  nombre, cedula, direccion, celular, username , password;
-    private JComboBox<String> sede_apuesta;
+    private JComboBox<String> sede_casa_apuesta;
 	private JCalendar nacimiento;
     private JButton cancelar,registrar;
 
@@ -23,7 +24,7 @@ public class Register extends JPanel {
 
         // JLabels
         
-        texto1 = new JLabel("Formulario de registro");
+        texto1 = new JLabel("Formulario de Registro");
         texto2 = new JLabel("Digite su Nombre completo:");
         texto3 = new JLabel("Fecha de nacimiento:");
         texto4 = new JLabel("Numero de documento:");
@@ -40,39 +41,68 @@ public class Register extends JPanel {
 
         // JTextFields
 
-        username = new JTextField(20); 
-        password = new JTextField(30); 
+        nombre = new JTextField(); 
+
+        username = new JTextField(); 
+        password = new JTextField(); 
+        
         
         // JButtons
 
         cancelar = new JButton("Cancelar");
         registrar = new JButton("Crear Usuario");
+        
+        // JComboBox
+        
+        sede_casa_apuesta = new JComboBox<String>();
+
 
        //--------------------------------- Propiedades para los componentes --------------------------------- 
         
         // JCalendar
         
-        nacimiento.setBounds(40, 440, 500, 400); 
+        nacimiento.setBounds(40, 260, 500, 400); 
+        nacimiento.setDecorationBackgroundColor(Color.white); // cambia el Color del fondo del JCalendar
+        nacimiento.setDecorationBordersVisible(true); // establece unos bordes al calendario para dejar mejor la distribucion de este
+        nacimiento.setWeekdayForeground(Color.BLUE); // poner un color a los dias de la semana
+        nacimiento.setForeground(Color.black); // cambiara el color del texto que tenemos en el calendario
+        nacimiento.setFont(new Font("Arial", Font.ITALIC, 15)); // Cambiar la fuente y tamaño
 
-       
         // JButtons
 
-        cancelar.setBounds(400,280,120,80);
+        cancelar.setBounds(600,280,120,80);
         registrar.setBounds(800,280,120,80);
         
 
         // JLabels
-        texto1.setBounds(30,40,130,50);
-        texto2.setBounds(30,120,130,50);
+        
+        texto1.setBounds(610,40,400,50);
+        texto1.setForeground(Color.black);
+		texto1.setFont(new Font("Arial" , Font.ITALIC,32));
+		
+        texto2.setBounds(30,90,300,50);
+        texto2.setForeground(Color.black);
+		texto2.setFont(new Font("Arial" , Font.BOLD,20));
+		
+		texto3.setBounds(30,210,300,50);
+	    texto3.setForeground(Color.black);
+        texto3.setFont(new Font("Arial" , Font.BOLD,20));
         
         // JTextFields
+        nombre.setBounds(40,140,350,50);
+		nombre.setFont(new Font("Arial", Font.PLAIN, 18));	
+
+
         username.setBounds(400,40,200,50);
         password.setBounds(400,120,200,50);
         
-     //------------- agregar los componenetes -------------------------------------------
+     //------------- agregar los componenetes al JPanel Register -------------------------------------------
 
         add(texto1);
         add(texto2);
+        add(texto3);
+
+        add(nombre);
         add(username);
         add(password);
         add(cancelar);
@@ -81,6 +111,9 @@ public class Register extends JPanel {
     }
 
    
+    public JTextField getFull_Name() {
+        return nombre;
+    }
 
 
 	public JTextField getNewUsername() {
