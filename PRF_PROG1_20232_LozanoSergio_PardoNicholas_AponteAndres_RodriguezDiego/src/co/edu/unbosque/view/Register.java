@@ -42,6 +42,10 @@ public class Register extends JPanel {
         // JTextFields
 
         nombre = new JTextField(); 
+        cedula = new JTextField(); 
+        direccion = new JTextField();
+        celular = new JTextField(); 
+
 
         username = new JTextField(); 
         password = new JTextField(); 
@@ -67,40 +71,31 @@ public class Register extends JPanel {
         nacimiento.setWeekdayForeground(Color.BLUE); // poner un color a los dias de la semana
         nacimiento.setForeground(Color.black); // cambiara el color del texto que tenemos en el calendario
         nacimiento.setFont(new Font("Arial", Font.ITALIC, 15)); // Cambiar la fuente y tamaño
-
+     
+        // JComboBox
         
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
+        sede_casa_apuesta.setBounds(900,140,450,50);
+        sede_casa_apuesta.setForeground(Color.black);
+        sede_casa_apuesta.setFont(new Font("Arial" , Font.ITALIC,18));
+        sede_casa_apuesta.addItem("Bogota");
+        sede_casa_apuesta.addItem("Chia");
+        sede_casa_apuesta.addItem("Tunja");
+        sede_casa_apuesta.addItem("Bucaramanga");
+        sede_casa_apuesta.addItem("Cartagena");
+        sede_casa_apuesta.addItem("Santa Marta");
+        sede_casa_apuesta.addItem("Cucuta");
+        sede_casa_apuesta.addItem("Leticia");
         
         
         // JButtons
 
-        cancelar.setBounds(600,280,120,80);
-        registrar.setBounds(800,280,120,80);
+        cancelar.setBounds(1000,700,120,80);
+        registrar.setBounds(1200,700,120,80);
         
 
         // JLabels
         
-        texto1.setBounds(610,40,400,50);
+        texto1.setBounds(610,20,400,50);
         texto1.setForeground(Color.black);
 		texto1.setFont(new Font("Arial" , Font.ITALIC,32));
 		
@@ -112,41 +107,116 @@ public class Register extends JPanel {
 	    texto3.setForeground(Color.black);
         texto3.setFont(new Font("Arial" , Font.BOLD,20));
         
+        texto4.setBounds(30,665,300,50);
+	    texto4.setForeground(Color.black);
+        texto4.setFont(new Font("Arial" , Font.BOLD,20));
+        
+        texto5.setBounds(900,90,450,50);
+        texto5.setForeground(Color.black);
+		texto5.setFont(new Font("Arial" , Font.BOLD,20));
+		
+		texto6.setBounds(900,210,450,50);
+        texto6.setForeground(Color.black);
+		texto6.setFont(new Font("Arial" , Font.BOLD,20));
+		
+		texto7.setBounds(900,320,450,50);
+        texto7.setForeground(Color.black);
+		texto7.setFont(new Font("Arial" , Font.BOLD,20));
+		
+		texto8.setBounds(900,430,450,50);
+        texto8.setForeground(Color.black);
+		texto8.setFont(new Font("Arial" , Font.BOLD,20));
+		
+		texto9.setBounds(900,540,450,50);
+        texto9.setForeground(Color.black);
+		texto9.setFont(new Font("Arial" , Font.BOLD,20));
+		
         // JTextFields
-        nombre.setBounds(40,140,350,50);
+
+		
+		nombre.setBounds(40,140,350,50);
 		nombre.setFont(new Font("Arial", Font.PLAIN, 18));	
 
+	    cedula.setBounds(40,720,350,50);
+		cedula.setFont(new Font("Arial", Font.PLAIN, 18));	
+		
+		direccion.setBounds(900,260,350,50);
+		direccion.setFont(new Font("Arial", Font.PLAIN, 18));	
 
-        username.setBounds(400,40,200,50);
-        password.setBounds(400,120,200,50);
+		celular.setBounds(900,370,350,50);
+		celular.setFont(new Font("Arial", Font.PLAIN, 18));	
+		
+		
+        username.setBounds(900,480,350,50);
+        password.setBounds(900,590,350,50);
+        
+        
+        
         
      //------------- agregar los componenetes al JPanel Register -------------------------------------------
 
         add(texto1);
         add(texto2);
         add(texto3);
+        add(texto4);
+        add(texto5);
+        add(texto6);
+        add(texto7);
+        add(texto8);
+        add(texto9);
+
+
+
 
         add(nombre);
+        add(cedula);
+        add(direccion);
+        add(celular);
+
         add(username);
         add(password);
+        
+        
         add(cancelar);
         add(registrar);
         add(nacimiento);
+        add(sede_casa_apuesta);
     }
 
    
+    
+//-----------------------------------------getters y setters -------------------------------------------
+    
+    
     public JTextField getFull_Name() {
         return nombre;
     }
-
-
 	public JTextField getNewUsername() {
         return username;
     }
-
 	public JTextField getNewPassword() {
 		return password;
 	}
+	public JTextField getCedula() {
+	    return cedula;
+    }
+	public JTextField getDireccion() {
+	    return direccion;
+    }
+	public JTextField getCelular() {
+		return celular;
+	}
+	
+	
+    public JCalendar getFecha() {
+	    return nacimiento;
+	}
+    
+    
+	public JComboBox<String> getSede_Casa_Apuestas() {
+	    return sede_casa_apuesta ;
+    }
+	
 	
     public JButton getButton_Cancel() {
         return cancelar;
