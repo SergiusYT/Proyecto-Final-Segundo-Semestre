@@ -76,6 +76,7 @@ public class Register extends JPanel {
         
         sede_casa_apuesta.setBounds(900,140,450,50);
         sede_casa_apuesta.setForeground(Color.black);
+        sede_casa_apuesta.setBackground(Color.white);
         sede_casa_apuesta.setFont(new Font("Arial" , Font.ITALIC,18));
         sede_casa_apuesta.addItem("Bogota");
         sede_casa_apuesta.addItem("Chia");
@@ -85,6 +86,7 @@ public class Register extends JPanel {
         sede_casa_apuesta.addItem("Santa Marta");
         sede_casa_apuesta.addItem("Cucuta");
         sede_casa_apuesta.addItem("Leticia");
+        sede_casa_apuesta.setSelectedIndex(-1); // Establecer ninguna opción seleccionada por defecto
         
         
         // JButtons

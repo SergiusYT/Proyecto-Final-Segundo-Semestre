@@ -135,6 +135,12 @@ public class Controller implements ActionListener{
 
 			    		view.getRegister().getNewUsername().setText("");
 			    		view.getRegister().getNewPassword().setText("");
+			    		view.getRegister().getFull_Name().setText("");
+			    		view.getRegister().getCedula().setText("");
+			    		view.getRegister().getDireccion().setText("");
+			    		view.getRegister().getCelular().setText("");
+			    		view.getRegister().getSede_Casa_Apuestas().setSelectedIndex(-1); // Establecer ninguna opción seleccionada por defecto
+
 			    		
 			    		view.setLogin();
 		    	   
@@ -154,12 +160,17 @@ public class Controller implements ActionListener{
 		    		view.setLogin();
 		    		view.getRegister().getNewUsername().setText("");
 		    		view.getRegister().getNewPassword().setText("");
+		    		view.getRegister().getFull_Name().setText("");
+		    		view.getRegister().getCedula().setText("");
+		    		view.getRegister().getDireccion().setText("");
+		    		view.getRegister().getCelular().setText("");
+		    		view.getRegister().getSede_Casa_Apuestas().setSelectedIndex(-1); // Establecer ninguna opción seleccionada por defecto
 		    	 
 		     break;
 		     
 		     case "salir_Login":
 		    	 
-					System.exit(0); // con esto se cerrara el programa al entrar a este methodo no retornable
+					System.exit(0); // con esto se cerrara el programa 
 		     
 		     break;
 			
