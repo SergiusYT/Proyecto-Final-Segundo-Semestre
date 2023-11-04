@@ -71,6 +71,27 @@ public class Register extends JPanel {
         
         
         
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
         // JButtons
 
         cancelar.setBounds(600,280,120,80);
