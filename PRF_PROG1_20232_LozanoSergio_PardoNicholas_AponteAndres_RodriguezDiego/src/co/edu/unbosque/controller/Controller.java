@@ -46,6 +46,10 @@ public class Controller implements ActionListener{
 	  view.getLogin().getButton_Register().addActionListener(this);
 	  view.getLogin().getButton_Register().setActionCommand("sign_in");
 	  
+	  view.getLogin().getButton_Salir().addActionListener(this);
+	  view.getLogin().getButton_Salir().setActionCommand("salir_Login");
+
+	  
 	//---------------------- Registro -------------------------------- 
 	  
 	  
@@ -151,6 +155,12 @@ public class Controller implements ActionListener{
 		    		view.getRegister().getNewUsername().setText("");
 		    		view.getRegister().getNewPassword().setText("");
 		    	 
+		     break;
+		     
+		     case "salir_Login":
+		    	 
+					System.exit(0); // con esto se cerrara el programa al entrar a este methodo no retornable
+		     
 		     break;
 			
 		}

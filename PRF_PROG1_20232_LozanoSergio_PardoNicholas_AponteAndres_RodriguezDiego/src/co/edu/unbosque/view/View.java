@@ -23,10 +23,9 @@ public class View extends JFrame{
 		//------------------- propiedades y caracteristica que contendra el JFrame -----------------------------------
 		
 		
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(600, 400); // tamaño del jframe
         setExtendedState(JFrame.MAXIMIZED_BOTH); // Establece el JFrame en modo pantalla completa
-      //  setUndecorated(true); // Elimina la barra de título y bordes
+        setUndecorated(true); // Elimina la barra de título y bordes
         setResizable(false); // Evita que el usuario redimensione la ventana
         
         
