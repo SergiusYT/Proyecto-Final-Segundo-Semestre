@@ -148,7 +148,10 @@ public class Register extends JPanel {
 		
 		
         username.setBounds(900,480,350,50);
+		username.setFont(new Font("Arial", Font.PLAIN, 18));	
+
         password.setBounds(900,590,350,50);
+		password.setFont(new Font("Arial", Font.PLAIN, 18));	
         
         
         
