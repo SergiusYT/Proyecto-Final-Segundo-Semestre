@@ -10,12 +10,13 @@ public class Model {
 
 	private User_DAO user_DAO;
 	private User_DTO user_DTO;
+	private Loteria loteria;
 
 //----------------------- contructor -------------------------------	
 	
     public Model() {
         user_DAO = new User_DAO();
-
+        loteria = new Loteria();
     }
 
     
@@ -54,6 +55,12 @@ public class Model {
 	            return true; // Inicio de sesión exitoso
 	        }
 	        return false; // Inicio de sesión fallido
+	    }
+	    
+	    
+	    public Loteria getLoteria() {
+	    	
+	    	return loteria;
 	    }
 	    
 	    

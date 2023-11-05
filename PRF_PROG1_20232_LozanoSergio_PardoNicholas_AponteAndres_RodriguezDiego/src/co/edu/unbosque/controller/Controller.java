@@ -177,6 +177,49 @@ public class Controller implements ActionListener{
 		
   }
   
+  //-------------------------------- Eventos de la Pantalla De Inicio --------------------------------------
+
+  
+  public void Events_Pantalla_Inicio(ActionEvent E_inicio) {
+		
+		
+		switch(E_inicio.getActionCommand()) {
+		
+		     case "lotery_button":
+		    	
+		 
+		
+		     break;
+		
+		     case "superastro_button":  
+			
+		   
+		    	 
+		     break;
+		
+		     case "baloto_button": 
+			
+		    	
+			
+		     break;	
+		     
+		     case "betplay_button":  
+					
+		    	
+		    	 
+		     break;
+		     
+		     case "chance_button":
+		    	 
+		     
+		     break;
+			
+		}
+		
+}
+  
+  
+  
   //--------------------------------------------------------------------------
   
   
@@ -187,6 +230,8 @@ public class Controller implements ActionListener{
 	  
 	// Activacion de los eventos 
                Events_Login(e);
+               
+               Events_Pantalla_Inicio(e);
   	
   }
 	

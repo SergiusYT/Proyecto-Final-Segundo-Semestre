@@ -12,6 +12,7 @@ public class User_DTO implements Serializable{
 	private static final long serialVersionUID = 1L;
 	private String username;
     private String password;
+    private Double saldo; // es el dinero que tendra el usuario para sus apuestas
    
     
   //-------------------------- Contructor que tomara los datos ----------------------  
