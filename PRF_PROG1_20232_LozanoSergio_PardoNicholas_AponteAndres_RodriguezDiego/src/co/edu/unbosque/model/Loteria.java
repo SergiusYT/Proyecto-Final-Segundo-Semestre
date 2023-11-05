@@ -2,25 +2,39 @@ package co.edu.unbosque.model;
 
 import java.util.*;
 
-public class Loteria {
+import co.edu.unbosque.model.persistence.*;
 
+public class Loteria {
+	
     private ArrayList<Integer> numerosGanadores; // Combinación de números ganadores
     private int costoBoleto; // Costo del boleto
+    private Loteria_DAO loteria_DAO;
 
     public Loteria() {
-        this.numerosGanadores = new ArrayList<>(); // Inicializa la lista, pero no genera los números aquí
+        
+    	loteria_DAO = new Loteria_DAO();
+
     }
 
-    
     public void generarNumerosGanadores() {
-        numerosGanadores.clear(); // Limpia la lista actual
-
+    	// Cargar números ganadores existentes
+        Loteria_DTO dtoExistente = loteria_DAO.cargarNumerosGanadores();
+        ArrayList<Integer> numerosGanadoresExistentes = (dtoExistente != null) ? dtoExistente.getNumerosGanadores() : new ArrayList<>();
+        
+        // Generar nuevos números ganadores
         Random random = new Random();
-
-        for (int i = 0; i < 4; i++) { // 4 cifras
-            int numero = random.nextInt(10); // Genera un número entre 0 y 9
-            numerosGanadores.add(numero);
+        ArrayList<Integer> nuevosNumeros = new ArrayList<>();
+        for (int i = 0; i < 4; i++) {
+            int numero = random.nextInt(10); //numeros entre 0 a 9
+            nuevosNumeros.add(numero);
         }
+        
+        // Agregar los nuevos números a la lista existente
+        numerosGanadoresExistentes.addAll(nuevosNumeros);
+        
+        // Guardar la lista completa en el archivo
+        Loteria_DTO dto = new Loteria_DTO(numerosGanadoresExistentes);
+        loteria_DAO.guardarNumerosGanadores(dto);
     }
 
     
@@ -37,7 +51,11 @@ public class Loteria {
     }
 
     public ArrayList<Integer> getNumerosGanadores() {
-        return numerosGanadores;
+        Loteria_DTO dto = loteria_DAO.cargarNumerosGanadores();
+        if (dto != null) {
+            return dto.getNumerosGanadores();
+        }
+        return new ArrayList<>(); // Devuelve una lista vacía si no se puede cargar el DTO
     }
 }
    

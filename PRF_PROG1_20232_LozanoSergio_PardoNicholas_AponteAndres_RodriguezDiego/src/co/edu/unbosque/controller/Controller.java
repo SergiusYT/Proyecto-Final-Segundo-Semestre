@@ -168,7 +168,7 @@ public class Controller implements ActionListener{
 		     break;
 		     
 		     case "salir_Login":
-		    	 
+
 					System.exit(0); // con esto se cerrara el programa 
 		     
 		     break;
@@ -187,7 +187,8 @@ public class Controller implements ActionListener{
 		
 		     case "lotery_button":
 		    	
-		 
+		   
+
 		
 		     break;
 		

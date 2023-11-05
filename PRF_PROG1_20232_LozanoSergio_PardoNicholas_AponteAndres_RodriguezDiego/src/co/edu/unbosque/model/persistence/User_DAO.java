@@ -5,10 +5,11 @@ import java.util.ArrayList;
 
 public class User_DAO {
     private ArrayList<User_DTO> usuarios;
-    private String archivo = "Archives// apostadores.dat";
+    private String archivo;
 
     public User_DAO() {
         usuarios = new ArrayList<>();
+        archivo = "Archives// apostadores.dat";
         consultarUsuarios(); // Cargar usuarios al iniciar el programa
     }
     
