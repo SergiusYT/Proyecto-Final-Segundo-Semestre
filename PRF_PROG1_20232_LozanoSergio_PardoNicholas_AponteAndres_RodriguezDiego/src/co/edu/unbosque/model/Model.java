@@ -19,10 +19,6 @@ public class Model {
     
  // ---------------------------- Metodos de la Persistencia ------------------------------------------------------   
     
-    
-    
-    
-    
       // .............. metodos de usuario Persistencia ...............................
     
     

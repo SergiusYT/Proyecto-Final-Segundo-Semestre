@@ -1,89 +1,128 @@
 package co.edu.unbosque.model.persistence;
 
 import java.io.*;
-import java.util.*;
+import java.util.ArrayList;
 
 public class User_DAO {
- 
-	private ArrayList<User_DTO> usuarios = new ArrayList<>();
+    private ArrayList<User_DTO> usuarios;
     private String archivo = "apostadores.dat";
-	
 
-	public User_DAO() {
-		
-        cargarUsuariosDesdeArchivo(); // Cargar usuarios al iniciar el programa
+    public User_DAO() {
+        usuarios = new ArrayList<>();
+        consultarUsuarios(); // Cargar usuarios al iniciar el programa
+    }
     
-	}
+    
+    
 
-// -------------- metodo para agregar un usuario --------------------------------
-	
+    // Método para agregar un usuario, cargar usuarios desde archivo y guardar en el archivo
     public boolean agregarUsuario(User_DTO usuario) {
-    	
-    	// verifcar si el usuario ya existe
-    	
-        if (buscarUsuario(usuario.getUsername()) == null) {   // se llama el metodo de buscarUsario para ver si este se encuentra ya registrado
-            usuarios.add(usuario); 
-            guardarUsuariosEnArchivo(); // Guardar la lista de usuarios en el archivo
+        // Cargar usuarios desde archivo
+    	consultarUsuarios();
+
+        // Verificar si el usuario ya existe
+        if (buscarUsuario(usuario.getUsername()) == null) {
+            usuarios.add(usuario);
+
+            // Guardar usuarios en archivo
+            try (ObjectOutputStream outputStream = new ObjectOutputStream(new FileOutputStream(archivo))) {
+                outputStream.writeObject(usuarios); // Serializar y guardar el ArrayList de usuarios
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
             return true; // Indicar que el usuario se agregó exitosamente
         }
-        
         return false; // Indicar que el usuario ya existe y no se pudo agregar
-    
     }
     
     
     
     
-    // Buscar un usuario por su nombre de usuario
-    
+
+    // Método para buscar un usuario por su nombre de usuario
     public User_DTO buscarUsuario(String username) {
         for (User_DTO usuario : usuarios) {
             if (usuario.getUsername().equals(username)) {
-                
-            	return usuario;// Devolver el usuario si se encuentra
+                return usuario; // Devolver el usuario si se encuentra
             }
         }
         return null; // Devolver null si el usuario no se encuentra
     }
+    
+    
 
-    // Método para cargar usuarios desde el archivo .dat
-    @SuppressWarnings("unchecked")
-	public void cargarUsuariosDesdeArchivo() {
-        try (ObjectInputStream inputStream = new ObjectInputStream(new FileInputStream(archivo))) { 
-          
-        	usuarios = (ArrayList<User_DTO>) inputStream.readObject(); // Deserializar el arraylist de usuarios
-        
-        } catch (IOException | ClassNotFoundException e) {
-            // Si hay un error al cargar, simplemente continuamos con la lista vacía
+    // Método para actualizar un usuario
+    public void actualizarUsuario(String username, User_DTO nuevoUsuario) {
+        for (int i = 0; i < usuarios.size(); i++) {
+            User_DTO usuario = usuarios.get(i);
+            if (usuario.getUsername().equals(username)) {
+                usuarios.set(i, nuevoUsuario);
+
+                // Guardar usuarios en archivo
+                try (ObjectOutputStream outputStream = new ObjectOutputStream(new FileOutputStream(archivo))) {
+                    outputStream.writeObject(usuarios); // Serializar y guardar el ArrayList de usuarios
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+
+                return;
+            }
         }
     }
+    
+    
+    
+    
 
-    // Método para guardar el arraylist de los usuarios en el archivo .dat
-    private void guardarUsuariosEnArchivo() {
+    // Método para eliminar un usuario
+    public void eliminarUsuario(String username) {
+        usuarios.removeIf(usuario -> usuario.getUsername().equals(username));
+
+        // Guardar usuarios en archivo
         try (ObjectOutputStream outputStream = new ObjectOutputStream(new FileOutputStream(archivo))) {
-            outputStream.writeObject(usuarios); // Serializar y guardar el arraylist de usuarios
-     
+            outputStream.writeObject(usuarios); // Serializar y guardar el ArrayList de usuarios
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
-
-	public ArrayList<User_DTO> getUsuarios() {
-		return usuarios;
-	}
-
-	public void setUsuarios(ArrayList<User_DTO> usuarios) {
-		this.usuarios = usuarios;
-	}
-
-	public String getArchivo() {
-		return archivo;
-	}
-
-	public void setArchivo(String archivo) {
-		this.archivo = archivo;
-	}
     
     
     
-}  
+
+ // Método para cargar usuarios desde el archivo .dat
+    public void consultarUsuarios() {
+        ArrayList<User_DTO> usuariosCargados = new ArrayList<>();
+
+        try (ObjectInputStream inputStream = new ObjectInputStream(new FileInputStream(archivo))) {
+            while (true) {
+                User_DTO usuario = (User_DTO) inputStream.readObject();
+                usuariosCargados.add(usuario);
+            }
+        } catch (EOFException e) {
+            // Fin del archivo
+        } catch (IOException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        usuarios = usuariosCargados;
+    }
+    
+    
+
+    public ArrayList<User_DTO> getUsuarios() {
+        return usuarios;
+    }
+
+    public void setUsuarios(ArrayList<User_DTO> usuarios) {
+        this.usuarios = usuarios;
+    }
+
+    public String getArchivo() {
+        return archivo;
+    }
+
+    public void setArchivo(String archivo) {
+        this.archivo = archivo;
+    }
+}
