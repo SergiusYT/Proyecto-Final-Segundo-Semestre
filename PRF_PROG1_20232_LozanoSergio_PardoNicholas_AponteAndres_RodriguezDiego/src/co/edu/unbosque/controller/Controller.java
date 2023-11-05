@@ -141,7 +141,6 @@ public class Controller implements ActionListener{
 			    		view.getRegister().getCelular().setText("");
 			    		view.getRegister().getSede_Casa_Apuestas().setSelectedIndex(-1); // Establecer ninguna opción seleccionada por defecto
 
-			    		
 			    		view.setLogin();
 		    	   
 		    	 }else {

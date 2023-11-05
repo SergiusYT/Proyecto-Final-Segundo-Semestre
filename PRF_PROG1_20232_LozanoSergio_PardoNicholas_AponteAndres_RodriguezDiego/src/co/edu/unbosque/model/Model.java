@@ -5,16 +5,17 @@ import co.edu.unbosque.model.persistence.*;
 import java.util.*;
 
 
+
 public class Model {
 
 	private User_DAO user_DAO;
 	private User_DTO user_DTO;
 
-
 //----------------------- contructor -------------------------------	
 	
     public Model() {
         user_DAO = new User_DAO();
+
     }
 
     
@@ -55,7 +56,7 @@ public class Model {
 	        return false; // Inicio de sesión fallido
 	    }
 	    
-	 
+	    
 	    
 
 	
