@@ -97,7 +97,7 @@ public class Controller implements ActionListener{
 		    	 String username = view.getLogin().getUsername().getText();
 		    	 String password = view.getLogin().getPassword().getText();     // se trae el texto escrito por el usuario  
 				    	 
-		    	if (model.validarInicioSesion(username, password)) {
+		    	if (model.getUsuarios().validarInicioSesion(username, password)) {
 		    		
 		    		view.mensaje("Inicio de sesion Exitoso");
 		    		
@@ -129,7 +129,7 @@ public class Controller implements ActionListener{
 		    	 String nuevousername = view.getRegister().getNewUsername().getText();
 		    	 String nuevopassword = view.getRegister().getNewPassword().getText();     // se trae el texto escrito por el usuario
 		    	 
-		    	 if(model.agregarUsuario(model.usuario(nuevousername, nuevopassword))) {  
+		    	 if(model.getUsuarios().agregarUsuario(nuevousername, nuevopassword)) {  
 		    		 
 			    		view.mensaje("Registro Exitoso");
 
@@ -187,8 +187,8 @@ public class Controller implements ActionListener{
 		
 		     case "lotery_button":
 		    	
-		   
-
+		    	 System.out.println(model.getLoteria().generarSeriesUnicas());
+		    	
 		
 		     break;
 		

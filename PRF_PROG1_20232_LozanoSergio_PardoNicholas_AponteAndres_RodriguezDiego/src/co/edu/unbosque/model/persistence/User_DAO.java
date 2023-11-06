@@ -93,21 +93,23 @@ public class User_DAO {
 
  // Método para cargar usuarios desde el archivo .dat
     @SuppressWarnings("unchecked")
-	public void consultarUsuarios() {
+	public ArrayList<User_DTO> consultarUsuarios() {
     	try (ObjectInputStream inputStream = new ObjectInputStream(new FileInputStream(archivo))) {
     		
             usuarios = (ArrayList<User_DTO>) inputStream.readObject(); // Deserializar el ArrayList de usuarios
+            return usuarios;
             
         } catch (IOException | ClassNotFoundException e) {
             // Si hay un error al cargar, simplemente continuamos con la lista vacía
+        	return null;
         }
     }
     
     
+    
+    
 
-    public ArrayList<User_DTO> getUsuarios() {
-        return usuarios;
-    }
+
 
     public void setUsuarios(ArrayList<User_DTO> usuarios) {
         this.usuarios = usuarios;
