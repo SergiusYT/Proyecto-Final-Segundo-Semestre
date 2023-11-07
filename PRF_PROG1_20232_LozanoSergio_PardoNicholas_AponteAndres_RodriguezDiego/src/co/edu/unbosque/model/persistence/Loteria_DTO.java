@@ -7,10 +7,10 @@ public class Loteria_DTO implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
 	
-	private int numerosGanadores, series;
+	private String numerosGanadores, series;
 	
 
-    public Loteria_DTO(int numerosGanadores, int series) {
+    public Loteria_DTO(String numerosGanadores, String series) {
     	
         this.numerosGanadores = numerosGanadores;
         this.series = series;
@@ -24,10 +24,10 @@ public class Loteria_DTO implements Serializable{
                '}';
     }
 
-    public int getNumerosGanadores() {
+    public String getNumerosGanadores() {
         return numerosGanadores;
     }
-    public int getSeries() {
+    public String getSeries() {
         return series;
     }
 }
