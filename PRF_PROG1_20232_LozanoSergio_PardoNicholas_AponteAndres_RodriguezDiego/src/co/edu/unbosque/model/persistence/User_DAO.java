@@ -1,13 +1,14 @@
 package co.edu.unbosque.model.persistence;
 
 import java.io.*;
-import java.util.ArrayList;
+import java.util.*;
 
 public class User_DAO {
     private ArrayList<User_DTO> usuarios;
     private String archivo;
 
     public User_DAO() {
+    	
         usuarios = new ArrayList<>();
         archivo = "Archives// apostadores.dat";
         consultarUsuarios(); // Cargar usuarios al iniciar el programa
@@ -15,6 +16,19 @@ public class User_DAO {
     
     
     
+    
+  // Método para buscar un usuario en ESPECIFICO  por su nombre de usuario
+    
+    public User_DTO buscarUsuario(String username) {
+        for (User_DTO usuario : usuarios) {
+            if (usuario.getUsername().equals(username)) {
+                return usuario; // Devolver el usuario si se encuentra
+            }
+        }
+        return null; // Devolver null si el usuario no se encuentra
+    }
+    
+   
 
     // Método para agregar un usuario, cargar usuarios desde archivo y guardar en el archivo
     public boolean agregarUsuario(User_DTO usuario) {
@@ -39,25 +53,15 @@ public class User_DAO {
     
     
     
-    
-
-    // Método para buscar un usuario por su nombre de usuario
-    public User_DTO buscarUsuario(String username) {
-        for (User_DTO usuario : usuarios) {
-            if (usuario.getUsername().equals(username)) {
-                return usuario; // Devolver el usuario si se encuentra
-            }
-        }
-        return null; // Devolver null si el usuario no se encuentra
-    }
+  
     
     
 
     // Método para actualizar un usuario
-    public void actualizarUsuario(String username, User_DTO nuevoUsuario) {
+    public void actualizarUsuario(String username, User_DTO nuevoUsuario, User_DTO usuarioExistente) {
         for (int i = 0; i < usuarios.size(); i++) {
-            User_DTO usuario = usuarios.get(i);
-            if (usuario.getUsername().equals(username)) {
+            usuarioExistente = usuarios.get(i);
+            if (usuarioExistente.getUsername().equals(username)) {
                 usuarios.set(i, nuevoUsuario);
 
                 // Guardar usuarios en archivo
@@ -109,17 +113,4 @@ public class User_DAO {
     
     
 
-
-
-    public void setUsuarios(ArrayList<User_DTO> usuarios) {
-        this.usuarios = usuarios;
-    }
-
-    public String getArchivo() {
-        return archivo;
-    }
-
-    public void setArchivo(String archivo) {
-        this.archivo = archivo;
-    }
 }

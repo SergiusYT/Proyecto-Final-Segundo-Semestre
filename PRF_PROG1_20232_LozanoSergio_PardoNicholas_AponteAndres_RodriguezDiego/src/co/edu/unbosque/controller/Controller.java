@@ -187,7 +187,9 @@ public class Controller implements ActionListener{
 		
 		     case "lotery_button":
 		    	
-		    	 System.out.println(model.getLoteria().generarSeriesUnicas());
+	
+
+
 		    	
 		
 		     break;

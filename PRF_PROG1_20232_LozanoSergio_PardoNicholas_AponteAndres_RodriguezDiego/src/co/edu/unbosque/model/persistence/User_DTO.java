@@ -22,7 +22,13 @@ public class User_DTO implements Serializable{
         this.password = password;
     }
 
-    
+    @Override
+    public String toString() {
+        return "User_DTO{" +
+               "username='" + username + '\'' +
+               ", password='" + password + '\'' +
+               '}';
+    }
     
  //-------------------------- Getters y Setters ------------------------------------
     

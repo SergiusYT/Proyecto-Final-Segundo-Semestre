@@ -4,11 +4,12 @@ import java.util.*;
 
 import co.edu.unbosque.model.persistence.*;
 
-public class Loteria {
+public class Loteria implements Interface{
 	
     private ArrayList<Integer> numerosGanadores; // Combinación de números ganadores
     private int costoBoleto; // Costo del boleto
     private Loteria_DAO loteria_DAO;
+    private Loteria_DTO loteria_DTO;
     private String serie; // Serie de tres dígitos no repetibles
     private double premioPrincipal, premioAcumulado ; // Monto del premio principal
     private ArrayList<String> fraccionesCompradas; // Registro de fracciones compradas
@@ -28,32 +29,7 @@ public class Loteria {
     
 // ---------------------------      METODOS PARA NUMEROS GANADORES GENERADOS EN UN SORTEO ----------------------------------------     
 
-    public void generarNumerosGanadores() {
-    	// Cargar números ganadores existentes
-        ArrayList<Integer> dtoExistente = loteria_DAO.cargarNumeroGanador();
-        ArrayList<Integer> numerosGanadoresExistentes = (dtoExistente != null) ? dtoExistente.getNumerosGanadores() : new ArrayList<>();
-        
-        // Generar nuevos números ganadores
-        random = new Random();
-        ArrayList<Integer> nuevosNumeros = new ArrayList<>();
-        for (int i = 0; i < 4; i++) {
-            int numero = random.nextInt(10); //numeros entre 0 a 9
-            nuevosNumeros.add(numero);
-        }
-        
-        // Agregar los nuevos números a la lista existente
-        numerosGanadoresExistentes.addAll(nuevosNumeros);
-        
-        // Guardar la lista completa en el archivo
-        Loteria_DTO dto = new Loteria_DTO(numerosGanadoresExistentes);
-        loteria_DAO.guardarNumerosGanadores(dto);
-    }
-
-    
-    public boolean comprobarGanador(ArrayList<Integer> numerosElegidos) {
-        return numerosGanadores.equals(numerosElegidos);
-    }
-    
+   
     
     
    //------------------------------------ METODOS PARA LA SERIES, FRACCIONES -----------------------------------
@@ -109,7 +85,42 @@ public class Loteria {
     
     
     
- //----------------------------------------------  METODO PARA COMENZAR EL JUEGO ---------------------------------------   
+ //----------------------------------------------  METODOs PARA COMENZAR EL JUEGO ---------------------------------------   
+    
+    
+    public void generarNumerosGanadores() {
+    	 // Cargar números ganadores existentes si hay
+        ArrayList<Loteria_DTO> numerosGanadoresExistentes = loteria_DAO.cargarNumerosGanadores();
+
+        // Generar nuevos números ganadores
+        int nuevoNumeroGanador = 0;
+        for (int i = 0; i < 4; i++) {
+        	
+            nuevoNumeroGanador = random.nextInt(10000); // números entre 0000 y 9999
+        }
+
+        // Crear un nuevo objeto Loteria_DTO para los nuevos números ganadores
+        loteria_DTO = new Loteria_DTO(nuevoNumeroGanador, 0); // Supongo que la serie es 0
+
+        // Agregar el nuevo número ganador a la lista existente (o crear una nueva lista si no había)
+        if (numerosGanadoresExistentes == null) {
+            numerosGanadoresExistentes = new ArrayList<>();
+        }
+        numerosGanadoresExistentes.add(loteria_DTO);
+
+        // Guardar la lista completa en el archivo
+        loteria_DAO.guardarNumerosGanadores(numerosGanadoresExistentes);
+    }
+    
+
+    
+    public boolean comprobarGanador(ArrayList<Integer> numerosElegidos) {
+        return numerosGanadores.equals(numerosElegidos);
+    }
+    
+    
+    
+   
     
     
     public void realizarSorteo() {
@@ -138,8 +149,11 @@ public class Loteria {
     
     
     
+    public ArrayList<Loteria_DTO> getConsultarNumerosGanadores() {
+    	return loteria_DAO.cargarNumerosGanadores();
+    }
     
-    
+
     
 
     public int getCostoBoleto() {
@@ -150,13 +164,7 @@ public class Loteria {
         this.costoBoleto = costoBoleto;
     }
 
-    public ArrayList<Integer> getNumerosGanadores() {
-        Loteria_DTO dto = loteria_DAO.cargarNumerosGanadores();
-        if (dto != null) {
-            return dto.getNumerosGanadores();
-        }
-        return new ArrayList<>(); // Devuelve una lista vacía si no se puede cargar el DTO
-    }
+
 }
    
 

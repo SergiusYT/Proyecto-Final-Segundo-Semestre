@@ -5,55 +5,48 @@ import java.util.ArrayList;
 
 
 public class Loteria_DAO {
+	
+	private ArrayList<Loteria_DTO> numeros;
     private String archivo; // Ruta del archivo .dat
-    private Loteria_DTO loteriaDTO;
 
     public Loteria_DAO() {
     	
+    	numeros = new ArrayList<>() ;
         archivo = "Archives// loteria.dat";
     }
 
     
- //---------------------- METODOS PARA GUARDAR EL HISTORICO DE LOS NUMEROS GANADORES ---------------------------------------   
+ //---------------------- METODOS PARA EL HISTORICO DE LOS NUMEROS GANADORES ---------------------------------------   
     
-    public void guardarNumerosGanadores(ArrayList<Integer> numeroGanador, ArrayList<Integer> serie ) {
-    	loteriaDTO = new Loteria_DTO(numeroGanador, serie);
-        try (ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream(archivo))) {
-            out.writeObject(loteriaDTO);
+    public void guardarNumerosGanadores(ArrayList<Loteria_DTO>  numerosGanadoresExistentes) {
+        // Guardar usuarios en archivo
+        try (ObjectOutputStream outputStream = new ObjectOutputStream(new FileOutputStream(archivo))) {
+            outputStream.writeObject(numerosGanadoresExistentes); // Serializar y guardar el ArrayList de usuarios
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
-
     
-    
-//---------------------- METODOS PARA EL HISTORICO DE LOS NUMEROS GANADORES ---------------------------------------   
-   
 
-    public ArrayList<Integer> cargarNumeroGanador() {
-        try (ObjectInputStream in = new ObjectInputStream(new FileInputStream(archivo))) {
-        	
-        	loteriaDTO = (Loteria_DTO) in.readObject();
-            return loteriaDTO.getNumerosGanadores();
+ // Método para cargar usuarios desde el archivo .dat
+    @SuppressWarnings("unchecked")
+	public ArrayList<Loteria_DTO> cargarNumerosGanadores() {
+    	try (ObjectInputStream inputStream = new ObjectInputStream(new FileInputStream(archivo))) {
+    		
+            numeros = (ArrayList<Loteria_DTO>) inputStream.readObject(); // Deserializar el ArrayList de usuarios
+            return numeros;
             
         } catch (IOException | ClassNotFoundException e) {
-            return null; // Devuelve null si no se puede cargar el DTO
-
+            // Si hay un error al cargar, simplemente continuamos con la lista vacía
+        	return null;
         }
     }
+
+    
+
     
     
 //---------------------- METODOS PARA LOS NUMEROS DE LA SERIE -----------------------------------------------------
     
-    
-    public ArrayList<Integer> cargarSerieGanadora() {
-        try (ObjectInputStream in = new ObjectInputStream(new FileInputStream(archivo))) {
-        	loteriaDTO = (Loteria_DTO) in.readObject();
-        	
-            return loteriaDTO.getSeries();
-        } catch (IOException | ClassNotFoundException e) {
-            return new ArrayList<>(); // Devuelve una lista vacía si no se puede cargar el DTO
-        }
-    }
-    
+
 }
