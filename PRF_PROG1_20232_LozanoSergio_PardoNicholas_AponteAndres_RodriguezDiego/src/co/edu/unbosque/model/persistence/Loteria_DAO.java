@@ -12,7 +12,7 @@ public class Loteria_DAO {
     public Loteria_DAO() {
     	
     	numeros = new ArrayList<>() ;
-        archivo = "Archives// loteria.dat";
+        archivo = "Archives// juegos.dat";
     }
 
     
