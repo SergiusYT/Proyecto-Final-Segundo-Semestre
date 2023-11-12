@@ -39,24 +39,7 @@ public class Loteria implements Interface{
    
     
     
-   //------------------------------------ METODOS PARA LA SERIES, FRACCIONES -----------------------------------
-    
-    
-    public ArrayList<String> generarSeriesUnicas() {
-    	
-    	    series_Disponibles = new ArrayList<>();
-
-    	    for (int i = 0; i < 24; i++) {
-    	    	
-    	            int numero = random.nextInt(1000); // Genera un número entre 000 y 999
-    	            String serieConCeros = String.format("%03d", numero); // Formatear con ceros a la izquierda
-    	       
-    	            series_Disponibles.add(serieConCeros);
-    	    }
-
-    	    return series_Disponibles;
-    }
-
+   
     
 
     public void comprarFraccion(int fraccion) {
@@ -90,15 +73,16 @@ public class Loteria implements Interface{
     
     
     
- //----------------------------------------------  METODOs PARA COMENZAR EL JUEGO ---------------------------------------   
+ //----------------------------------------------  METODOS NECESARIOS DE LOTERIA ---------------------------------------   
     
+    
+    /*--------------------- METODOS PARA QUE GENERES UN NUMERO DE 4 DIGITOS Y UN SERIE GANADORA -----------------------------------*/
+
     
     public void generarNumerosGanadores() {
-    	 // Cargar números ganadores existentes si hay
 
         // Generar nuevos números ganadores
       
-
             nuevoNumeroGanador = random.nextInt(10000); // Genera números entre 0 y 9999
            
          // Convierte el número en una cadena (String) con ceros a la izquierda si es necesario
@@ -108,7 +92,7 @@ public class Loteria implements Interface{
             nuevoSerieGanadora = random.nextInt(1000); // Genera números entre 0 y 999
             
             // Convierte el número en una cadena (String) con ceros a la izquierda si es necesario
-              serieGanadora = String.format("%03d", nuevoSerieGanadora);
+             serieGanadora = String.format("%03d", nuevoSerieGanadora);
             
           
 
@@ -116,6 +100,31 @@ public class Loteria implements Interface{
         loteria_DAO.guardarNumerosGanadores(numeroGanador, serieGanadora);
     }
     
+    
+             /*--------------------------- METODOS PARA LA SERIES GENERADAS -----------------------------------*/
+    
+    
+    public ArrayList<String> generarSeriesUnicas() {
+    	
+    	    series_Disponibles = new ArrayList<>();
+
+    	    for (int i = 0; i < 24; i++) {
+    	    	
+    	            int numero = random.nextInt(1000); // Genera un número entre 000 y 999
+    	            String serieConCeros = String.format("%03d", numero); // Formatear con ceros a la izquierda
+    	      
+    	            
+    	       // En una posición aleatoria, se agregara el número ganador de serie para dar una mayor probabilidad de ganar por parte de la serie
+    	            if (i == random.nextInt(24)) {
+    	                serieConCeros = String.format("%03d", nuevoSerieGanadora);
+    	            }
+    	            
+    	            series_Disponibles.add(serieConCeros);
+    	    }
+
+    	    return series_Disponibles;
+    }
+
 
     
     public boolean comprobarGanador(ArrayList<Integer> numerosElegidos) {
@@ -151,6 +160,10 @@ public class Loteria implements Interface{
             premioPrincipal = 0.0;
         }
     }
+    
+    
+    
+    
     
     
     

@@ -189,10 +189,11 @@ public class Controller implements ActionListener{
 		    	
 		     
 		    	 
-		    	 System.out.println(model.getLoteria().generarSeriesUnicas());
 		    	 
 		    	 
 		    	 model.getLoteria().generarNumerosGanadores();
+
+		    	 System.out.println(model.getLoteria().generarSeriesUnicas());
 
 		    	 
 		    	 System.out.println(model.getLoteria().getConsultarNumerosGanadores());
