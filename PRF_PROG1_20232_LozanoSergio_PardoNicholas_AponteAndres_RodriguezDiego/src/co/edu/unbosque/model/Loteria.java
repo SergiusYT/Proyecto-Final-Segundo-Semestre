@@ -42,10 +42,7 @@ public class Loteria implements Interface{
    
     
 
-    public void comprarFraccion(int fraccion) {
-        fraccionesCompradas.add(fraccion);
-    }
-
+ 
     public void calcularPremiosYRepartir() {
         double premioTotal = premioPrincipal + premioAcumulado;
         int totalFracciones = fraccionesCompradas.size();
@@ -76,7 +73,7 @@ public class Loteria implements Interface{
  //----------------------------------------------  METODOS NECESARIOS DE LOTERIA ---------------------------------------   
     
     
-    /*--------------------- METODOS PARA QUE GENERES UN NUMERO DE 4 DIGITOS Y UN SERIE GANADORA -----------------------------------*/
+          /*--------------------- METODOS PARA QUE GENERES UN NUMERO DE 4 DIGITOS Y UN SERIE GANADORA ------------------------*/
 
     
     public void generarNumerosGanadores() {
@@ -94,8 +91,6 @@ public class Loteria implements Interface{
             // Convierte el número en una cadena (String) con ceros a la izquierda si es necesario
              serieGanadora = String.format("%03d", nuevoSerieGanadora);
             
-          
-
         // Guardar la lista completa en el archivo
         loteria_DAO.guardarNumerosGanadores(numeroGanador, serieGanadora);
     }
@@ -124,7 +119,23 @@ public class Loteria implements Interface{
 
     	    return series_Disponibles;
     }
+    
+    
 
+    
+    /*--------------------------- METODOS PARA LA SERIES GENERADAS -----------------------------------*/
+
+    public void cantidadFraccion(int fraccion) {
+    	
+        fraccionesCompradas.add(fraccion);
+    }
+
+    
+    
+ //....................................................................................................................   
+    
+    
+    
 
     
     public boolean comprobarGanador(ArrayList<Integer> numerosElegidos) {
@@ -134,7 +145,7 @@ public class Loteria implements Interface{
     
     
    
-//----------------------------------------------  METODO PARA COMENZAR EL JUEGO ---------------------------------------   
+//----------------------------------------------  METODO PARA COMENZAR EL JUEGO o SORTEO ---------------------------------------   
 
     
     public void realizarSorteo() {

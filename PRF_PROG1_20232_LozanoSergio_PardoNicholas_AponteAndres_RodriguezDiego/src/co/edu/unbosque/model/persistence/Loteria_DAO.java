@@ -13,7 +13,7 @@ public class Loteria_DAO {
     public Loteria_DAO() {
     	
     	numeros = new ArrayList<>() ;
-        archivo = "Archives// juegos.dat";
+        archivo = "Archives// apuestas-loteria.dat";
     }
 
     
@@ -21,9 +21,6 @@ public class Loteria_DAO {
     
     public void guardarNumerosGanadores(String numerosGanadores, String series) {
     	
-    	 // Cargar números ganadores existentes si hay
-        cargarNumerosGanadores();
-
         loteria_DTO = new Loteria_DTO(numerosGanadores, series);
 
         // Agregar el nuevo número ganador a la lista existente
