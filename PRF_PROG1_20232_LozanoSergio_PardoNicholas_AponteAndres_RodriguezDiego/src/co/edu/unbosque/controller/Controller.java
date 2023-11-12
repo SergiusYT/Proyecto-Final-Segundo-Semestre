@@ -188,17 +188,10 @@ public class Controller implements ActionListener{
 		     case "lotery_button":
 		    	
 		     
+		    	
 		    	 
 		    	 
-		    	 
-		    	 model.getLoteria().generarNumerosGanadores();
-
-		    	 System.out.println(model.getLoteria().generarSeriesUnicas());
-
-		    	 
-		    	 System.out.println(model.getLoteria().getConsultarNumerosGanadores());
-
-        
+		  
 		    	
 		
 		     break;

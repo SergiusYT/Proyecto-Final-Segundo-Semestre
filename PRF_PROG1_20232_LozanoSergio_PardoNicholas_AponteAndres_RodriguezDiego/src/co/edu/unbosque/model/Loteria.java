@@ -8,15 +8,15 @@ public class Loteria implements Interface{
 	
     private Loteria_DAO loteria_DAO;
 	
-    private ArrayList<Integer> numerosGanadores, fraccionesCompradas; 
+    private ArrayList<Integer> numerosGanadores;
     private ArrayList<String> series_Disponibles;
 
-    private int nuevoNumeroGanador, nuevoSerieGanadora  ; 
+    private int nuevoNumeroGanador, nuevoSerieGanadora, fraccionesCompradas;  
     
     private String numeroGanador, serieGanadora; 
 
     
-    private double premioPrincipal, premioAcumulado, costoBoleto ; // Monto del premio principal
+    private double premioTOTAL, premioAcumulado, costoBoleto ; // Monto del premio principal
     private Random random;
 
     
@@ -29,8 +29,7 @@ public class Loteria implements Interface{
     	
         numerosGanadores = new ArrayList<>();
         
-        fraccionesCompradas = new ArrayList<>();
-
+      
 
     }
     
@@ -43,27 +42,7 @@ public class Loteria implements Interface{
     
 
  
-    public void calcularPremiosYRepartir() {
-        double premioTotal = premioPrincipal + premioAcumulado;
-        int totalFracciones = fraccionesCompradas.size();
-        double premioPorFraccion = premioTotal / totalFracciones;
-
-        for (int fraccion : fraccionesCompradas) {
-            if (esGanadora(fraccion, serieGanadora, numerosGanadores)) {
-                // Reparte el premio por fracción
-                premioPrincipal -= premioPorFraccion;
-            }
-        }
-
-        premioAcumulado += premioPrincipal;
-        premioPrincipal = 0.0;
-    }
-
-    public boolean esGanadora(int fraccion, String serie, ArrayList<Integer> numerosGanadores) {
-        // Implementa la lógica para verificar si una fracción es ganadora
-        // Puedes comparar la serie y los números de la fracción con los ganadores
-        return true; // Cambia esto según tu lógica de verificación
-    }
+    
     
     
     
@@ -121,14 +100,39 @@ public class Loteria implements Interface{
     }
     
     
+    
+    	public double calcularPremioPorFracciones(double premio) {
+    	    double porcentaje = 0;
+
+    	    switch (fraccionesCompradas) {
+    	        case 1:
+    	            porcentaje = 0.45; // si compra una fraccion tiene un 45% 
+    	            break;
+    	        case 2:
+    	            porcentaje = 0.75; // si compra dos fracciones tiene un 75% 
+    	            break;
+    	        case 3:
+    	            porcentaje = 1.0; // si compra tres fracciones tiene un 100% 
+    	            break;
+    	    }
+    	    double premio_real = premio * (1 - 0.2); // la loteria quita el 20% del total del premio y queda el 80% como premio realmente
+    	    
+    	    
+
+    	    
+    	    premioTOTAL=  premio_real * porcentaje;  // se quitara los porcetajes respectivos al premio total dependiendo las fracciones compradas      
+    	    
+            premioAcumulado +=  premio - premioTOTAL; // acumula lo descontado del premio total y se suma eso para los proximos premios
+
+    	    
+    	    return premioTOTAL;
+    	}
+    
+    
 
     
     /*--------------------------- METODOS PARA LA SERIES GENERADAS -----------------------------------*/
 
-    public void cantidadFraccion(int fraccion) {
-    	
-        fraccionesCompradas.add(fraccion);
-    }
 
     
     
@@ -149,27 +153,10 @@ public class Loteria implements Interface{
 
     
     public void realizarSorteo() {
-        // Genera números ganadores
-       generarNumerosGanadores();
        
-        // Verifica si hay ganadores
-        boolean hayGanador = false;
-        for (int fraccion : fraccionesCompradas) {
-            if (esGanadora(fraccion, serieGanadora, numerosGanadores)) {
-                // Hay al menos un ganador
-                hayGanador = true;
-                break;
-            }
-        }
-
-        if (hayGanador) {
-            // Si hay ganador, reparte los premios
-            calcularPremiosYRepartir();
-        } else {
-            // Si no hay ganador, acumula el premio principal
-            premioAcumulado += premioPrincipal;
-            premioPrincipal = 0.0;
-        }
+    	
+    	
+    	
     }
     
     
@@ -184,7 +171,20 @@ public class Loteria implements Interface{
     
 
     
+    public int getcantidadFraccion() {	
+        return fraccionesCompradas; 
+    }
+    
+    public void setcantidadFraccion(int fraccion) {
+        this.fraccionesCompradas = fraccion;
+    }
+    
 
+    public Double getPremioAcumulado() {	
+        return premioAcumulado; 
+    }
+    
+    
     public Double getCostoBoleto() {
         return costoBoleto;
     }
