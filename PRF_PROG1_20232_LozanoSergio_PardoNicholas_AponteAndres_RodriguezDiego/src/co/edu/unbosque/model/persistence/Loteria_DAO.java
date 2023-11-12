@@ -8,6 +8,7 @@ public class Loteria_DAO {
 	
 	private ArrayList<Loteria_DTO> numeros;
     private String archivo; // Ruta del archivo .dat
+    private Loteria_DTO loteria_DTO;
 
     public Loteria_DAO() {
     	
@@ -18,13 +19,23 @@ public class Loteria_DAO {
     
  //---------------------- METODOS PARA EL HISTORICO DE LOS NUMEROS GANADORES ---------------------------------------   
     
-    public void guardarNumerosGanadores(ArrayList<Loteria_DTO>  numerosGanadoresExistentes) {
-        // Guardar usuarios en archivo
+    public void guardarNumerosGanadores(String numerosGanadores, String series) {
+    	
+    	 // Cargar números ganadores existentes si hay
+        cargarNumerosGanadores();
+
+        loteria_DTO = new Loteria_DTO(numerosGanadores, series);
+
+        // Agregar el nuevo número ganador a la lista existente
+        numeros.add(loteria_DTO);
+
+        // Guardar la lista completa en el archivo
         try (ObjectOutputStream outputStream = new ObjectOutputStream(new FileOutputStream(archivo))) {
-            outputStream.writeObject(numerosGanadoresExistentes); // Serializar y guardar el ArrayList de usuarios
+            outputStream.writeObject(numeros); // Serializar y guardar el ArrayList de números ganadores
         } catch (IOException e) {
             e.printStackTrace();
         }
+    
     }
     
 
@@ -32,14 +43,12 @@ public class Loteria_DAO {
     @SuppressWarnings("unchecked")
 	public ArrayList<Loteria_DTO> cargarNumerosGanadores() {
     	try (ObjectInputStream inputStream = new ObjectInputStream(new FileInputStream(archivo))) {
-    		
-            numeros = (ArrayList<Loteria_DTO>) inputStream.readObject(); // Deserializar el ArrayList de usuarios
-            return numeros;
-            
+    		numeros = (ArrayList<Loteria_DTO>) inputStream.readObject(); // Deserializar el ArrayList de números ganadores
         } catch (IOException | ClassNotFoundException e) {
             // Si hay un error al cargar, simplemente continuamos con la lista vacía
-        	return null;
         }
+        return numeros;
+
     }
 
     
