@@ -18,7 +18,7 @@ public class Loteria_DAO {
     }
 
     
- //---------------------- METODOS PARA EL HISTORICO DE LOS NUMEROS GANADORES ---------------------------------------   
+ //---------------------- METODOS PARA EL HISTORICO DE LOS JUEGOS ---------------------------------------   
     
     public void guardarJuego(String nombreJuego, String tipoJuego, String numerosGanadores, String series, double presupuesto) {
     	
@@ -39,8 +39,10 @@ public class Loteria_DAO {
     
     }
     
+    
+    
 
- // Método para cargar usuarios desde el archivo .dat
+ // Método para cargar los juegos desde el archivo .dat
     @SuppressWarnings("unchecked")
 	public ArrayList<Loteria_DTO> cargarJuego() {
     	try (ObjectInputStream inputStream = new ObjectInputStream(new FileInputStream(archivoCasa))) {
@@ -71,6 +73,9 @@ public class Loteria_DAO {
 	    return 0.0; // Devolver 0 si la lista está vacía
 	}
     
-    
+	
+	
+//---------------------- METODOS PARA LAS APUESTAS HECHAS EN LA LOTERIA ---------------------------------------   
+
 
 }
