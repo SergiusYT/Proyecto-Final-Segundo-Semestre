@@ -24,7 +24,8 @@ public class User_DAO {
     }
 
     public boolean agregarUsuario(String username, String password) {
-        
+    	
+    	consultarUsuarios();
 
         // Verificar si el usuario ya existe
         if (buscarUsuario(username) == null) {

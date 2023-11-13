@@ -1,13 +1,11 @@
 package co.edu.unbosque.model;
 
-import java.util.*;
 
 public interface Interface {
 
-     public abstract void generarNumerosGanadores() ;
+     public abstract void generarNumerosGanadores(int numeroUsuario) ;
 	 
-	 public abstract boolean comprobarGanador(ArrayList<Integer> numeroganador) ;
 	 
-	 public abstract void realizarSorteo();
+	 public abstract Double realizarSorteo(double premio, String series, String numero);
 	 
 }

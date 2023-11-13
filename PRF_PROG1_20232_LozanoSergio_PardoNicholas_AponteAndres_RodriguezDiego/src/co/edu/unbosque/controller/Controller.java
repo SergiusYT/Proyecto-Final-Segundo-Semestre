@@ -5,6 +5,7 @@ import co.edu.unbosque.view.*;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Scanner;
 
 
 
@@ -187,8 +188,42 @@ public class Controller implements ActionListener{
 		
 		     case "lotery_button":
 		    	
-		     
-		    	
+		         Scanner scanner = new Scanner(System.in);
+
+		      
+
+
+		         
+		    	 System.out.println("Ingrese el premio: ");
+		         double premio = scanner.nextDouble();
+
+		         System.out.println("Ingrese la cantidad de fracciones: ");
+		         int fracciones = scanner.nextInt();
+		         
+		         System.out.println("Ingrese la cantidad de fracciones: ");
+		         int numero = scanner.nextInt();
+   model.getLoteria().generarNumerosGanadores(numero);
+		         
+		         System.out.println("Ingrese la cantidad de fracciones: ");
+		         String serie = scanner.next();
+		         
+		      
+		         
+		    	 System.out.println(		         model.getLoteria().getConsultarNumerosGanadores());
+
+		         
+		        String num = Integer.toString(numero);
+		         
+		         model.getLoteria().setcantidadFraccion(fracciones);
+		         
+
+		         Double premioGanado = model.getLoteria().realizarSorteo(premio, serie, num);
+
+		         if (premioGanado != null) {
+		             System.out.println("¡Felicidades! Has ganado: $" + premioGanado);
+		         } else {
+		             System.out.println("Lo siento, no has ganado. Premio acumulado: $" + model.getLoteria().getPremioAcumulado());
+		         }
 		    	 
 		    	 
 		  

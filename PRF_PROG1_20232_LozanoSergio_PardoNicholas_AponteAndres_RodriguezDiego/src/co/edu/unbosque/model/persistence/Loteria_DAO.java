@@ -21,6 +21,9 @@ public class Loteria_DAO {
     
     public void guardarNumerosGanadores(String numerosGanadores, String series) {
     	
+         cargarNumerosGanadores();
+
+    	
         loteria_DTO = new Loteria_DTO(numerosGanadores, series);
 
         // Agregar el nuevo número ganador a la lista existente
@@ -51,8 +54,6 @@ public class Loteria_DAO {
     
 
     
-    
-//---------------------- METODOS PARA LOS NUMEROS DE LA SERIE -----------------------------------------------------
     
 
 }

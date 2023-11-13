@@ -8,7 +8,6 @@ public class Loteria implements Interface{
 	
     private Loteria_DAO loteria_DAO;
 	
-    private ArrayList<Integer> numerosGanadores;
     private ArrayList<String> series_Disponibles;
 
     private int nuevoNumeroGanador, nuevoSerieGanadora, fraccionesCompradas;  
@@ -25,28 +24,8 @@ public class Loteria implements Interface{
         
     	loteria_DAO = new Loteria_DAO();
     	random = new Random();
-    	
-    	
-        numerosGanadores = new ArrayList<>();
-        
-      
-
+    
     }
-    
-// ---------------------------      METODOS PARA NUMEROS GANADORES GENERADOS EN UN SORTEO ----------------------------------------     
-
-   
-    
-    
-   
-    
-
- 
-    
-    
-    
-    
-    
     
     
  //----------------------------------------------  METODOS NECESARIOS DE LOTERIA ---------------------------------------   
@@ -55,14 +34,23 @@ public class Loteria implements Interface{
           /*--------------------- METODOS PARA QUE GENERES UN NUMERO DE 4 DIGITOS Y UN SERIE GANADORA ------------------------*/
 
     
-    public void generarNumerosGanadores() {
+    public void generarNumerosGanadores(int numeroApostador) {
+    
+    // daremos la probabilidad 50/50 para que este pueda ganar el premio con los 4 digitos
+    	
+    	// Generar un número aleatorio entre 1 y 100
+        int probabilidad = random.nextInt(100) + 1;
 
-        // Generar nuevos números ganadores
-      
-            nuevoNumeroGanador = random.nextInt(10000); // Genera números entre 0 y 9999
-           
-         // Convierte el número en una cadena (String) con ceros a la izquierda si es necesario
-             numeroGanador = String.format("%04d", nuevoNumeroGanador);
+        if (probabilidad <= 50) {
+            // Si la probabilidad es 1-50%, elige el número del apostador
+            nuevoNumeroGanador = numeroApostador;
+        } else {
+            // Si la probabilidad es 51-100%, elige un número aleatorio como de 4 digitos cualquiera
+            nuevoNumeroGanador = random.nextInt(10000);
+        }
+
+        // Convierte el número en una cadena (String) con ceros a la izquierda si es necesario
+        numeroGanador = String.format("%04d", nuevoNumeroGanador);
 
             
             nuevoSerieGanadora = random.nextInt(1000); // Genera números entre 0 y 999
@@ -101,7 +89,10 @@ public class Loteria implements Interface{
     
     
     
-    	public double calcularPremioPorFracciones(double premio) {
+    /*--------------------------- METODOS PARA COMPROBAR SI GANO Y  LA CANTINDAD DE DINERO DEPENDIENDO LA FRACCION -----------------------------------*/
+
+    
+    	public double calcularPremio(double premio) {
     	    double porcentaje = 0;
 
     	    switch (fraccionesCompradas) {
@@ -131,7 +122,6 @@ public class Loteria implements Interface{
     
 
     
-    /*--------------------------- METODOS PARA LA SERIES GENERADAS -----------------------------------*/
 
 
     
@@ -142,9 +132,7 @@ public class Loteria implements Interface{
     
 
     
-    public boolean comprobarGanador(ArrayList<Integer> numerosElegidos) {
-        return numerosGanadores.equals(numerosElegidos);
-    }
+
     
     
     
@@ -152,12 +140,26 @@ public class Loteria implements Interface{
 //----------------------------------------------  METODO PARA COMENZAR EL JUEGO o SORTEO ---------------------------------------   
 
     
-    public void realizarSorteo() {
-       
-    	
-    	
-    	
-    }
+    	public Double realizarSorteo(double premio, String series, String numero) {
+    	    
+    	    
+    	    // Verificar si hay ganadores
+    	        if (this.serieGanadora.equals(series) && this.numeroGanador.equals(numero)) {
+    	            // Hay al menos un ganador
+        	    	return  calcularPremio(premio); 
+    	        
+    	    } else {
+    	        // Si no hay ganador, acumula el premio principal
+    	        
+    	        premioTOTAL = premioAcumulado += premio;
+
+    	        
+    	        return null;
+    	    }
+    	}
+
+    
+  
     
     
     
@@ -193,6 +195,11 @@ public class Loteria implements Interface{
         this.costoBoleto = costoBoleto;
     }
 
+	
+
+
+	
+	
 
 }
    
