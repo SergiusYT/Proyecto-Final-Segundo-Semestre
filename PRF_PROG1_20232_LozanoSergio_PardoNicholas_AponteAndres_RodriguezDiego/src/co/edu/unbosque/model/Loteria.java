@@ -183,7 +183,7 @@ public class Loteria{
     
     
     public ArrayList<Loteria_DTO> getConsultarNumerosGanadores() {
-    	return loteria_DAO.cargarNumerosGanadores();
+    	return loteria_DAO.cargarJuego();
     }
     
 
