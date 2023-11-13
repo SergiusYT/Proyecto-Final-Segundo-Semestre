@@ -5,7 +5,6 @@ import co.edu.unbosque.view.*;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.Scanner;
 
 
 
@@ -188,7 +187,7 @@ public class Controller implements ActionListener{
 		
 		     case "lotery_button":
 		    	
-		    
+		    	
 		  
 		    	
 		

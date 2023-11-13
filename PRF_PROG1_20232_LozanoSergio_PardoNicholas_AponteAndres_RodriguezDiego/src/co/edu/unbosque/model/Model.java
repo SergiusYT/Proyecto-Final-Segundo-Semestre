@@ -1,9 +1,10 @@
 package co.edu.unbosque.model;
 
-
+import co.edu.unbosque.model.persistence.ConfiguracionCasaApuestas;
 
 public class Model {
 
+	private ConfiguracionCasaApuestas configuracion;
 	private Usuarios usuario; 
 	private Loteria loteria;
 
@@ -11,12 +12,27 @@ public class Model {
 	
     public Model() {
     	
+    	configuracion = new ConfiguracionCasaApuestas();
+    	
     	usuario = new Usuarios();
         loteria = new Loteria();
     }
 
     
- // ---------------------------- Metodos de devuelven un clase ------------------------------------------------------   
+    
+    public void gestionarPropiedades(int numeroSedes, double presupuestoTOTAL) {
+    	configuracion.escribirPropiedades(numeroSedes, presupuestoTOTAL);
+    	
+        double presupuestoPorJuego = configuracion.getPresupuestoPorJuego();
+        
+        // Pasamos el presupuesto por juego a los juegos específicos (puedes ajustar esto según tus necesidades)
+        loteria.setPresupuestoParaLoteria(presupuestoPorJuego);
+	}
+    
+    
+    
+    
+ // ---------------------------- Metodos de devuelven una clase ------------------------------------------------------   
     
     
 	    public Usuarios getUsuarios() {
