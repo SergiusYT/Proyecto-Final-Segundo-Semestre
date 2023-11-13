@@ -58,7 +58,7 @@ public class Loteria{
             // Convierte el número en una cadena (String) con ceros a la izquierda si es necesario
              serieGanadora = String.format("%03d", nuevoSerieGanadora);
              
-	            loteria_DAO.guardarNumerosGanadores(numeroGanador, serieGanadora, loteria_DAO.cargarPremioAcumulado());
+	   //       loteria_DAO.guardarJuego("", "", numeroGanador, serieGanadora, loteria_DAO.cargarPremioAcumulado());
 
             
     }
@@ -142,7 +142,7 @@ public class Loteria{
     	
 
 
-		public Double realizarSorteo(double premio, String series, String numero) {
+		public Double realizarSorteo(String nombreJuego ,String tipoJuego, String series, String numero, double premio) {
     	    
 	    	premioAcumulado = loteria_DAO.cargarPremioAcumulado();
 	    	double premioReal = premio + premioAcumulado; // se suma el premio del argumento con el premioacumulado que se lleva implementado 
@@ -156,7 +156,7 @@ public class Loteria{
     	            premioAcumulado +=  premioReal - premioTOTAL; // acumula lo descontado del premio total y se suma eso para los proximos premios
 
     	            // Guardar números ganadores, series y premio acumulado
-    	            loteria_DAO.guardarNumerosGanadores(numero, series, premioAcumulado);
+    	            loteria_DAO.guardarJuego(nombreJuego,tipoJuego,numero, series, premioAcumulado);
 
     	            return premioTOTAL;
     	        
@@ -166,7 +166,7 @@ public class Loteria{
     	    	
     	        premioTOTAL = premioAcumulado += premio;
 
-	            loteria_DAO.guardarNumerosGanadores(numeroGanador, serieGanadora, premioTOTAL);
+	            loteria_DAO.guardarJuego(nombreJuego,tipoJuego,numeroGanador, serieGanadora, premioTOTAL);
 
     	        
     	        return null;

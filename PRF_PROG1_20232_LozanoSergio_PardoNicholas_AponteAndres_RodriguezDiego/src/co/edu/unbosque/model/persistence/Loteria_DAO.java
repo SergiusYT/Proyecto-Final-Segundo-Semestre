@@ -20,12 +20,12 @@ public class Loteria_DAO {
     
  //---------------------- METODOS PARA EL HISTORICO DE LOS NUMEROS GANADORES ---------------------------------------   
     
-    public void guardarNumerosGanadores(String numerosGanadores, String series, double prmeioAcumulado) {
+    public void guardarJuego(String nombreJuego, String tipoJuego, String numerosGanadores, String series, double presupuesto) {
     	
-        cargarNumerosGanadores(); // para comprobar 
+    	cargarJuego(); // para comprobar 
 
     	
-        loteria_DTO = new Loteria_DTO(numerosGanadores, series, prmeioAcumulado);
+        loteria_DTO = new Loteria_DTO(nombreJuego, tipoJuego ,numerosGanadores, series, presupuesto);
 
         // Agregar el nuevo número ganador a la lista existente
         numeros.add(loteria_DTO);
@@ -42,7 +42,7 @@ public class Loteria_DAO {
 
  // Método para cargar usuarios desde el archivo .dat
     @SuppressWarnings("unchecked")
-	public ArrayList<Loteria_DTO> cargarNumerosGanadores() {
+	public ArrayList<Loteria_DTO> cargarJuego() {
     	try (ObjectInputStream inputStream = new ObjectInputStream(new FileInputStream(archivoCasa))) {
     		numeros = (ArrayList<Loteria_DTO>) inputStream.readObject(); // Deserializar el ArrayList de números ganadores
         } catch (IOException | ClassNotFoundException e) {
@@ -60,12 +60,12 @@ public class Loteria_DAO {
 	del programa no se pierda dicho premio y asignarlo denuevo para hacer la devidas operaciones con este */
 	
 	public Double cargarPremioAcumulado() {
-	    cargarNumerosGanadores();
+		cargarJuego();
 
 	    if (!numeros.isEmpty()) {
 	        // Obtener el último Loteria_DTO de la lista
 	        Loteria_DTO ultimoDTO = numeros.get(numeros.size() - 1);
-	        return ultimoDTO.getPremio_Acumulado();
+	        return ultimoDTO.getPremio();
 	    }
 
 	    return 0.0; // Devolver 0 si la lista está vacía

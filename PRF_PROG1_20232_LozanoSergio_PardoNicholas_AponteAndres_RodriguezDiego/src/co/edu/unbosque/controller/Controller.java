@@ -188,53 +188,7 @@ public class Controller implements ActionListener{
 		
 		     case "lotery_button":
 		    	
-		         Scanner scanner = new Scanner(System.in);
-
-		         int x = 2121;
-		         
-   model.getLoteria().generarNumerosGanadores(x);
-
-
-		    	 System.out.println(		         model.getLoteria().getConsultarNumerosGanadores());
-
-		    	 System.out.println("Ingrese el premio: ");
-		         double premio = scanner.nextDouble();
-
-		         System.out.println("Ingrese la cantidad de fracciones: ");
-		         int fracciones = scanner.nextInt();
-		         System.out.println("Ingrese la cantidad de digitos: ");
-		         int numero = scanner.nextInt();
-
-		         System.out.println("Ingrese la cantidad de fracciones: ");
-		         String serie = scanner.next();
-		         
-		      
-		         
-
-		         
-		        String num = Integer.toString(numero);
-		         
-		         model.getLoteria().setcantidadFraccion(fracciones);
-		         
-
-		         Double premioGanado = model.getLoteria().realizarSorteo(premio, serie, num);
-
-
-		         
-		         
-		         if (premioGanado != null) {
-		             System.out.println("¡Felicidades! Has ganado: $" + premioGanado);
-		             
-			    	 System.out.println(model.getLoteria().getConsultarNumerosGanadores());
-
-		         } else {
-		             System.out.println("Lo siento, no has ganado. Premio acumulado: $" + model.getLoteria().getPremioAcumulado());
-		             
-			    	 System.out.println(model.getLoteria().getConsultarNumerosGanadores());
-
-		         }
-		    	 
-		    	 
+		    
 		  
 		    	
 		
