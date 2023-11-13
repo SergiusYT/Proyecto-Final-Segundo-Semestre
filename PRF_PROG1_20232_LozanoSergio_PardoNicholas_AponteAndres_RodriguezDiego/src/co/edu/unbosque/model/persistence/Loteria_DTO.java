@@ -8,19 +8,20 @@ public class Loteria_DTO implements Serializable{
 	
 	
 	private String numerosGanadores, series;
-	
+	private double premio_Acumulado;
 
-    public Loteria_DTO(String numerosGanadores, String series) {
+    public Loteria_DTO(String numerosGanadores, String series, double premio_Acumulado) {
     	
         this.numerosGanadores = numerosGanadores;
         this.series = series;
+        this.premio_Acumulado = premio_Acumulado;
     }
     
     @Override
     public String toString() {
         return "Loteria_DTO{" +
                "numerosGanadores='" + numerosGanadores + '\'' +
-               ", series='" + series + '\'' +
+               ", series='" + series + " Premio Acumulado: "+premio_Acumulado+ '\'' +
                '}';
     }
 
@@ -29,5 +30,11 @@ public class Loteria_DTO implements Serializable{
     }
     public String getSeries() {
         return series;
+    }
+    public Double getPremio_Acumulado() {
+    	return premio_Acumulado;
+    }
+    public void setPremio_Acumulado(double premio_Acumulado) {
+    	this.premio_Acumulado = premio_Acumulado;
     }
 }

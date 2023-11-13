@@ -4,7 +4,7 @@ import java.util.*;
 
 import co.edu.unbosque.model.persistence.*;
 
-public class Loteria implements Interface{
+public class Loteria{
 	
     private Loteria_DAO loteria_DAO;
 	
@@ -57,9 +57,10 @@ public class Loteria implements Interface{
             
             // Convierte el número en una cadena (String) con ceros a la izquierda si es necesario
              serieGanadora = String.format("%03d", nuevoSerieGanadora);
+             
+	            loteria_DAO.guardarNumerosGanadores(numeroGanador, serieGanadora, loteria_DAO.cargarPremioAcumulado());
+
             
-        // Guardar la lista completa en el archivo
-        loteria_DAO.guardarNumerosGanadores(numeroGanador, serieGanadora);
     }
     
     
@@ -109,12 +110,10 @@ public class Loteria implements Interface{
     	    double premio_real = premio * (1 - 0.2); // la loteria quita el 20% del total del premio y queda el 80% como premio realmente
     	    
     	    
-
-    	    
     	    premioTOTAL=  premio_real * porcentaje;  // se quitara los porcetajes respectivos al premio total dependiendo las fracciones compradas      
     	    
-            premioAcumulado +=  premio - premioTOTAL; // acumula lo descontado del premio total y se suma eso para los proximos premios
 
+    	    premioAcumulado = 0 ; // se pone como valor 0 porque el premioacumulado se va a repatir 
     	    
     	    return premioTOTAL;
     	}
@@ -140,18 +139,34 @@ public class Loteria implements Interface{
 //----------------------------------------------  METODO PARA COMENZAR EL JUEGO o SORTEO ---------------------------------------   
 
     
-    	public Double realizarSorteo(double premio, String series, String numero) {
+    	
+
+
+		public Double realizarSorteo(double premio, String series, String numero) {
     	    
-    	    
+	    	premioAcumulado = loteria_DAO.cargarPremioAcumulado();
+	    	double premioReal = premio + premioAcumulado; // se suma el premio del argumento con el premioacumulado que se lleva implementado 
+
+    		
     	    // Verificar si hay ganadores
     	        if (this.serieGanadora.equals(series) && this.numeroGanador.equals(numero)) {
     	            // Hay al menos un ganador
-        	    	return  calcularPremio(premio); 
+    	            calcularPremio(premioReal);
+
+    	            premioAcumulado +=  premioReal - premioTOTAL; // acumula lo descontado del premio total y se suma eso para los proximos premios
+
+    	            // Guardar números ganadores, series y premio acumulado
+    	            loteria_DAO.guardarNumerosGanadores(numero, series, premioAcumulado);
+
+    	            return premioTOTAL;
     	        
     	    } else {
     	        // Si no hay ganador, acumula el premio principal
     	        
+    	    	
     	        premioTOTAL = premioAcumulado += premio;
+
+	            loteria_DAO.guardarNumerosGanadores(numeroGanador, serieGanadora, premioTOTAL);
 
     	        
     	        return null;
@@ -186,6 +201,10 @@ public class Loteria implements Interface{
         return premioAcumulado; 
     }
     
+    public ArrayList<String> getSeriesAutomaticas() {
+    	return series_Disponibles;
+    }
+    
     
     public Double getCostoBoleto() {
         return costoBoleto;
@@ -195,7 +214,14 @@ public class Loteria implements Interface{
         this.costoBoleto = costoBoleto;
     }
 
-	
+    public double getPremioTOTAL() {
+		return premioTOTAL;
+	}
+
+
+	public void setPremioTOTAL(double premioTOTAL) {
+		this.premioTOTAL = premioTOTAL;
+	}
 
 
 	

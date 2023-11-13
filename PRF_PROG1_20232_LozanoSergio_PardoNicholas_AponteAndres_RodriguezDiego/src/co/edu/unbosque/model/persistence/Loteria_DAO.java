@@ -13,18 +13,18 @@ public class Loteria_DAO {
     public Loteria_DAO() {
     	
     	numeros = new ArrayList<>() ;
-        archivo = "Archives// apuestas-loteria.dat";
+        archivo = "Archives//Juegos// apuestas-loteria.dat";
     }
 
     
  //---------------------- METODOS PARA EL HISTORICO DE LOS NUMEROS GANADORES ---------------------------------------   
     
-    public void guardarNumerosGanadores(String numerosGanadores, String series) {
+    public void guardarNumerosGanadores(String numerosGanadores, String series, double prmeioAcumulado) {
     	
-         cargarNumerosGanadores();
+        cargarNumerosGanadores(); // para comprobar 
 
     	
-        loteria_DTO = new Loteria_DTO(numerosGanadores, series);
+        loteria_DTO = new Loteria_DTO(numerosGanadores, series, prmeioAcumulado);
 
         // Agregar el nuevo número ganador a la lista existente
         numeros.add(loteria_DTO);
@@ -46,13 +46,29 @@ public class Loteria_DAO {
     		numeros = (ArrayList<Loteria_DTO>) inputStream.readObject(); // Deserializar el ArrayList de números ganadores
         } catch (IOException | ClassNotFoundException e) {
             // Si hay un error al cargar, simplemente continuamos con la lista vacía
+            numeros = new ArrayList<>();
+
         }
         return numeros;
 
     }
+	
+	
+	
+/* Método que servira para que el premio acumulado despues del cierre 
+	del programa no se pierda dicho premio y asignarlo denuevo para hacer la devidas operaciones con este */
+	
+	public Double cargarPremioAcumulado() {
+	    cargarNumerosGanadores();
 
-    
+	    if (!numeros.isEmpty()) {
+	        // Obtener el último Loteria_DTO de la lista
+	        Loteria_DTO ultimoDTO = numeros.get(numeros.size() - 1);
+	        return ultimoDTO.getPremio_Acumulado();
+	    }
 
+	    return 0.0; // Devolver 0 si la lista está vacía
+	}
     
     
 

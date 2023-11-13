@@ -10,7 +10,7 @@ public class User_DAO {
 
     public User_DAO() {
         usuarios = new ArrayList<>();
-        archivo = "Archives//apostadores.dat";
+        archivo = "Archives//Apostadores// apostadores.dat";
         consultarUsuarios(); // Cargar usuarios al iniciar el programa
     }
 
