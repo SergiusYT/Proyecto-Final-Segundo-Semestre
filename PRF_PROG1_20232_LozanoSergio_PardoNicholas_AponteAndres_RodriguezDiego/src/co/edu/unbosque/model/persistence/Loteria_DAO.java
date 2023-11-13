@@ -7,13 +7,14 @@ import java.util.ArrayList;
 public class Loteria_DAO {
 	
 	private ArrayList<Loteria_DTO> numeros;
-    private String archivo; // Ruta del archivo .dat
+    private String archivoCasa, archivoApuestas; // Ruta del archivo .dat
     private Loteria_DTO loteria_DTO;
 
     public Loteria_DAO() {
     	
     	numeros = new ArrayList<>() ;
-        archivo = "Archives//Juegos// apuestas-loteria.dat";
+    	archivoCasa = "Archives//Juego// juegos.dat";
+    	archivoApuestas = "Archives//Apuestas// apuestas-loteria.dat";
     }
 
     
@@ -30,7 +31,7 @@ public class Loteria_DAO {
         numeros.add(loteria_DTO);
 
         // Guardar la lista completa en el archivo
-        try (ObjectOutputStream outputStream = new ObjectOutputStream(new FileOutputStream(archivo))) {
+        try (ObjectOutputStream outputStream = new ObjectOutputStream(new FileOutputStream(archivoCasa))) {
             outputStream.writeObject(numeros); // Serializar y guardar el ArrayList de números ganadores
         } catch (IOException e) {
             e.printStackTrace();
@@ -42,7 +43,7 @@ public class Loteria_DAO {
  // Método para cargar usuarios desde el archivo .dat
     @SuppressWarnings("unchecked")
 	public ArrayList<Loteria_DTO> cargarNumerosGanadores() {
-    	try (ObjectInputStream inputStream = new ObjectInputStream(new FileInputStream(archivo))) {
+    	try (ObjectInputStream inputStream = new ObjectInputStream(new FileInputStream(archivoCasa))) {
     		numeros = (ArrayList<Loteria_DTO>) inputStream.readObject(); // Deserializar el ArrayList de números ganadores
         } catch (IOException | ClassNotFoundException e) {
             // Si hay un error al cargar, simplemente continuamos con la lista vacía

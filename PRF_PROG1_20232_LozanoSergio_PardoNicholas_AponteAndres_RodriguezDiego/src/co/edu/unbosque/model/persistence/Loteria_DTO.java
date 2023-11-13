@@ -10,6 +10,7 @@ public class Loteria_DTO implements Serializable{
 	private String numerosGanadores, series;
 	private double premio_Acumulado;
 
+
     public Loteria_DTO(String numerosGanadores, String series, double premio_Acumulado) {
     	
         this.numerosGanadores = numerosGanadores;
