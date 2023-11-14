@@ -7,9 +7,17 @@ public class Juegos_DTO implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	
-	private String nombre, tipoJuego;
-	private double presupuesto;
+	protected String nombre, tipoJuego;
+	protected double presupuesto;
 
+	
+	 // Constructor sin parámetros en Juegos_DTO
+  public Juegos_DTO() {
+    // es para que  permita poner los dtos de las apuestas_juegos.dat en general y no dependizar de que haga un super en el contructor a la clase heredada
+  }
+	
+	
+	
   public Juegos_DTO(String nombre, String tipoJuego, double presupuesto) {
 	  
 	  this.nombre = nombre;

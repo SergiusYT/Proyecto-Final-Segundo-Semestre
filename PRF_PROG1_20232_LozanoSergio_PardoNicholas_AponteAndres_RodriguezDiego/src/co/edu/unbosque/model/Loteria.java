@@ -19,6 +19,8 @@ public class Loteria{
     private double presupuestoDelJuego; // Almacenar el presupuesto por juego
 
     
+    private String nombreApostador;
+    
     private Random random;
 
     
@@ -61,7 +63,7 @@ public class Loteria{
             // Convierte el número en una cadena (String) con ceros a la izquierda si es necesario
              serieGanadora = String.format("%03d", nuevoSerieGanadora);
              
-	   //       loteria_DAO.guardarJuego("", "", numeroGanador, serieGanadora, loteria_DAO.cargarPremioAcumulado());
+	          loteria_DAO.guardarJuego("", "", numeroGanador, serieGanadora, loteria_DAO.cargarPremioAcumulado());
 
             
     }
@@ -145,21 +147,22 @@ public class Loteria{
     	
 
 
-		public Double realizarSorteo(String nombreJuego ,String tipoJuego, String series, String numero) {
+		public Double realizarSorteo(String nombreJuego ,String tipoJuego, String serieApostada, String numeroApostado) {
     	    
 	    	premioAcumulado = loteria_DAO.cargarPremioAcumulado();
 	    	double premioReal = presupuestoDelJuego + premioAcumulado; // se suma el premio del argumento con el premioacumulado que se lleva implementado 
 
     		
     	    // Verificar si hay ganadores
-    	        if (this.serieGanadora.equals(series) && this.numeroGanador.equals(numero)) {
+    	        if (this.serieGanadora.equals(serieApostada) && this.numeroGanador.equals(numeroApostado)) {
     	            // Hay al menos un ganador
     	            calcularPremio(premioReal);
 
     	            premioAcumulado +=  premioReal - premioTOTAL; // acumula lo descontado del premio total y se suma eso para los proximos premios
 
     	            // Guardar números ganadores, series y premio acumulado
-    	            loteria_DAO.guardarJuego(nombreJuego,tipoJuego,numero, series, premioAcumulado);
+    	            loteria_DAO.guardarJuego(nombreJuego,tipoJuego,numeroGanador, serieGanadora, premioAcumulado);
+    	            loteria_DAO.guardarApuestaLoteria(nombreApostador, "",0 , "", 0, numeroApostado, serieApostada, fraccionesCompradas);
 
     	            return premioTOTAL;
     	        
@@ -192,6 +195,15 @@ public class Loteria{
     // para establecer el presupuesto que tendra el juego
     public void setPresupuestoParaLoteria(double presupuestoDelJuego) {
         this.presupuestoDelJuego = presupuestoDelJuego;
+    }
+    
+    public String getUsuarioEnSesion() {
+        return nombreApostador;
+    }
+    
+    // para establecer el nombre 
+    public void setUsuarioEnSesion(String nombre) {
+        this.nombreApostador = nombre;
     }
 
     

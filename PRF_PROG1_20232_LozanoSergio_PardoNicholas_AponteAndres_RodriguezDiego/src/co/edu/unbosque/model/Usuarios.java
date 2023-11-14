@@ -28,17 +28,22 @@ public class Usuarios {
         return false; // Datos de entrada no válidos
     }
 
-    public User_DTO buscarUsuario(String username) {
-        return user_DAO.buscarUsuario(username);
+    public String buscarNombreApostador(String nombre) {
+        return user_DAO.buscarUsuario(nombre);
     }
 
     public ArrayList<User_DTO> obtenerTodosLosUsuarios() {
         return user_DAO.consultarUsuarios();
     }
 
+    public String obtenerNombreApostador() {
+        return user_DAO.consultarNombreApostadorEnSesion();
+    }
+    
     public boolean validarInicioSesion(String username, String password) {
-        User_DTO userDTO = buscarUsuario(username);
-        return userDTO != null && userDTO.getPassword().equals(password);
+     // Verificar si el usuario y la contraseña coinciden
+
+        return user_DAO.buscarUsuario(username) != null && user_DAO.comparararPassword(password) != null;
     }
 }
 	    

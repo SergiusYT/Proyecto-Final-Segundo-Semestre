@@ -14,15 +14,26 @@ public class User_DAO {
         consultarUsuarios(); // Cargar usuarios al iniciar el programa
     }
 
-    public User_DTO buscarUsuario(String username) {
+    public String buscarUsuario(String username) {
         for (User_DTO usuario : usuarios) {
             if (usuario.getUsername().equals(username)) {
-                return usuario;
+                return usuario.getUsername();
             }
         }
         return null;
     }
 
+    
+    public String comparararPassword(String password) {
+        for (User_DTO contraseña : usuarios) {
+            if (contraseña.getPassword().equals(password)) {
+                return contraseña.getPassword();
+            }
+        }
+        return null;
+    }
+    
+    
     public boolean agregarUsuario(String username, String password) {
     	
     	consultarUsuarios();
@@ -63,5 +74,18 @@ public class User_DAO {
             // Si hay un error al cargar, simplemente continuamos con la lista vacía
         }
 		return usuarios;
+    }
+	
+	
+// metodo donde sacara el nombre especifico de la persona que inicio sesion  	
+    @SuppressWarnings("unchecked")
+	public String consultarNombreApostadorEnSesion() {
+        try (ObjectInputStream inputStream = new ObjectInputStream(new FileInputStream(archivo))) {
+            usuarios = (ArrayList<User_DTO>) inputStream.readObject(); // Deserializar el ArrayList de usuarios
+            return user_DTO.getUsername();
+        } catch (IOException | ClassNotFoundException e) {
+            // Si hay un error al cargar, simplemente continuamos con la lista vacía
+        }
+        return null;
     }
 }

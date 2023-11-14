@@ -5,6 +5,7 @@ import co.edu.unbosque.view.*;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Scanner;
 
 
 
@@ -99,6 +100,8 @@ public class Controller implements ActionListener{
 				    	 
 		    	if (model.getUsuarios().validarInicioSesion(username, password)) {
 		    		
+		    		model.setDatosNecesariosApostador(username); // poner los datos necesesarios para usos posteriores
+		    		
 		    		view.mensaje("Inicio de sesion Exitoso");
 		    		
 		    		view.getLogin().getUsername().setText("");
@@ -128,6 +131,10 @@ public class Controller implements ActionListener{
 			
 		    	 String nuevousername = view.getRegister().getNewUsername().getText();
 		    	 String nuevopassword = view.getRegister().getNewPassword().getText();     // se trae el texto escrito por el usuario
+		    	// String nombre_Completo = view.getRegister().
+		    	 
+		    	 
+		    	 
 		    	 
 		    	 if(model.getUsuarios().agregarUsuario(nuevousername, nuevopassword)) {  
 		    		 
@@ -187,7 +194,55 @@ public class Controller implements ActionListener{
 		
 		     case "lotery_button":
 		    	
-		    	
+		    	 Scanner scanner = new Scanner(System.in);
+
+		         int x = 2121;
+		         
+   model.getLoteria().generarNumerosGanadores(x);
+
+
+		    	 System.out.println(		         model.getLoteria().getConsultarNumerosGanadores());
+
+		    	 System.out.println("Ingrese el premio: ");
+		         double premio = scanner.nextDouble();
+		         
+		         model.gestionarPropiedades(2, premio);
+
+		         System.out.println("Ingrese la cantidad de fracciones: ");
+		         int fracciones = scanner.nextInt();
+		         System.out.println("Ingrese la cantidad de digitos: ");
+		         int numero = scanner.nextInt();
+
+		         System.out.println("Ingrese la cantidad de fracciones: ");
+		         String serie = scanner.next();
+		         
+		      
+		         
+
+		         
+		        String num = Integer.toString(numero);
+		         
+		         model.getLoteria().setcantidadFraccion(fracciones);
+		         
+
+		         Double premioGanado = model.getLoteria().realizarSorteo("LoteriaBogota", "Loteria" , serie, num);
+
+
+		         
+		         
+		         if (premioGanado != null) {
+		             System.out.println("¡Felicidades! Has ganado: $" + premioGanado);
+		             
+			    	 System.out.println(model.getLoteria().getConsultarNumerosGanadores());
+			    	 System.out.println(model.getLoteria().getUsuarioEnSesion());
+
+
+		         } else {
+		             System.out.println("Lo siento, no has ganado. Premio acumulado: $" + model.getLoteria().getPremioAcumulado());
+		             
+			    	 System.out.println(model.getLoteria().getConsultarNumerosGanadores());
+
+		         }
 		  
 		    	
 		

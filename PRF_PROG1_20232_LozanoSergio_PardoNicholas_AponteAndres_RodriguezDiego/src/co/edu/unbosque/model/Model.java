@@ -29,7 +29,7 @@ public class Model {
         loteria.setPresupuestoParaLoteria(presupuestoPorJuego);
 	}
     
-    
+      
     
     
  // ---------------------------- Metodos de devuelven una clase ------------------------------------------------------   
@@ -39,7 +39,14 @@ public class Model {
 	    	return usuario;
 	    }
 	    
-	    public Loteria getLoteria() {
+	    public void setDatosNecesariosApostador(String nombre) {
+	    	
+	    	loteria.setUsuarioEnSesion(usuario.buscarNombreApostador(nombre));
+
+	    	
+	    }
+	    
+	    public Loteria getLoteria() {	    	
 	    	
 	    	return loteria;
 	    }
