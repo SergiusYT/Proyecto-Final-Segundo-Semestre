@@ -147,12 +147,14 @@ public class Controller implements ActionListener{
 		             public void propertyChange(PropertyChangeEvent evt) {
 		                 if ("calendar".equals(evt.getPropertyName())) {
 		                   Date fechaSeleccionada = view.getRegister().getFecha().getDate(); // tomara la fecha que seleccione el usuario
-		                     // Puedes realizar otras acciones si es necesario
-		                 }
+		                     model.getUsuarios().calcularEdad(fechaSeleccionada);		                 }
 		             }
 		         });
 		    	 
-		    	 
+		         String cedula = view.getRegister().getCedula().getText();
+		 //    String sedeQueJugara = view.getRegister().getSede_Casa_Apuestas().gettex;  es un combo box toca ver eso
+                 String direccion = view.getRegister().getCelular().getText();
+                 String celular = view.getRegister().getDireccion().getText();		
 		    	 
 		    	 if(model.getUsuarios().agregarUsuario(nuevousername, nuevopassword, nombre_Completo)) {  
 		    		 
