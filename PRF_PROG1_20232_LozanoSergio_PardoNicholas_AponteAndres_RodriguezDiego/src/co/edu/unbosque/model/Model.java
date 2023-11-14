@@ -39,9 +39,16 @@ public class Model {
 	    	return usuario;
 	    }
 	    
-	    public void setDatosNecesariosApostador(String nombre) {
+	    public void setDatosNecesariosApostador(String username) {
 	    	
-	    	loteria.setUsuarioEnSesion(usuario.buscarNombreApostador(nombre));
+	//cabe recalcar que todos los datos estaran vinculados directamente con el username porque estos son datos diferentes en cada usuario 
+	    	
+	    	
+	    //-------------------->   Loteria
+	    	
+	    	loteria.setUsuarioEnSesion(usuario.buscarNombreDeUsuarioApostador(username));	    	
+	    	loteria.setNombreRealApostador(usuario.getNombreReal(username));
+
 
 	    	
 	    }

@@ -10,16 +10,17 @@ public class User_DTO implements Serializable{
 	
 
 	private static final long serialVersionUID = 1L;
-	private String username;
-    private String password;
+	private String username, password, nombreApostador;
+
     private Double saldo; // es el dinero que tendra el usuario para sus apuestas
    
     
   //-------------------------- Contructor que tomara los datos ----------------------  
     
-    public User_DTO(String username, String password) {
+    public User_DTO(String username, String password, String nombreApostador) {
         this.username = username;
         this.password = password;
+        this.nombreApostador = nombreApostador;
     }
 
     @Override
@@ -27,6 +28,8 @@ public class User_DTO implements Serializable{
         return "User_DTO{" +
                "username='" + username + '\'' +
                ", password='" + password + '\'' +
+               ", nombre del Apostador='" + nombreApostador + '\'' +
+
                '}';
     }
     
@@ -46,6 +49,14 @@ public class User_DTO implements Serializable{
 
 	public void setPassword(String password) {
 		this.password = password;
+	}
+
+	public String getNombreApostador() {
+		return nombreApostador;
+	}
+
+	public void setNombreApostador(String nombreApostador) {
+		this.nombreApostador = nombreApostador;
 	}
     
     

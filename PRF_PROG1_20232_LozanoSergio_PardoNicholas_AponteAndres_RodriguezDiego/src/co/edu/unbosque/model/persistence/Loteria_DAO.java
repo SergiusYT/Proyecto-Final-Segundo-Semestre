@@ -44,15 +44,19 @@ public class Loteria_DAO {
 
  // Método para cargar los juegos desde el archivo .dat
     @SuppressWarnings("unchecked")
-	public ArrayList<Loteria_DTO> cargarJuego() {
+	public String cargarJuego() {
     	try (ObjectInputStream inputStream = new ObjectInputStream(new FileInputStream(archivoCasa))) {
-    		datos = (ArrayList<Loteria_DTO>) inputStream.readObject(); // Deserializar el ArrayList de números ganadores
+            datos = (ArrayList<Loteria_DTO>) inputStream.readObject(); // Deserializar el ArrayList de números ganadores
+            String resultado = "";
+            for (Loteria_DTO juego : datos) {
+                resultado += juego.toStringJuego();
+            }
+            return resultado;
         } catch (IOException | ClassNotFoundException e) {
             // Si hay un error al cargar, simplemente continuamos con la lista vacía
-        	datos = new ArrayList<>();
-
+            datos = new ArrayList<>();
+            return "Error al cargar el historial de juegos.";
         }
-        return datos;
 
     }
 	
@@ -77,12 +81,12 @@ public class Loteria_DAO {
 	
 //---------------------- METODOS PARA LAS APUESTAS HECHAS EN LA LOTERIA ---------------------------------------   
 
-public void guardarApuestaLoteria(String nombreApostador, String nombreSede, int cedula, String fecha , double valorApuesta, String numeroApostador, String serieApostador, int fraccion) {
+public void guardarApuestaLoteria(String usernameApostador, String nombreApostador, String nombreSede, int cedula, String fecha , double valorApuesta, String numeroApostador, String serieApostador, int fraccion) {
     	
 	    cargarApuestaLoteria(); // para comprobar 
 
     	
-        loteria_DTO = new Loteria_DTO(nombreApostador, nombreSede ,cedula, fecha, valorApuesta, numeroApostador, serieApostador, fraccion );
+        loteria_DTO = new Loteria_DTO(usernameApostador,nombreApostador, nombreSede ,cedula, fecha, valorApuesta, numeroApostador, serieApostador, fraccion );
 
         // Agregar el nuevo número ganador a la lista existente
         datos.add(loteria_DTO);
@@ -101,16 +105,58 @@ public void guardarApuestaLoteria(String nombreApostador, String nombreSede, int
 
  // Método para cargar los juegos desde el archivo .dat
     @SuppressWarnings("unchecked")
-	public ArrayList<Loteria_DTO> cargarApuestaLoteria() {
-    	try (ObjectInputStream inputStream = new ObjectInputStream(new FileInputStream(archivoApuestas))) {
-    		datos = (ArrayList<Loteria_DTO>) inputStream.readObject(); // Deserializar el ArrayList de números ganadores
+	public String cargarApuestaLoteria() {
+ 
+        try (ObjectInputStream inputStream = new ObjectInputStream(new FileInputStream(archivoApuestas))) {
+            datos = (ArrayList<Loteria_DTO>) inputStream.readObject(); // Deserializar el ArrayList de números ganadores
+            String resultado = "";
+            for (Loteria_DTO juego : datos) {
+                resultado += juego.toStringApostador();
+            }
+            return resultado;
         } catch (IOException | ClassNotFoundException e) {
             // Si hay un error al cargar, simplemente continuamos con la lista vacía
-        	datos = new ArrayList<>();
-
+            datos = new ArrayList<>();
+            return "Error al cargar el historial de juegos.";
         }
-        return datos;
-
+        
     }
+	//---------------------------METODOS PARA CONVERTIR LOS DATOS EN STRINGS----------------------------------------
+	
+	
+
+	
+	
+	
+	
+	
+	//................................. metodos que mostraran los ultimos datos ...............................................
+   
+	public String obtenerUltimoSorteo() {
+		
+    	cargarJuego();
+		    if (!datos.isEmpty()) {
+		        loteria_DTO = datos.get(datos.size() - 1); // se toma el ultimo elemento de la arraylist
+		        return loteria_DTO.toStringJuego(); // se utiliza el metodo del dto para convertir los datos en un string para que puedan ser leidos
+		    } else {
+		        return "no hay ningun juego"; // mensaje predeterminado
+		    }
+		}
+   
+   
+   
+    public String obtenerUltimaApuesta() {
+		
+	       cargarApuestaLoteria();
+		    if (!datos.isEmpty()) {
+		        loteria_DTO = datos.get(datos.size() - 1);// se toma el ultimo elemento de la arraylist
+		        return loteria_DTO.toStringApostador();// se utiliza el metodo del dto para convertir los datos en un string para que puedan ser leidos
+		    } else {
+		        return "no hay ninguna apuesta"; // mensaje predeterminado
+		    }
+		}  
+	
+//_---------------------------------------------------------------------------------------------------------------	
+	
 
 }

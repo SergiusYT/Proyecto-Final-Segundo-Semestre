@@ -100,6 +100,7 @@ public class Controller implements ActionListener{
 				    	 
 		    	if (model.getUsuarios().validarInicioSesion(username, password)) {
 		    		
+		    		
 		    		model.setDatosNecesariosApostador(username); // poner los datos necesesarios para usos posteriores
 		    		
 		    		view.mensaje("Inicio de sesion Exitoso");
@@ -131,12 +132,12 @@ public class Controller implements ActionListener{
 			
 		    	 String nuevousername = view.getRegister().getNewUsername().getText();
 		    	 String nuevopassword = view.getRegister().getNewPassword().getText();     // se trae el texto escrito por el usuario
-		    	// String nombre_Completo = view.getRegister().
+		         String nombre_Completo = view.getRegister().getFull_Name().getText();
 		    	 
 		    	 
 		    	 
 		    	 
-		    	 if(model.getUsuarios().agregarUsuario(nuevousername, nuevopassword)) {  
+		    	 if(model.getUsuarios().agregarUsuario(nuevousername, nuevopassword, nombre_Completo)) {  
 		    		 
 			    		view.mensaje("Registro Exitoso");
 
@@ -194,6 +195,8 @@ public class Controller implements ActionListener{
 		
 		     case "lotery_button":
 		    	
+		    	 view.setLoteriaPanel();
+		    	 
 		    	 Scanner scanner = new Scanner(System.in);
 
 		         int x = 2121;
@@ -201,7 +204,7 @@ public class Controller implements ActionListener{
    model.getLoteria().generarNumerosGanadores(x);
 
 
-		    	 System.out.println(		         model.getLoteria().getConsultarNumerosGanadores());
+		    	// System.out.println(		         model.getLoteria().getConsultarSorteo());
 
 		    	 System.out.println("Ingrese el premio: ");
 		         double premio = scanner.nextDouble();
@@ -233,14 +236,27 @@ public class Controller implements ActionListener{
 		         if (premioGanado != null) {
 		             System.out.println("¡Felicidades! Has ganado: $" + premioGanado);
 		             
-			    	 System.out.println(model.getLoteria().getConsultarNumerosGanadores());
-			    	 System.out.println(model.getLoteria().getUsuarioEnSesion());
+		             view.getLoteriaPanel().getTexto1().setText(model.getLoteria().obtenerUltimoSorteo());
+		             
+			    	// System.out.println("Consulta del sorteo: "); model.getLoteria().getConsultarSorteo();
+//			    	 System.out.println("\n\nConsulta de la apuesta: "); model.getLoteria().getConsultarApuesta();
+		             view.getLoteriaPanel().getTexto2().setText(model.getLoteria().obtenerUltimaApuesta());
 
+		             view.getLoteriaPanel().getTexto4().setText(model.getLoteria().getConsultarSorteo());
+
+		             System.out.println(model.getLoteria().getConsultarSorteo());
 
 		         } else {
 		             System.out.println("Lo siento, no has ganado. Premio acumulado: $" + model.getLoteria().getPremioAcumulado());
 		             
-			    	 System.out.println(model.getLoteria().getConsultarNumerosGanadores());
+		             view.getLoteriaPanel().getTexto1().setText(model.getLoteria().obtenerUltimoSorteo());
+		             
+//		             System.out.println("Consulta del sorteo: ");  model.getLoteria().getConsultarSorteo();
+//			    	 System.out.println("\n\nConsulta de la apuesta: ");  model.getLoteria().getConsultarApuesta();
+		             view.getLoteriaPanel().getTexto2().setText(model.getLoteria().obtenerUltimaApuesta());
+		             view.getLoteriaPanel().getTexto4().setText(model.getLoteria().getConsultarSorteo());
+		             System.out.println(model.getLoteria().getConsultarSorteo());
+
 
 		         }
 		  
@@ -249,8 +265,10 @@ public class Controller implements ActionListener{
 		     break;
 		
 		     case "superastro_button":  
-			
-		   
+		    	 
+		    		view.setLogin();
+		    	    view.getLogin().getUsername().setText("");
+		    		view.getLogin().getPassword().setText("");
 		    	 
 		     break;
 		

@@ -13,6 +13,9 @@ public class User_DAO {
         archivo = "Archives//Apostadores// apostadores.dat";
         consultarUsuarios(); // Cargar usuarios al iniciar el programa
     }
+    
+    
+//-------------------------------- METODOS PARA OBTENER ALGUN DATO EN ESPECIFICO ------------------------------------------    
 
     public String buscarUsuario(String username) {
         for (User_DTO usuario : usuarios) {
@@ -33,14 +36,26 @@ public class User_DAO {
         return null;
     }
     
+    public String obtenerNombreReal(String username) {
+        for (User_DTO usuario : usuarios) {
+            if (usuario.getUsername().equals(username)) { // como dependende del usuario en el que este retornara el nombre de ese usuario especificamente
+                return usuario.getNombreApostador();
+            }
+        }
+        return null;
+    }
     
-    public boolean agregarUsuario(String username, String password) {
+    
+//-------------------------------- METODOS CRUD -----------------------------------------------------------    
+    
+    
+    public boolean agregarUsuario(String username, String password, String nombreApostador) {
     	
     	consultarUsuarios();
 
         // Verificar si el usuario ya existe
         if (buscarUsuario(username) == null) {
-            user_DTO = new User_DTO(username, password);
+            user_DTO = new User_DTO(username, password, nombreApostador);
             usuarios.add(user_DTO);
 
             // Guardar usuarios en archivo
@@ -77,15 +92,5 @@ public class User_DAO {
     }
 	
 	
-// metodo donde sacara el nombre especifico de la persona que inicio sesion  	
-    @SuppressWarnings("unchecked")
-	public String consultarNombreApostadorEnSesion() {
-        try (ObjectInputStream inputStream = new ObjectInputStream(new FileInputStream(archivo))) {
-            usuarios = (ArrayList<User_DTO>) inputStream.readObject(); // Deserializar el ArrayList de usuarios
-            return user_DTO.getUsername();
-        } catch (IOException | ClassNotFoundException e) {
-            // Si hay un error al cargar, simplemente continuamos con la lista vacía
-        }
-        return null;
-    }
+
 }

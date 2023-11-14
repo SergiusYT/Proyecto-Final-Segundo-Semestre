@@ -21,30 +21,34 @@ public class Usuarios {
     
   
 
-    public boolean agregarUsuario(String username, String password) {
+    public boolean agregarUsuario(String username, String password, String nombreApostador) {
         if (username != null && !username.isEmpty() && password != null) {
-            return user_DAO.agregarUsuario(username, password);
+            return user_DAO.agregarUsuario(username, password, nombreApostador);
         }
         return false; // Datos de entrada no válidos
     }
 
-    public String buscarNombreApostador(String nombre) {
-        return user_DAO.buscarUsuario(nombre);
+    public String buscarNombreDeUsuarioApostador(String username) {
+        return user_DAO.buscarUsuario(username);
     }
 
     public ArrayList<User_DTO> obtenerTodosLosUsuarios() {
         return user_DAO.consultarUsuarios();
     }
 
-    public String obtenerNombreApostador() {
-        return user_DAO.consultarNombreApostadorEnSesion();
-    }
-    
+  
     public boolean validarInicioSesion(String username, String password) {
      // Verificar si el usuario y la contraseña coinciden
 
         return user_DAO.buscarUsuario(username) != null && user_DAO.comparararPassword(password) != null;
     }
+    
+   public String getNombreReal(String nombre) {
+	        // Si el inicio de sesión fue exitoso, devolver el nombre real del usuario
+	        return user_DAO.obtenerNombreReal(nombre);
+	    
+	
+   }
 }
 	    
 

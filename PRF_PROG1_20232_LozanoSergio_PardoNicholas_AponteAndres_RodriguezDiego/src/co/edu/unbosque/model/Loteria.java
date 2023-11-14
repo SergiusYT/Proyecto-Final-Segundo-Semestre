@@ -19,7 +19,7 @@ public class Loteria{
     private double presupuestoDelJuego; // Almacenar el presupuesto por juego
 
     
-    private String nombreApostador;
+    private String usernameDelApostador, nombreRealApostador;
     
     private Random random;
 
@@ -63,7 +63,7 @@ public class Loteria{
             // Convierte el número en una cadena (String) con ceros a la izquierda si es necesario
              serieGanadora = String.format("%03d", nuevoSerieGanadora);
              
-	          loteria_DAO.guardarJuego("", "", numeroGanador, serieGanadora, loteria_DAO.cargarPremioAcumulado());
+	       //   loteria_DAO.guardarJuego("", "", numeroGanador, serieGanadora, loteria_DAO.cargarPremioAcumulado());
 
             
     }
@@ -162,7 +162,7 @@ public class Loteria{
 
     	            // Guardar números ganadores, series y premio acumulado
     	            loteria_DAO.guardarJuego(nombreJuego,tipoJuego,numeroGanador, serieGanadora, premioAcumulado);
-    	            loteria_DAO.guardarApuestaLoteria(nombreApostador, "",0 , "", 0, numeroApostado, serieApostada, fraccionesCompradas);
+    	            loteria_DAO.guardarApuestaLoteria(usernameDelApostador,nombreRealApostador, "",0 , "", 0, numeroApostado, serieApostada, fraccionesCompradas);
 
     	            return premioTOTAL;
     	        
@@ -173,6 +173,7 @@ public class Loteria{
     	        premioTOTAL = premioAcumulado += presupuestoDelJuego;
 
 	            loteria_DAO.guardarJuego(nombreJuego,tipoJuego,numeroGanador, serieGanadora, premioTOTAL);
+	            loteria_DAO.guardarApuestaLoteria(usernameDelApostador,nombreRealApostador, "",0 , "", 0, numeroApostado, serieApostada, fraccionesCompradas);
 
     	        
     	        return null;
@@ -186,10 +187,23 @@ public class Loteria{
     
 //------------------------- GETTER Y SETTERS ---------------------------------------------------------   
     
+
     
     
-    public ArrayList<Loteria_DTO> getConsultarNumerosGanadores() {
+    public String getConsultarSorteo() {
     	return loteria_DAO.cargarJuego();
+    }
+    
+    public String getConsultarApuesta() {
+    	return loteria_DAO.cargarApuestaLoteria();
+    }
+    
+    public String obtenerUltimoSorteo() {
+    	return loteria_DAO.obtenerUltimoSorteo();
+    }
+    
+    public String obtenerUltimaApuesta() {
+    	return loteria_DAO.obtenerUltimaApuesta();
     }
     
     // para establecer el presupuesto que tendra el juego
@@ -198,16 +212,32 @@ public class Loteria{
     }
     
     public String getUsuarioEnSesion() {
-        return nombreApostador;
+        return usernameDelApostador;
     }
     
-    // para establecer el nombre 
-    public void setUsuarioEnSesion(String nombre) {
-        this.nombreApostador = nombre;
+    // para establecer el nombre de usuario del apostador
+    public void setUsuarioEnSesion(String usernameDelApostador) {
+        this.usernameDelApostador = usernameDelApostador;
     }
+    
+    public String getNombreRealApostador() {
+		return nombreRealApostador;
+	}
 
-    
-    public int getcantidadFraccion() {	
+    // para establecer el nombre de usuario del apostador
+	public void setNombreRealApostador(String nombreRealApostador) {
+		this.nombreRealApostador = nombreRealApostador;
+	}
+
+
+	
+	
+	
+	
+	
+	
+	
+	public int getcantidadFraccion() {	
         return fraccionesCompradas; 
     }
     

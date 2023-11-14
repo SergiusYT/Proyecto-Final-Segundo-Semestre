@@ -2,7 +2,7 @@ package co.edu.unbosque.model.persistence;
 
 import java.io.*;
 
-public class Loteria_DTO extends Juegos_DTO implements Serializable{
+public class Loteria_DTO extends Juegos_DTO implements Serializable, ConversionString_DTOS{
 
 	private static final long serialVersionUID = 1L;
 	
@@ -10,7 +10,7 @@ public class Loteria_DTO extends Juegos_DTO implements Serializable{
 	private String numerosGanadores, seriesGanadores;
 
     // apostador
-	private String nombreApostador, numeroApostador, serieApostador, nombreSede;
+	private String usernameApostador, nombreApostador, numeroApostador, serieApostador, nombreSede;
 	private int fraccion, cedula;
 	private double valorApuesta;
 
@@ -29,8 +29,9 @@ public class Loteria_DTO extends Juegos_DTO implements Serializable{
  // ------------------------------ Contructor que tomara datos de las apuestas de los apostadores -------------------------------------	
     
     
-    public Loteria_DTO(String nombreApostador, String nombreSede, int cedula, String fecha , double valorApuesta, String numeroApostador, String serieApostador, int fraccion) {
+    public Loteria_DTO(String usernameApostador, String nombreApostador, String nombreSede, int cedula, String fecha , double valorApuesta, String numeroApostador, String serieApostador, int fraccion) {
         
+    	 this.usernameApostador = usernameApostador; 
     	 this.nombreApostador = nombreApostador;
          this.nombreSede = nombreSede;
          this.cedula = cedula;
@@ -44,24 +45,27 @@ public class Loteria_DTO extends Juegos_DTO implements Serializable{
 //...................................................................................................................................    
     
     
-    
-    
     @Override
-    public String toString() {
-        if (numerosGanadores != null && seriesGanadores != null) {
-            return "Loteria_DTO{ nombre del juego " + getNombre() + " tipo de juego " + getTipoJuego() +
-                    " numerosGanadores='" + numerosGanadores + '\'' +
-                    ", series='" + seriesGanadores + " Premio Acumulado: " + getPresupuesto() + '\'' +
-                    '}';
-        } else {
-            return "Loteria_DTO{ nombre del apostador " + nombreApostador + " nombre de la sede " + nombreSede +
-                    " cedula='" + cedula + '\'' +
-                    ", valorApuesta='" + valorApuesta + '\'' +
-                    ", numeroApostador='" + numeroApostador + '\'' +
-                    ", serieApostador='" + serieApostador + '\'' +
-                    '}';
-        }
-    } 
+    
+    public String toStringJuego() {
+        return "<html>Nombre del juego: " + getNombre() +
+                "<br>Tipo de juego: " + getTipoJuego() +
+                "<br>Números ganadores: " + numerosGanadores +
+                "<br>Series ganadoras: " + seriesGanadores +
+                "<br>Premio acumulado: " + getPresupuesto() +
+                "</html>";
+    }
+
+    public String toStringApostador() {
+        return  "<html>Nombre de usuario del apostador: "+ usernameApostador +
+        		"<br>Nombre del apostador: " + nombreApostador +
+                "<br>Número apostado: " + numeroApostador +
+                "<br>Serie apostada: " + serieApostador +
+                "<br>Fracciones compradas: " + fraccion +
+                "<br>Valor de la apuesta: " + valorApuesta +
+                "</html>";
+
+    }
     
 
     
@@ -76,5 +80,8 @@ public class Loteria_DTO extends Juegos_DTO implements Serializable{
 	public Double getPremio() {
 		return getPresupuesto();
 	}
+
+
+	
    
 }
