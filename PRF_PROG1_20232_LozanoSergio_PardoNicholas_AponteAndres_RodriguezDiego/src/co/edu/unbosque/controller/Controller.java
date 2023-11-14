@@ -5,7 +5,13 @@ import co.edu.unbosque.view.*;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.Scanner;
+
+// son para recibir los eventos de los jcalendars implementados en el programa
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
+
+import java.util.*;
+
 
 
 
@@ -134,6 +140,17 @@ public class Controller implements ActionListener{
 		    	 String nuevopassword = view.getRegister().getNewPassword().getText();     // se trae el texto escrito por el usuario
 		         String nombre_Completo = view.getRegister().getFull_Name().getText();
 		    	 
+		     
+		      //en esta seccion tomaremos la fecha que seleccione el usuario y manejaremos logica en este   
+		         view.getRegister().getFecha().addPropertyChangeListener(new PropertyChangeListener() {
+		             @Override
+		             public void propertyChange(PropertyChangeEvent evt) {
+		                 if ("calendar".equals(evt.getPropertyName())) {
+		                   Date fechaSeleccionada = view.getRegister().getFecha().getDate(); // tomara la fecha que seleccione el usuario
+		                     // Puedes realizar otras acciones si es necesario
+		                 }
+		             }
+		         });
 		    	 
 		    	 
 		    	 
