@@ -62,11 +62,21 @@ public class View extends JFrame{
      
 	}
 	
+//----------------------------------  mensajes predeterminados -------------------------------------------------------	
 	
-	public void mensaje(String texto) {
+    public void mensajeInformativo(String informacion, String titulo ) {
 		
-		JOptionPane.showMessageDialog(null, texto);
+		JOptionPane.showMessageDialog(null, informacion, titulo, JOptionPane.WARNING_MESSAGE);
 	}
+	
+	public void mensajeAdvertencia(String mensaje, String razon ) {
+		
+		JOptionPane.showMessageDialog(null, mensaje, razon, JOptionPane.WARNING_MESSAGE);
+	}
+	
+	 public void mensajeError(String causa, String error) {
+		  JOptionPane.showMessageDialog(null, causa , error, JOptionPane.ERROR_MESSAGE);
+	  }
 	
 
 	

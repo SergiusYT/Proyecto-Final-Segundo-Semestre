@@ -49,13 +49,13 @@ public class User_DAO {
 //-------------------------------- METODOS CRUD -----------------------------------------------------------    
     
     
-    public boolean agregarUsuario(String username, String password, String nombreApostador) {
+    public boolean agregarUsuario(String username, String password, String nombreApostador, int edad, String cedula, String sede, String direccion, String celular) {
     	
     	consultarUsuarios();
 
         // Verificar si el usuario ya existe
         if (buscarUsuario(username) == null) {
-            user_DTO = new User_DTO(username, password, nombreApostador);
+            user_DTO = new User_DTO(username, password, nombreApostador, edad, cedula, sede, direccion, celular);
             usuarios.add(user_DTO);
 
             // Guardar usuarios en archivo

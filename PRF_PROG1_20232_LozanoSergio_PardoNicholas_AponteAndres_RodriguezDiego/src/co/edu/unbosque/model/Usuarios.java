@@ -24,10 +24,13 @@ public class Usuarios {
     
   
 
-    public boolean agregarUsuario(String username, String password, String nombreApostador) {
-        if (username != null && !username.isEmpty() && password != null ) {
-            return user_DAO.agregarUsuario(username, password, nombreApostador);
+    public boolean agregarUsuario(String username, String password, String nombreApostador, int edad, String cedula, String sede, String direccion, String celular) {
+    	
+        if (username != null && !username.isEmpty() && password != null && !password.isEmpty() ) {
+         
+        	return user_DAO.agregarUsuario(username, password, nombreApostador, edad, cedula, sede, direccion,  celular);
         }
+        
         return false; // Datos de entrada no válidos
     }
 

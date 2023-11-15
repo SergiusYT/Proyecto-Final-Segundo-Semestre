@@ -109,7 +109,7 @@ public class Controller implements ActionListener{
 		    		
 		    		model.setDatosNecesariosApostador(username); // poner los datos necesesarios para usos posteriores
 		    		
-		    		view.mensaje("Inicio de sesion Exitoso");
+		    		view.mensajeInformativo("Inicio de sesion Exitoso", "Bienvenido a Gold Magic");
 		    		
 		    		view.getLogin().getUsername().setText("");
 
@@ -117,7 +117,7 @@ public class Controller implements ActionListener{
 
 		    	}else {
 		    		
-		    		view.mensaje("Inicio de sesion Fallido. Verifique lo ingresado");
+		    		view.mensajeError("Verifique lo ingresado mi estimado usuario :3", "ERROR 439 'Inicio de sesion Fallido.'");
 		    		
 		    		
 		    		view.getLogin().getUsername().setText("");
@@ -153,31 +153,124 @@ public class Controller implements ActionListener{
 		    	 
 		         String cedula = view.getRegister().getCedula().getText();
 		 //    String sedeQueJugara = view.getRegister().getSede_Casa_Apuestas().gettex;  es un combo box toca ver eso
-                 String direccion = view.getRegister().getCelular().getText();
-                 String celular = view.getRegister().getDireccion().getText();		
+                                 
+                 String direccion = view.getRegister().getDireccion().getText();		
+                 String celular = view.getRegister().getCelular().getText();
+ 
+            
+                 
+                 
+                 
 		    	 
-		    	 if(model.getUsuarios().agregarUsuario(nuevousername, nuevopassword, nombre_Completo)) {  
-		    		 
-			    		view.mensaje("Registro Exitoso");
+                 if (nombre_Completo.isEmpty() || cedula.isEmpty() || direccion.isEmpty() || celular.isEmpty()) {
+                     view.mensajeAdvertencia("Por favor, complete todos los campos.", "¡Ey!, así como dificil no?");
+                     
+                 }else if (nuevousername.isEmpty()){
+                     
+                     view.mensajeAdvertencia("Ingrese un nombre de usuario para su cuenta. Porfavor :>", "¡Ups! te hace falta algo nuestro futuro usuario");
 
-			    		view.getRegister().getNewUsername().setText("");
-			    		view.getRegister().getNewPassword().setText("");
-			    		view.getRegister().getFull_Name().setText("");
-			    		view.getRegister().getCedula().setText("");
-			    		view.getRegister().getDireccion().setText("");
-			    		view.getRegister().getCelular().setText("");
-			    		view.getRegister().getSede_Casa_Apuestas().setSelectedIndex(-1); // Establecer ninguna opción seleccionada por defecto
+                 }else if (nuevopassword.isEmpty()){
+                     
+                     view.mensajeAdvertencia("Ingrese una contraseña para su cuenta. Porfavor :>", "¡Ups! te hace falta algo nuestro futuro usuario");
+                     
+                  } else {
+                     // traer  la edad seleccionada por el usuario
+                     int edad =  model.getUsuarios().getEdad();
 
-			    		view.setLogin();
-		    	   
-		    	 }else {
-		    		 
-			    		view.mensaje("El nombre de usuario ya está en uso. Elija otro");
-			    		
-			    		view.getRegister().getNewUsername().setText("");
-			    		view.getRegister().getNewPassword().setText("");
-
-		    	 }
+                     // Verificar si la edad es mayor de 18 años
+                     if (edad >= 18) {
+                    	 
+                    	 if (!celular.isEmpty()) {
+                        	 try {
+                        		 System.out.println(celular);
+                        	 
+                        		 model.validarNumeroDigitos(celular);
+                        
+                        	 }catch(IllegalArgumentException e){ 
+                        		 System.out.println("Error autentico");
+                        		 view.mensajeError("Por favor ingrese su número de celular (recuerde que un número de celular contiene 10 digitos", "ERROR 508 'no es un número de celuco.'");
+                                 return; 
+            
+     //Se interrumpe la ejecución del método actual, evitando que el código siguiente al bloque try-catch se ejecute en caso de que haya una excepción.               
+                        	 }
+                        	 
+                         }	 
+                          if (!cedula.isEmpty()) {
+                        	 
+                        	 try {
+                        		 System.out.println(cedula);
+                        	 
+                        		 model.validarSiesNumero(cedula);
+                        
+                        	 }catch(IllegalArgumentException e){ 
+                                 e.getMessage();                  
+                            	 view.mensajeError("La cédula debe contener solo números.", "¡Ups!");
+                                 return; 
+        //Se interrumpe la ejecución del método actual, evitando que el código siguiente al bloque try-catch se ejecute en caso de que haya una excepción.               
+                        
+                        	 }
+                              
+                         }
+                         // Resto del código para agregar el usuario
+                         if (model.getUsuarios().agregarUsuario(nuevousername, nuevopassword, nombre_Completo, edad, cedula,"sede", direccion, celular)) {
+                             // Registro exitoso
+                             view.mensajeInformativo("¡en hora buena!. Dejanos darte la bienvenida "+ nombre_Completo +" a nuestra alucinante y controvercial casa de apuestas Gold Magic.\n\n( Ya eres un nueva alma, ¡perdon! ''integrante'' que pertence a esta familia"+ nombre_Completo +" :) )", "Registro Exitoso");
+                             // Limpiar los campos
+                             view.getRegister().getNewUsername().setText("");
+                             view.getRegister().getNewPassword().setText("");
+                             view.getRegister().getFull_Name().setText("");
+                             view.getRegister().getCedula().setText("");
+                             view.getRegister().getDireccion().setText("");
+                             view.getRegister().getCelular().setText("");
+                             view.getRegister().getSede_Casa_Apuestas().setSelectedIndex(-1); // Establecer ninguna opción seleccionada por defecto
+                             view.setLogin();
+                             
+                         } else {
+                             view.mensajeError("El nombre de usuario ya está en uso. Elija otro", "ERROR 203 'Sea un poquito más original :D'");
+                             view.getRegister().getNewUsername().setText("");
+                             view.getRegister().getNewPassword().setText("");
+                         }
+                     } else {
+                         view.mensajeAdvertencia("Usted es menor de edad, debe tener al menos 18 años para registrarse.", "¡Oye! Estas muy joven para dañarte la vida rapido :/");
+                      // Limpiar los campos
+                         view.getRegister().getNewUsername().setText("");
+                         view.getRegister().getNewPassword().setText("");
+                         view.getRegister().getFull_Name().setText("");
+                         view.getRegister().getCedula().setText("");
+                         view.getRegister().getDireccion().setText("");
+                         view.getRegister().getCelular().setText("");
+                         view.getRegister().getSede_Casa_Apuestas().setSelectedIndex(-1); // Establecer ninguna opción seleccionada por defecto
+                         view.setLogin();
+                     }
+              /*       
+                      if (!celular.isEmpty()) {
+                    	 try {
+                    		 System.out.println(celular);
+                    	 
+                    		 model.validarNumeroDigitos(celular);
+                    
+                    	 }catch(IllegalArgumentException e){ 
+                    		 System.out.println("Error autentico");
+                    		 view.mensajeError("Por favor ingrese su número de celular (recuerde que un número de celular contiene 10 digitos", "ERROR 508 'no es un número de celuco.'");
+                    	 }
+                    	 
+                     }	 
+                      if (!cedula.isEmpty()) {
+                    	 
+                    	 try {
+                    		 System.out.println(cedula);
+                    	 
+                    		 model.validarSiesNumero(cedula);
+                    
+                    	 }catch(IllegalArgumentException e){ 
+                             e.getMessage();                  
+                        	 view.mensajeError("La cédula debe contener solo números.", "¡Ups!");
+                    	 }
+                          
+                     }
+                     
+                    	 */
+                 }
 			
 		     break;	
 		     
