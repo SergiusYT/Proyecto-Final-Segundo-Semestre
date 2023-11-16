@@ -8,6 +8,9 @@ public class Principal extends JPanel {
 	private static final long serialVersionUID = 1L;
 	private JLabel texto1, texto2;
     private JButton loteria,superastro,baloto,betplay,chance;
+    
+    
+
 
     public Principal() {
         setLayout(null);
@@ -36,6 +39,7 @@ public class Principal extends JPanel {
         texto2.setBounds(30,120,130,50);
 
 
+      
         
      
 
@@ -46,6 +50,8 @@ public class Principal extends JPanel {
         add(baloto);
         add(betplay);
         add(chance);   
+        
+ 
     
     }
 
@@ -54,7 +60,11 @@ public class Principal extends JPanel {
 
 
 	
-    public JButton getButton_Loteria() {
+
+
+
+
+	public JButton getButton_Loteria() {
         return loteria;
     }
     public JButton getButton_SuperAstro() {

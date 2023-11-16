@@ -86,6 +86,11 @@ public class Controller implements ActionListener{
    //--------------------------------------------------------------------------	
 	 
 
+	
+
+	  
+	  
+	  
    }
 
 // --------------------- CREACIÓN Y IMPLEMENTACION DE EVENTOS---------------------------------------------------
@@ -104,8 +109,6 @@ public class Controller implements ActionListener{
 		    	 String username = view.getLogin().getUsername().getText();
 		    	 String password = view.getLogin().getPassword().getText();     // se trae el texto escrito por el usuario  
 				    	 
-		      view.getMapa();
-		    	 
 		    	 
 		    	if (model.getUsuarios().validarInicioSesion(username, password)) {
 		    		
@@ -245,34 +248,7 @@ public class Controller implements ActionListener{
                          view.getRegister().getSede_Casa_Apuestas().setSelectedIndex(-1); // Establecer ninguna opción seleccionada por defecto
                          view.setLogin();
                      }
-              /*       
-                      if (!celular.isEmpty()) {
-                    	 try {
-                    		 System.out.println(celular);
-                    	 
-                    		 model.validarNumeroDigitos(celular);
-                    
-                    	 }catch(IllegalArgumentException e){ 
-                    		 System.out.println("Error autentico");
-                    		 view.mensajeError("Por favor ingrese su número de celular (recuerde que un número de celular contiene 10 digitos", "ERROR 508 'no es un número de celuco.'");
-                    	 }
-                    	 
-                     }	 
-                      if (!cedula.isEmpty()) {
-                    	 
-                    	 try {
-                    		 System.out.println(cedula);
-                    	 
-                    		 model.validarSiesNumero(cedula);
-                    
-                    	 }catch(IllegalArgumentException e){ 
-                             e.getMessage();                  
-                        	 view.mensajeError("La cédula debe contener solo números.", "¡Ups!");
-                    	 }
-                          
-                     }
-                     
-                    	 */
+         
                  }
 			
 		     break;	

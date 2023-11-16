@@ -17,7 +17,7 @@ public class View extends JFrame{
 	private Principal principal;
 	private LoteriaPanel loteria;
 
-	
+
 	
 	public View() {
 		
@@ -36,6 +36,7 @@ public class View extends JFrame{
                 register = new Register();
                 principal = new Principal();
                 loteria = new LoteriaPanel();
+            
 
         
        //------------------------ Actualizacion de paneles en el mismo JFrame----------------------------------------
@@ -122,10 +123,6 @@ public class View extends JFrame{
     }
 
 
-
-
-	
-	
 
 
 }

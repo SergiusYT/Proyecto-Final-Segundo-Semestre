@@ -1,12 +1,15 @@
 package co.edu.unbosque.model;
 
+
 import co.edu.unbosque.model.persistence.ConfiguracionCasaApuestas;
+
 
 public class Model {
 
 	private ConfiguracionCasaApuestas configuracion;
 	private Usuarios usuario; 
 	private Loteria loteria;
+
 
 //----------------------- contructor -------------------------------	
 	
