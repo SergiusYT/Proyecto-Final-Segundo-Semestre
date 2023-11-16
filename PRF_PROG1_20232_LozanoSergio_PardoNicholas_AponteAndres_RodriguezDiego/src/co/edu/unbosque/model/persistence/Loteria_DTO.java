@@ -59,7 +59,8 @@ public class Loteria_DTO extends Juegos_DTO implements Serializable, ConversionS
     public String toStringApostador() {
         return  "<html>Nombre de usuario del apostador: "+ usernameApostador +
         		"<br>Nombre del apostador: " + nombreApostador +
-                "<br>Número apostado: " + numeroApostador +
+                "<br>Numero de cedula: "+ cedula +
+        		"<br>Número apostado: " + numeroApostador +
                 "<br>Serie apostada: " + serieApostador +
                 "<br>Fracciones compradas: " + fraccion +
                 "<br>Valor de la apuesta: " + valorApuesta +
