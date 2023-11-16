@@ -104,6 +104,9 @@ public class Controller implements ActionListener{
 		    	 String username = view.getLogin().getUsername().getText();
 		    	 String password = view.getLogin().getPassword().getText();     // se trae el texto escrito por el usuario  
 				    	 
+		      view.getMapa();
+		    	 
+		    	 
 		    	if (model.getUsuarios().validarInicioSesion(username, password)) {
 		    		
 		    		
