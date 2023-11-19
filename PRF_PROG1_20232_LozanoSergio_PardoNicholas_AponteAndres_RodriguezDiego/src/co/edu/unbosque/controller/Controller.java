@@ -21,15 +21,23 @@ public class Controller implements ActionListener{
 	  private View view;
 	  private Model model;
 
-		
+
 	  
   public Controller(){
 	  
 	  view= new View();   
 	  model= new Model();
 
+	  
 	  add_components();  
 	  ejecutar();
+	  
+	  
+	  Scanner scanner = new Scanner(System.in);
+ 	 System.out.println("Ingrese la sedes: ");
+      String serie = scanner.next();
+      
+      model.getSedes().agregarNuevaSede(serie, 0);
   }
 	  
 	  
@@ -66,6 +74,10 @@ public class Controller implements ActionListener{
 	  view.getRegister().getButton_Create_User().addActionListener(this);
 	  view.getRegister().getButton_Create_User().setActionCommand("create_user");
 	  
+	 
+	  
+	  
+	  
     //---------------------- Ventana principal  -------------------------------- 
   
 	  view.getPrincipal().getButton_Loteria().addActionListener(this);
@@ -85,12 +97,20 @@ public class Controller implements ActionListener{
 	  
    //--------------------------------------------------------------------------	
 	 
+	  //en esta seccion tomaremos la fecha que seleccione el usuario y manejaremos logica en este en el registro 
+      view.getRegister().getFecha().addPropertyChangeListener(new PropertyChangeListener() {
+     	    @Override
+     	    public void propertyChange(PropertyChangeEvent evt) {  // metodo que exige obligatoriamente el PropertyChangeListener
+     	        if ("calendar".equals(evt.getPropertyName())) {
+     	            // Esperar a que se seleccione un día
+     	            if (view.getRegister().getFecha().getDayChooser().getDay() != 0) {
+     	                Date fechaSeleccionada = view.getRegister().getFecha().getDate();
+     	                model.getUsuarios().calcularEdad(fechaSeleccionada);
+     	            }
+     	        }
+     	    }
+     	});
 
-	
-
-	  
-	  
-	  
    }
 
 // --------------------- CREACIÓN Y IMPLEMENTACION DE EVENTOS---------------------------------------------------
@@ -136,6 +156,20 @@ public class Controller implements ActionListener{
 			
 		    	 view.setRegister();
 		    	 view.getLogin().getPassword().setText("");
+		    	 
+		    	// Implementar las sedes como opciones al JComboBox dependiendo de las sede que existen guardadas en sedes.dat
+		         Set<String> ubicaciones = model.getSedes().todasUbicacionesSedes(); 
+
+		      // Verifica si el conjunto es nulo o vacío antes de establecer el JComboBox
+		      if (ubicaciones != null && !ubicaciones.isEmpty()) {
+		          view.getRegister().setSede_casa_apuesta(ubicaciones);
+		          view.getRegister().getSede_Casa_Apuestas().setSelectedIndex(-1); // Establecer ninguna opción seleccionada por defecto
+
+		      } else {
+		          // Maneja el caso en el que no hay ubicaciones disponibles
+		          view.mensajeAdvertencia("La casa de apuesta aun no tiene ninguna sede disponible", "¡No hay sedes!");
+		          view.setLogin();
+		      }
 
 		    	 
 		     break;
@@ -147,25 +181,18 @@ public class Controller implements ActionListener{
 		         String nombre_Completo = view.getRegister().getFull_Name().getText();
 		    	 
 		     
-		      //en esta seccion tomaremos la fecha que seleccione el usuario y manejaremos logica en este   
-		         view.getRegister().getFecha().addPropertyChangeListener(new PropertyChangeListener() {
-		             @Override
-		             public void propertyChange(PropertyChangeEvent evt) {
-		                 if ("calendar".equals(evt.getPropertyName())) {
-		                   Date fechaSeleccionada = view.getRegister().getFecha().getDate(); // tomara la fecha que seleccione el usuario
-		                     model.getUsuarios().calcularEdad(fechaSeleccionada);		                 }
-		             }
-		         });
+		     
 		    	 
 		         String cedula = view.getRegister().getCedula().getText();
-		 //    String sedeQueJugara = view.getRegister().getSede_Casa_Apuestas().gettex;  es un combo box toca ver eso
-                                 
+
+		    // se llama la opcion seleccionada del JComboBox de la sede 
+		         
+                 String sede_Jugara = (String) view.getRegister().getSede_Casa_Apuestas().getSelectedItem() ; 
+		       
+		         
+		         
                  String direccion = view.getRegister().getDireccion().getText();		
-                 String celular = view.getRegister().getCelular().getText();
- 
-            
-                 
-                 
+                 String celular = view.getRegister().getCelular().getText(); 
                  
 		    	 
                  if (nombre_Completo.isEmpty() || cedula.isEmpty() || direccion.isEmpty() || celular.isEmpty()) {
@@ -193,7 +220,6 @@ public class Controller implements ActionListener{
                         		 model.validarNumeroDigitos(celular);
                         
                         	 }catch(IllegalArgumentException e){ 
-                        		 System.out.println("Error autentico");
                         		 view.mensajeError("Por favor ingrese su número de celular (recuerde que un número de celular contiene 10 digitos", "ERROR 508 'no es un número de celuco.'");
                                  return; 
             
@@ -203,9 +229,7 @@ public class Controller implements ActionListener{
                          }	 
                           if (!cedula.isEmpty()) {
                         	 
-                        	 try {
-                        		 System.out.println(cedula);
-                        	 
+                        	 try {                        	 
                         		 model.validarSiesNumero(cedula);
                         
                         	 }catch(IllegalArgumentException e){ 
@@ -218,7 +242,7 @@ public class Controller implements ActionListener{
                               
                          }
                          // Resto del código para agregar el usuario
-                         if (model.getUsuarios().agregarUsuario(nuevousername, nuevopassword, nombre_Completo, edad, cedula,"sede", direccion, celular)) {
+                         if (model.getUsuarios().agregarUsuario(nuevousername, nuevopassword, nombre_Completo, edad, cedula,sede_Jugara, direccion, celular)) {
                              // Registro exitoso
                              view.mensajeInformativo("¡en hora buena!. Dejanos darte la bienvenida "+ nombre_Completo +" a nuestra alucinante y controvercial casa de apuestas Gold Magic.\n\n( Ya eres un nueva alma, ¡perdon! ''integrante'' que pertence a esta familia"+ nombre_Completo +" :) )", "Registro Exitoso");
                              // Limpiar los campos
@@ -268,6 +292,7 @@ public class Controller implements ActionListener{
 		     
 		     case "salir_Login":
 
+		    	 System.out.println(		    	 model.getUsuarios().obtenerTodosLosUsuarios());
 					System.exit(0); // con esto se cerrara el programa 
 		     
 		     break;
@@ -316,9 +341,11 @@ public class Controller implements ActionListener{
 		         
 		        String num = Integer.toString(numero);
 		         
-		         model.getLoteria().setcantidadFraccion(fracciones);
+		         model.getLoteria().setCantidadFraccion(fracciones);
 		         
+	             System.out.println(model.getLoteria().getCostoBoleto());
 
+		         
 		         Double premioGanado = model.getLoteria().realizarSorteo("LoteriaBogota", "Loteria" , serie, num);
 
 
@@ -334,7 +361,7 @@ public class Controller implements ActionListener{
 		             view.getLoteriaPanel().getTexto2().setText(model.getLoteria().obtenerUltimaApuesta());
 
 		             view.getLoteriaPanel().getTexto4().setText(model.getLoteria().getConsultarSorteo());
-
+		             
 		             System.out.println(model.getLoteria().getConsultarSorteo());
 
 		         } else {

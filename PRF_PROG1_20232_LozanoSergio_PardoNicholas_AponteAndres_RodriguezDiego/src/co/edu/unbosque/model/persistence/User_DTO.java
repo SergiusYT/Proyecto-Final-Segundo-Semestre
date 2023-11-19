@@ -35,6 +35,10 @@ public class User_DTO implements Serializable{
                ", password='" + password + '\'' +
                ", nombre del Apostador='" + nombreApostador + '\'' +
                ", edad del Apostador='" + edad + '\'' +
+               ", cedula del Apostador='" + cedula + '\'' +
+               ", sede que juega el Apostador='" + sede + '\'' +
+               ", direccion del Apostador='" + direccion + '\'' +
+               ", celular del Apostador='" + celular + '\'' +
 
                '}';
     }

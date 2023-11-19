@@ -45,6 +45,23 @@ public class User_DAO {
         return null;
     }
     
+    public String obtenerCedula(String username) {
+        for (User_DTO usuario : usuarios) {
+            if (usuario.getUsername().equals(username)) { // como dependende del usuario en el que este retornara el nombre de ese usuario especificamente
+                return usuario.getCedula();
+            }
+        }
+        return null;
+    }
+    
+    public String obtenerSedeJugadaPorElApostador(String username) {
+        for (User_DTO usuario : usuarios) {
+            if (usuario.getUsername().equals(username)) { // como dependende del usuario en el que este retornara el nombre de ese usuario especificamente
+                return usuario.getSede();
+            }
+        }
+        return null;
+    }
     
 //-------------------------------- METODOS CRUD -----------------------------------------------------------    
     
@@ -80,17 +97,26 @@ public class User_DAO {
             e.printStackTrace();
         }
     }
+    
 
-    @SuppressWarnings("unchecked")
-	public ArrayList<User_DTO> consultarUsuarios() {
-        try (ObjectInputStream inputStream = new ObjectInputStream(new FileInputStream(archivo))) {
-            usuarios = (ArrayList<User_DTO>) inputStream.readObject(); // Deserializar el ArrayList de usuarios
-        } catch (IOException | ClassNotFoundException e) {
-            // Si hay un error al cargar, simplemente continuamos con la lista vacía
-        }
-		return usuarios;
-    }
-	
+    
+    // Método para cargar los juegos desde el archivo .dat
+       @SuppressWarnings("unchecked")
+   	public String consultarUsuarios() {
+       	try (ObjectInputStream inputStream = new ObjectInputStream(new FileInputStream(archivo))) {
+       		usuarios = (ArrayList<User_DTO>) inputStream.readObject(); // Deserializar el ArrayList de números ganadores
+               String resultado = "";
+               for (User_DTO user : usuarios) {
+                   resultado += user.toString();
+               }
+               return resultado;
+           } catch (IOException | ClassNotFoundException e) {
+               // Si hay un error al cargar, simplemente continuamos con la lista vacía
+        	   usuarios = new ArrayList<>();
+               return "Error al cargar los usuarios.";
+           }
+
+       }
 	
 
 }

@@ -67,7 +67,7 @@ public class View extends JFrame{
 	
     public void mensajeInformativo(String informacion, String titulo ) {
 		
-		JOptionPane.showMessageDialog(null, informacion, titulo, JOptionPane.WARNING_MESSAGE);
+		JOptionPane.showMessageDialog(null, informacion, titulo, JOptionPane.INFORMATION_MESSAGE);
 	}
 	
 	public void mensajeAdvertencia(String mensaje, String razon ) {

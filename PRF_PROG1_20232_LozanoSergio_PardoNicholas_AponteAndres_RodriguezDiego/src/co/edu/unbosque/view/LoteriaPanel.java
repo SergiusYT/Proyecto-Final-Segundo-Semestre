@@ -11,7 +11,7 @@ public class LoteriaPanel extends JPanel {
 	private static final long serialVersionUID = 1L;
 	private JLabel texto1, texto2, texto3, texto4, texto5, texto6, texto7, texto8, texto9;
     private JTextField  nombre, cedula, direccion, celular, username , password;
-    private JComboBox<String> sede_casa_apuesta;
+    private JComboBox<Double> valorApuesta;
 	private JCalendar nacimiento;
     private JButton cancelar,registrar;
 
@@ -58,7 +58,7 @@ public class LoteriaPanel extends JPanel {
         
         // JComboBox
         
-        sede_casa_apuesta = new JComboBox<String>();
+        valorApuesta = new JComboBox<Double>();
 
 
        //--------------------------------- Propiedades para los componentes --------------------------------- 
@@ -74,19 +74,7 @@ public class LoteriaPanel extends JPanel {
      
         // JComboBox
         
-        sede_casa_apuesta.setBounds(900,140,450,50);
-        sede_casa_apuesta.setForeground(Color.black);
-        sede_casa_apuesta.setBackground(Color.white);
-        sede_casa_apuesta.setFont(new Font("Arial" , Font.ITALIC,18));
-        sede_casa_apuesta.addItem("Bogota");
-        sede_casa_apuesta.addItem("Chia");
-        sede_casa_apuesta.addItem("Tunja");
-        sede_casa_apuesta.addItem("Bucaramanga");
-        sede_casa_apuesta.addItem("Cartagena");
-        sede_casa_apuesta.addItem("Santa Marta");
-        sede_casa_apuesta.addItem("Cucuta");
-        sede_casa_apuesta.addItem("Leticia");
-        sede_casa_apuesta.setSelectedIndex(-1); // Establecer ninguna opción seleccionada por defecto
+     
         
         
         // JButtons
@@ -226,11 +214,6 @@ public class LoteriaPanel extends JPanel {
 	    return nacimiento;
 	}
     
-    
-	public JComboBox<String> getSede_Casa_Apuestas() {
-	    return sede_casa_apuesta ;
-    }
-	
 	
     public JButton getButton_Cancel() {
         return cancelar;

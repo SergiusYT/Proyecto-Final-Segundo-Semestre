@@ -19,7 +19,7 @@ public class Loteria{
     private double presupuestoDelJuego; // Almacenar el presupuesto por juego
 
     
-    private String usernameDelApostador, nombreRealApostador;
+    private String usernameDelApostador, nombreRealApostador, cedula, sede;
     
     private Random random;
 
@@ -104,9 +104,10 @@ public class Loteria{
     	    switch (fraccionesCompradas) {
     	        case 1:
     	            porcentaje = 0.45; // si compra una fraccion tiene un 45% 
+    	            
     	            break;
     	        case 2:
-    	            porcentaje = 0.75; // si compra dos fracciones tiene un 75% 
+    	        	porcentaje = 0.75; // si compra dos fracciones tiene un 75% 
     	            break;
     	        case 3:
     	            porcentaje = 1.0; // si compra tres fracciones tiene un 100% 
@@ -124,8 +125,28 @@ public class Loteria{
     	}
     
     
+  //------------------------------- Metodo donde dira que dependiendo de la fraccion tendra un precio diferente -----------------------------  	
 
-    
+    	public void setCantidadFraccion(int fraccion) {
+    	    this.fraccionesCompradas = fraccion;
+
+    	    switch (fraccionesCompradas) {  // precio por fraccion 
+    	        case 1:
+    	            setCostoBoleto(5000);
+    	            break;
+    	        case 2:
+    	            setCostoBoleto(10000);
+    	            break;
+    	        case 3:
+    	            setCostoBoleto(15000);
+    	            break;
+    	        // Agregar más casos según sea necesario
+    	        default:
+    	            // Establecer un valor predeterminado si no coincide con ningún caso
+    	            setCostoBoleto(0.0);
+    	            break;
+    	    }
+    	}
 
 
     
@@ -162,7 +183,7 @@ public class Loteria{
 
     	            // Guardar números ganadores, series y premio acumulado
     	            loteria_DAO.guardarJuego(nombreJuego,tipoJuego,numeroGanador, serieGanadora, premioAcumulado);
-    	            loteria_DAO.guardarApuestaLoteria(usernameDelApostador,nombreRealApostador, "",0 , "", 0, numeroApostado, serieApostada, fraccionesCompradas);
+    	            loteria_DAO.guardarApuestaLoteria(usernameDelApostador,nombreRealApostador, sede, cedula , "", costoBoleto, numeroApostado, serieApostada, fraccionesCompradas);
 
     	            return premioTOTAL;
     	        
@@ -173,7 +194,7 @@ public class Loteria{
     	        premioTOTAL = premioAcumulado += presupuestoDelJuego;
 
 	            loteria_DAO.guardarJuego(nombreJuego,tipoJuego,numeroGanador, serieGanadora, premioTOTAL);
-	            loteria_DAO.guardarApuestaLoteria(usernameDelApostador,nombreRealApostador, "",0 , "", 0, numeroApostado, serieApostada, fraccionesCompradas);
+	            loteria_DAO.guardarApuestaLoteria(usernameDelApostador,nombreRealApostador, sede,cedula , "", costoBoleto, numeroApostado, serieApostada, fraccionesCompradas);
 
     	        
     	        return null;
@@ -228,22 +249,29 @@ public class Loteria{
 	public void setNombreRealApostador(String nombreRealApostador) {
 		this.nombreRealApostador = nombreRealApostador;
 	}
+	public String getCedula() {
+		return cedula;
+	}
+
+    // para establecer el nombre de usuario del apostador
+	public void setCedula(String cedula) {
+		this.cedula = cedula;
+	}
+	
+	public String getSede() {
+		return sede;
+	}
 
 
-	
-	
-	
-	
-	
-	
-	
+	public void setSede(String sede) {
+		this.sede = sede;
+	}
+
+
 	public int getcantidadFraccion() {	
         return fraccionesCompradas; 
     }
     
-    public void setcantidadFraccion(int fraccion) {
-        this.fraccionesCompradas = fraccion;
-    }
     
 
     public Double getPremioAcumulado() {	
@@ -259,7 +287,7 @@ public class Loteria{
         return costoBoleto;
     }
 
-    public void setCostoBoleto(int costoBoleto) {
+    public void setCostoBoleto(double costoBoleto) {
         this.costoBoleto = costoBoleto;
     }
 

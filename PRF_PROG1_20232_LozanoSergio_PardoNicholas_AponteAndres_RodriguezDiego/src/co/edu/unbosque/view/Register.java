@@ -1,6 +1,8 @@
 package co.edu.unbosque.view;
 
 import java.awt.*;
+import java.util.Set;
+
 import javax.swing.*;
 import com.toedter.calendar.*;
 
@@ -78,15 +80,6 @@ public class Register extends JPanel {
         sede_casa_apuesta.setForeground(Color.black);
         sede_casa_apuesta.setBackground(Color.white);
         sede_casa_apuesta.setFont(new Font("Arial" , Font.ITALIC,18));
-        sede_casa_apuesta.addItem("Bogota");
-        sede_casa_apuesta.addItem("Chia");
-        sede_casa_apuesta.addItem("Tunja");
-        sede_casa_apuesta.addItem("Bucaramanga");
-        sede_casa_apuesta.addItem("Cartagena");
-        sede_casa_apuesta.addItem("Santa Marta");
-        sede_casa_apuesta.addItem("Cucuta");
-        sede_casa_apuesta.addItem("Leticia");
-        sede_casa_apuesta.setSelectedIndex(-1); // Establecer ninguna opción seleccionada por defecto
         
         
         // JButtons
@@ -223,7 +216,17 @@ public class Register extends JPanel {
     }
 	
 	
-    public JButton getButton_Cancel() {
+// un set donde pondra las opciones que contendra el JComboBox 
+	public void setSede_casa_apuesta(Set<String> sedes) {
+		
+		this.sede_casa_apuesta.removeAllItems(); // Limpiar el JComboBox antes de agregar nuevas opciones
+        for (String sede : sedes) {
+            this.sede_casa_apuesta.addItem(sede); // agregar los elementos que lea 
+        }	}
+
+
+
+	public JButton getButton_Cancel() {
         return cancelar;
     }
     public JButton getButton_Create_User() {

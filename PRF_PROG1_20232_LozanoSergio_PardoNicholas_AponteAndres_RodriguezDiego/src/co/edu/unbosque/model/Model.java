@@ -9,7 +9,7 @@ public class Model {
 	private ConfiguracionCasaApuestas configuracion;
 	private Usuarios usuario; 
 	private Loteria loteria;
-
+    private Sedes sede;
 
 //----------------------- contructor -------------------------------	
 	
@@ -19,6 +19,8 @@ public class Model {
     	
     	usuario = new Usuarios();
         loteria = new Loteria();
+        sede = new Sedes();
+        
     }
 
     
@@ -47,6 +49,8 @@ public class Model {
     	    	
     	    	loteria.setUsuarioEnSesion(usuario.buscarNombreDeUsuarioApostador(username));	    	
     	    	loteria.setNombreRealApostador(usuario.getNombreReal(username));
+    	    	loteria.setCedula(usuario.getCedula(username));	    
+    	    	loteria.setSede(usuario.getSededelApostador(username));
 
 
     	    	
@@ -91,7 +95,12 @@ public class Model {
 	    public Usuarios getUsuarios() {
 	    	return usuario;
 	    }
+	 
+	    public Sedes getSedes() {
+	    	return sede;
+	    }
 	    
+	 
 	 
 	    
 	    public Loteria getLoteria() {	    	

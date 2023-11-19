@@ -37,20 +37,23 @@ public class Sede_DAO {
     
     }
     
-    
-    
-
- // Método para cargar los juegos desde el archivo .dat
     @SuppressWarnings("unchecked")
-	public ArrayList<Sede_DTO> cargarSedes() {
-    	try (ObjectInputStream inputStream = new ObjectInputStream(new FileInputStream(archivosedes))) {
-            sedes = (ArrayList<Sede_DTO>) inputStream.readObject(); // Deserializar el ArrayList de números ganadores
-            
-        } catch (IOException | ClassNotFoundException e) {
-            // Si hay un error al cargar, simplemente continuamos con la lista vacía
-        }
-      return sedes;
-    }
+   	public String cargarSedes() {
+       	try (ObjectInputStream inputStream = new ObjectInputStream(new FileInputStream(archivosedes))) {
+       		sedes = (ArrayList<Sede_DTO>) inputStream.readObject(); // Deserializar el ArrayList de números ganadores
+               String resultado = "";
+               for (Sede_DTO sede : sedes) {
+                   resultado += sede.toString();
+               }
+               return resultado;
+           } catch (IOException | ClassNotFoundException e) {
+               // Si hay un error al cargar, simplemente continuamos con la lista vacía
+        	   sedes = new ArrayList<>();
+               return "Error al cargar los usuarios.";
+           }
+
+       }
+    
 	
 	
 	
@@ -72,5 +75,56 @@ public class Sede_DAO {
 
 	}
 	
+	
+	public void eliminarSede(String ubicacion) {
+	    cargarSedes(); // Cargar las sedes existentes
 
+	    // Buscar la sede que se va a eliminar
+	    Iterator<Sede_DTO> iterator = sedes.iterator();
+	    while (iterator.hasNext()) { //hasNext es para que el bucle salga hasta que retorne false cuando ya no haya mas elementos en el archivo
+	        sede_DTO = iterator.next(); // para que devuelva el siguiente elemento y susesivamente 
+	        if (sede_DTO.getUbicacion().equals(ubicacion)) {
+	            iterator.remove(); // Eliminar la sede de la lista
+	        }
+	    }
+
+	    // Guardar la lista actualizada en el archivo
+	    for (Sede_DTO sede : sedes) {
+	        guardarSedes(sede.getUbicacion(), sede.getNumeroDeEmpleados());
+	    }
+	}
+	
+
+//------------------------------- Metodo para verificar si ya existe una sede con la ubicación dada	--------------------
+	
+	
+    public boolean sedeExistente(String ubicacion) {
+        cargarSedes();
+
+        for (Sede_DTO sede : sedes) {
+            if (sede.getUbicacion().equals(ubicacion)) {
+                return true; // La sede ya existe
+            }
+        }
+        return false; // La sede no existe
+    }
+    
+    public String obtenerSede(String nombreSede) {
+        for (Sede_DTO sede : sedes) {
+            if (sede.getUbicacion().equals(nombreSede)) { // como dependende del usuario en el que este retornara el nombre de ese usuario especificamente
+                return sede.getUbicacion();
+            }
+        }
+        return null;
+    }
+    
+    public Set<String> obtenerUbicacionTodasSedes() {
+        cargarSedes();
+  	
+        Set<String> ubicaciones = new HashSet<>();
+        for (Sede_DTO sede : sedes) {
+            ubicaciones.add(sede.getUbicacion());
+        }
+        return ubicaciones.isEmpty() ? null : ubicaciones;
+    }
 }

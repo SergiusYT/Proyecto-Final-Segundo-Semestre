@@ -10,8 +10,8 @@ public class Loteria_DTO extends Juegos_DTO implements Serializable, ConversionS
 	private String numerosGanadores, seriesGanadores;
 
     // apostador
-	private String usernameApostador, nombreApostador, numeroApostador, serieApostador, nombreSede;
-	private int fraccion, cedula;
+	private String usernameApostador, nombreApostador, numeroApostador, serieApostador,cedula, nombreSede;
+	private int fraccion;
 	private double valorApuesta;
 
 	
@@ -29,7 +29,7 @@ public class Loteria_DTO extends Juegos_DTO implements Serializable, ConversionS
  // ------------------------------ Contructor que tomara datos de las apuestas de los apostadores -------------------------------------	
     
     
-    public Loteria_DTO(String usernameApostador, String nombreApostador, String nombreSede, int cedula, String fecha , double valorApuesta, String numeroApostador, String serieApostador, int fraccion) {
+    public Loteria_DTO(String usernameApostador, String nombreApostador, String nombreSede, String cedula, String fecha , double valorApuesta, String numeroApostador, String serieApostador, int fraccion) {
         
     	 this.usernameApostador = usernameApostador; 
     	 this.nombreApostador = nombreApostador;

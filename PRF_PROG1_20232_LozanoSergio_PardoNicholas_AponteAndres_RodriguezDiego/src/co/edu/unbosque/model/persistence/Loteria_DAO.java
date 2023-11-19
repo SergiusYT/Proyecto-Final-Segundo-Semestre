@@ -81,7 +81,7 @@ public class Loteria_DAO {
 	
 //---------------------- METODOS PARA LAS APUESTAS HECHAS EN LA LOTERIA ---------------------------------------   
 
-public void guardarApuestaLoteria(String usernameApostador, String nombreApostador, String nombreSede, int cedula, String fecha , double valorApuesta, String numeroApostador, String serieApostador, int fraccion) {
+public void guardarApuestaLoteria(String usernameApostador, String nombreApostador, String nombreSede, String cedula, String fecha , double valorApuesta, String numeroApostador, String serieApostador, int fraccion) {
     	
 	    cargarApuestaLoteria(); // para comprobar 
 
@@ -120,14 +120,7 @@ public void guardarApuestaLoteria(String usernameApostador, String nombreApostad
             return "Error al cargar el historial de juegos.";
         }
         
-    }
-	//---------------------------METODOS PARA CONVERTIR LOS DATOS EN STRINGS----------------------------------------
-	
-	
-
-	
-	
-	
+    }	
 	
 	
 	//................................. metodos que mostraran los ultimos datos ...............................................

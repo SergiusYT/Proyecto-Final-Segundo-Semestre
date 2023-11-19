@@ -38,7 +38,7 @@ public class Usuarios {
         return user_DAO.buscarUsuario(username);
     }
 
-    public ArrayList<User_DTO> obtenerTodosLosUsuarios() {
+    public String obtenerTodosLosUsuarios() {
         return user_DAO.consultarUsuarios();
     }
     
@@ -69,12 +69,20 @@ public class Usuarios {
     }
     
    public String getNombreReal(String nombre) {
-	        // Si el inicio de sesión fue exitoso, devolver el nombre real del usuario
 	        return user_DAO.obtenerNombreReal(nombre);
 	    
 	
    }
+   
+   public String getCedula(String nombre) {
+       return user_DAO.obtenerCedula(nombre);
+   }
 
+   public String getSededelApostador(String nombre) {
+       return user_DAO.obtenerSedeJugadaPorElApostador(nombre);
+   }
+   
+   
   public int getEdad() {
 	  return edad;
   }
