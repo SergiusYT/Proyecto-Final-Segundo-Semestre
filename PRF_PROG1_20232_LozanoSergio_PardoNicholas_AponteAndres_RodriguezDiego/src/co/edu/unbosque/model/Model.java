@@ -9,6 +9,7 @@ public class Model {
 	private ConfiguracionCasaApuestas configuracion;
 	private Usuarios usuario; 
 	private Loteria loteria;
+	private SuperAstro superAstro;
     private Sedes sede;
 
 //----------------------- contructor -------------------------------	
@@ -19,6 +20,7 @@ public class Model {
     	
     	usuario = new Usuarios();
         loteria = new Loteria();
+        superAstro = new SuperAstro();
         sede = new Sedes();
         
     }
@@ -33,6 +35,8 @@ public class Model {
         
         // Pasamos el presupuesto por juego a los juegos específicos (puedes ajustar esto según tus necesidades)
         loteria.setPresupuestoParaLoteria(presupuestoPorJuego);
+        
+        superAstro.setPresupuestoParaSuperAstro(presupuestoPorJuego);
 	}
     
     
@@ -53,7 +57,13 @@ public class Model {
     	    	loteria.setSede(usuario.getSededelApostador(username));
 
 
-    	    	
+    	    
+    	   //-------------------->   SuperAstro
+ 	
+    	    	superAstro.setUsuarioEnSesion(usuario.buscarNombreDeUsuarioApostador(username));	    	
+    	    	superAstro.setNombreRealApostador(usuario.getNombreReal(username));
+    	    	superAstro.setCedula(usuario.getCedula(username));	    
+    	    	superAstro.setSede(usuario.getSededelApostador(username));
     	    }
     
 
@@ -109,7 +119,10 @@ public class Model {
 	    }
 	    
 	    
-	    
+	    public SuperAstro getSuperAstro() {
+	    	
+	    	return superAstro;
+	    }
 
 	
 	

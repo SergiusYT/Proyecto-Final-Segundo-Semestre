@@ -387,6 +387,32 @@ public class Controller implements ActionListener{
 		    		view.setLogin();
 		    	    view.getLogin().getUsername().setText("");
 		    		view.getLogin().getPassword().setText("");
+		    		
+		    		 // Establecer el presupuesto para el juego (ajusta según sea necesario)
+			         model.gestionarPropiedades(2, 150000000);
+
+
+		            // Realizar un sorteo (ajusta según sea necesario)
+		            model.getSuperAstro().generarNumerosGanadores(1234, "Aries");
+
+		            // Realizar una apuesta (ajusta según sea necesario)
+		            double premio1 = model.getSuperAstro().realizarSorteo("Juego1", "Tipo1", "Aries", "1234", 10000);
+
+		            // Imprimir resultados
+		            System.out.println("Consulta de sorteos:");
+		            System.out.println(model.getSuperAstro().getConsultarSorteo());
+
+		            System.out.println("\nConsulta de apuestas:");
+		            System.out.println(model.getSuperAstro().getConsultarApuesta());
+
+		            System.out.println("\nÚltimo sorteo:");
+		            System.out.println(model.getSuperAstro().obtenerUltimoSorteo());
+
+		            System.out.println("\nÚltima apuesta:");
+		            System.out.println(model.getSuperAstro().obtenerUltimaApuesta());
+
+		            System.out.println("\nPremio ganado: " + premio1);
+		            System.out.println("Premio acumulado: " +model.getSuperAstro().getPremioAcumulado());
 		    	 
 		     break;
 		

@@ -60,6 +60,7 @@ public class Loteria_DTO extends Juegos_DTO implements Serializable, ConversionS
         return  "<html>Nombre de usuario del apostador: "+ usernameApostador +
         		"<br>Nombre del apostador: " + nombreApostador +
                 "<br>Numero de cedula: "+ cedula +
+                "<br>Sede en la que juega: "+ nombreSede +
         		"<br>Número apostado: " + numeroApostador +
                 "<br>Serie apostada: " + serieApostador +
                 "<br>Fracciones compradas: " + fraccion +
