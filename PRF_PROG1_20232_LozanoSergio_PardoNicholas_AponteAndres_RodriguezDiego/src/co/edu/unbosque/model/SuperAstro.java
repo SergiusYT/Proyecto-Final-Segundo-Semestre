@@ -60,10 +60,10 @@ public class SuperAstro {
     
     // daremos la probabilidad 50/50 para que este pueda ganar el premio con los 4 digitos
     	
-    	// Generar un número aleatorio entre 1 y 100
-        int probabilidad = random.nextInt(100) + 1;
+        // Probabilidad para el Numero
+        int probabilidadNumero = random.nextInt(100) + 1;
 
-        if (probabilidad <= 50) {
+        if (probabilidadNumero <= 50) {
             // Si la probabilidad es 1-50%, elige el número del apostador
             nuevoNumeroGanador = numeroApostador;
         } else {
@@ -75,17 +75,20 @@ public class SuperAstro {
         numeroGanador = String.format("%04d", nuevoNumeroGanador);
 
             
-     // Generar un índice aleatorio para seleccionar un signo zodiacal
-        int indiceSigno = random.nextInt(signosZodiacos.size());
-        signosZodiacosGanador = signosZodiacos.get(indiceSigno);
+     // Probabilidad para el signo zodiacal
+        int probabilidadSigno = random.nextInt(100) + 1;
 
         // Aumentar la probabilidad de que salga el signo seleccionado por el usuario
-        if (signosZodiacosGanador.equals(signoApostador)) {
-            probabilidad += 50;
-        }
-	       //   loteria_DAO.guardarJuego("", "", numeroGanador, serieGanadora, loteria_DAO.cargarPremioAcumulado());
+        if (probabilidadSigno <= 50 ) {
+            // Aumentar la probabilidad en un 50%
+        	signosZodiacosGanador.equals(signoApostador);
+        }else {
+        	 // Generar un índice aleatorio para seleccionar un signo zodiacal
+            int indiceSigno = random.nextInt(signosZodiacos.size());
+            signosZodiacosGanador = signosZodiacos.get(indiceSigno);
 
-            
+        }
+          
     }
     
     

@@ -56,17 +56,8 @@ public class Baloto {
 
         // Convierte el número en una cadena (String) con ceros a la izquierda si es necesario
         numeroGanador = String.format("%04d", nuevoNumeroGanador);
-/*
             
-     // Generar un índice aleatorio para seleccionar un signo zodiacal
-        int indiceSigno = random.nextInt(signosZodiacos.size());
-        signosZodiacosGanador = signosZodiacos.get(indiceSigno);
-
-        // Aumentar la probabilidad de que salga el signo seleccionado por el usuario
-        if (signosZodiacosGanador.equals(signoApostador)) {
-            probabilidad += 50;
-        }
-	   */    //   loteria_DAO.guardarJuego("", "", numeroGanador, serieGanadora, loteria_DAO.cargarPremioAcumulado());
+   
 
             
     }
