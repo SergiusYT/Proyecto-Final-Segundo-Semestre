@@ -1,27 +1,28 @@
 package co.edu.unbosque.model.persistence;
 
+import java.io.*;
 
-public class SuperAstro_DTO extends Juegos_DTO implements  Juegos_DTOS {
+public class Baloto_DTO extends Juegos_DTO implements Serializable, Juegos_DTOS{
 
 	private static final long serialVersionUID = 1L;
 
 	// juego
-		private String numerosGanadores, signosGanadores;
+		private String numerosGanadores, superBalotaGanadora;
 
 	    // apostador
-		private String usernameApostador, nombreApostador, numeroApostador, signoZodiacoDelApostador,cedula, nombreSede;
+		private String usernameApostador, nombreApostador, numeroApostador, superBalotaApostada,cedula, nombreSede;
 		private double valorApuesta;
 	
 	
 	
-	public SuperAstro_DTO(String nombre, String tipoJuego, String numerosGanadores, String signosGanadores, double presupuesto) {
+	public Baloto_DTO(String nombre, String tipoJuego, String numerosGanadores, String superBalotaGanadora, double presupuesto) {
 		super(nombre, tipoJuego, presupuesto);
 		
 		this.numerosGanadores = numerosGanadores;
-		this.signosGanadores = signosGanadores;
+		this.superBalotaGanadora = superBalotaGanadora;
 	}
 
-	public SuperAstro_DTO(String usernameApostador, String nombreApostador, String nombreSede, String cedula, String fecha , double valorApuesta, String numeroApostador, String signoApostador) {
+	public Baloto_DTO(String usernameApostador, String nombreApostador, String nombreSede, String cedula, String fecha , double valorApuesta, String numeroApostador, String superBalotaGanadora) {
 	
 
    	 this.usernameApostador = usernameApostador; 
@@ -30,7 +31,7 @@ public class SuperAstro_DTO extends Juegos_DTO implements  Juegos_DTOS {
         this.cedula = cedula;
         this.valorApuesta = valorApuesta;
         this.numeroApostador = numeroApostador;
-        this.signoZodiacoDelApostador = signoApostador;
+        this.superBalotaApostada = superBalotaGanadora;
 		
 	}
 
@@ -40,7 +41,8 @@ public class SuperAstro_DTO extends Juegos_DTO implements  Juegos_DTOS {
 		return "<html>Nombre del juego: " + getNombre() +
                 "<br>Tipo de juego: " + getTipoJuego() +
                 "<br>Números ganadores: " + numerosGanadores +
-                "<br>Signo zodiaco ganador: " + signosGanadores +
+                "<br>SuperBalota ganadora: " + superBalotaGanadora +
+                "<br>Numero completo ganador: " +numerosGanadores+ superBalotaGanadora +
                 "<br>Premio acumulado: " + getPresupuesto() +
                 "</html>";
 		}
@@ -54,7 +56,8 @@ public class SuperAstro_DTO extends Juegos_DTO implements  Juegos_DTOS {
 	                "<br>Numero de cedula: "+ cedula +
 	                "<br>Sede en la que juega: "+ nombreSede +
 	        		"<br>Número apostado: " + numeroApostador +
-	                "<br>Signo zodiaco apostada: " + signoZodiacoDelApostador +
+	                "<br>SuperBalota apostada: " + superBalotaApostada +
+	                "<br>Numero completo apostado: " + numeroApostador+superBalotaApostada +
 	                "<br>Valor de la apuesta: " + valorApuesta +
 	                "</html>";	
 		 }

@@ -1,8 +1,7 @@
 package co.edu.unbosque.model.persistence;
 
-import java.io.*;
 
-public class Loteria_DTO extends Juegos_DTO implements Serializable, ConversionString_DTOS{
+public class Loteria_DTO extends Juegos_DTO implements Juegos_DTOS{
 
 	private static final long serialVersionUID = 1L;
 	
@@ -83,7 +82,7 @@ public class Loteria_DTO extends Juegos_DTO implements Serializable, ConversionS
 		return getPresupuesto();
 	}
 
-
+	
 	
    
 }

@@ -41,15 +41,29 @@ public class Loteria_DAO {
     
     
     
-
- // Método para cargar los juegos desde el archivo .dat
+    
+    // Método para cargar los juegos desde el archivo .dat
     @SuppressWarnings("unchecked")
 	public String cargarJuego() {
     	try (ObjectInputStream inputStream = new ObjectInputStream(new FileInputStream(archivoCasa))) {
             datos = (ArrayList<Loteria_DTO>) inputStream.readObject(); // Deserializar el ArrayList de números ganadores
             String resultado = "";
-            for (Loteria_DTO juego : datos) {
-                resultado += juego.toStringJuego();
+            // se recorre toda la lista de objetos 
+            for (Object juego : datos) {
+            	
+/* es para evitar choques o malentendidos con los datos de los juegos , porque si
+   no especificamos que objetos pertenecen a que instancia DTO de cada juego va haber errores de tipo 
+   Exception in thread "AWT-EventQueue-0" java.lang.ClassCastException: ya que este error se genera porque nosotros manejamos 
+   todos los sorteos y esta informacion en el mismo archivo juegos.dat donde se encuentran datos de cualquier instancia dto de cualquier juego
+    por eso se tiene que saber que objetos pertenecen a que instancia DTO*/ 
+            	
+                // Verificar si el juego es una instancia de SuperAstro_DTO            	
+                if (juego instanceof Loteria_DTO) {
+                	
+                    // Realizar un casting seguro a SuperAstro_DTO
+                	Loteria_DTO loteria_DTO = (Loteria_DTO) juego;
+                    resultado += loteria_DTO.toStringJuego();
+                }
             }
             return resultado;
         } catch (IOException | ClassNotFoundException e) {
@@ -65,18 +79,26 @@ public class Loteria_DAO {
 /* Método que servira para que el premio acumulado despues del cierre 
 	del programa no se pierda dicho premio y asignarlo denuevo para hacer la devidas operaciones con este */
 	
+
+	
 	public Double cargarPremioAcumulado() {
 		cargarJuego();
 
 	    if (!datos.isEmpty()) {
-	        // Obtener el último Loteria_DTO de la lista
-	        Loteria_DTO ultimoDTO = datos.get(datos.size() - 1);
-	        return ultimoDTO.getPremio();
+	        // Obtener el último objeto de SuperAstro_DTO de la lista
+	    	 for (int i = datos.size() - 1; i >= 0; i--) {
+	    		 
+	             // Verificar si el elemento en la posición actual es una instancia de SuperAstro_DTO
+	             if (datos.get(i) instanceof Loteria_DTO) {
+	                 // Realizar un casting seguro a SuperAstro_DTO
+	            	 Loteria_DTO ultimoDTO = (Loteria_DTO) datos.get(i);
+	                 return ultimoDTO.getPremio();
+	             }
+	         }
 	    }
 
 	    return 0.0; // Devolver 0 si la lista está vacía
 	}
-    
 	
 	
 //---------------------- METODOS PARA LAS APUESTAS HECHAS EN LA LOTERIA ---------------------------------------   

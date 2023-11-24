@@ -396,7 +396,7 @@ public class Controller implements ActionListener{
 		            model.getSuperAstro().generarNumerosGanadores(1234, "Aries");
 
 		            // Realizar una apuesta (ajusta según sea necesario)
-		            double premio1 = model.getSuperAstro().realizarSorteo("Juego1", "Tipo1", "Aries", "1234", 10000);
+		            double premio1 = model.getSuperAstro().realizarSorteo("Juego1", "SuperAstro", "Aries", "1234", 10000);
 
 		            // Imprimir resultados
 		            System.out.println("Consulta de sorteos:");
