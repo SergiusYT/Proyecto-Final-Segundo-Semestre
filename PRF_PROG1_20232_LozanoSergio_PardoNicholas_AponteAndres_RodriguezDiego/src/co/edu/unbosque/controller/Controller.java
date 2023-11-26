@@ -12,6 +12,8 @@ import java.beans.PropertyChangeListener;
 
 import java.util.*;
 
+import javax.swing.JComboBox;
+
 
 
 
@@ -311,8 +313,84 @@ public class Controller implements ActionListener{
 		
 		     case "lotery_button":
 		    	
-		    	 view.setLoteriaPanel();
+		   /* 	 view.setLoteriaPanel();
 		    	 
+		    	 
+		    	// Obtén el JComboBox de tu vista
+		    	 JComboBox<String> serieComboBox = view.getLoteriaPanel().getSerie();
+
+		    	 // Obtén la lista de ubicaciones desde el modelo
+		    	 ArrayList<String> ubicaciones = model.getLoteria().generarSeriesUnicas();
+
+		    	 // Limpiar el JComboBox antes de agregar nuevos elementos
+		    	 serieComboBox.removeAllItems();
+		         
+		         for (String ubicacion : ubicaciones) {
+		        	    serieComboBox.addItem(ubicacion);
+		        	}
+		         
+		         String numero= view.getLoteriaPanel().getNumero().getText();
+
+		         if (!numero.isEmpty()) {
+                	 
+                	 try {                        	 
+                		 model.validarNumerocuatroDigitos(numero);;
+                
+                	 }catch(IllegalArgumentException e){ 
+                         e.getMessage();                  
+                    	 view.mensajeError("La numero debe contener solo 4 digitos.", "¡Ups!");
+                         return; 
+//Se interrumpe la ejecución del método actual, evitando que el código siguiente al bloque try-catch se ejecute en caso de que haya una excepción.               
+                
+                	 }
+		         }
+		         int num = Integer.parseInt(numero);
+		         model.getLoteria().generarNumerosGanadores(num);
+
+		    	 String serie = (String) view.getLoteriaPanel().getSerie().getSelectedItem() ;
+		    	 
+		    	 
+		    	 int fraccion = (int) view.getLoteriaPanel().getValorApuesta().getSelectedItem();
+		    	 
+		         model.getLoteria().setCantidadFraccion(fraccion);
+
+		         Double premioGanado = model.getLoteria().realizarSorteo("LoteriaBogota", "Loteria" , serie, numero);
+
+		    	 
+		         if (premioGanado != null) {
+		        	 
+		        	 view.getLoteriaPanel().getTexto5().setText("¡Felicidades! Has ganado: $ " + premioGanado);
+		        	 
+		             
+		             view.getLoteriaPanel().getTexto1().setText(model.getLoteria().obtenerUltimoSorteo());
+		             
+			    	// System.out.println("Consulta del sorteo: "); model.getLoteria().getConsultarSorteo();
+//			    	 System.out.println("\n\nConsulta de la apuesta: "); model.getLoteria().getConsultarApuesta();
+		             view.getLoteriaPanel().getTexto2().setText(model.getLoteria().obtenerUltimaApuesta());
+
+		             
+		             System.out.println(model.getLoteria().getConsultarSorteo());
+
+		         } else {
+		             System.out.println("Lo siento, no has ganado. Premio acumulado: $" + model.getLoteria().getPremioAcumulado());
+		             
+		             view.getLoteriaPanel().getTexto1().setText(model.getLoteria().obtenerUltimoSorteo());
+		             
+//		             System.out.println("Consulta del sorteo: ");  model.getLoteria().getConsultarSorteo();
+//			    	 System.out.println("\n\nConsulta de la apuesta: ");  model.getLoteria().getConsultarApuesta();
+		             view.getLoteriaPanel().getTexto2().setText(model.getLoteria().obtenerUltimaApuesta());
+		             view.getLoteriaPanel().getTexto4().setText(model.getLoteria().getConsultarSorteo());
+		             System.out.println(model.getLoteria().getConsultarSorteo());
+
+
+		         }
+		  */
+		         
+		         
+		        
+		         
+		         view.setLoteriaPanel();
+		         
 		    	 Scanner scanner = new Scanner(System.in);
 
 		         int x = 2121;
@@ -332,7 +410,7 @@ public class Controller implements ActionListener{
 		         System.out.println("Ingrese la cantidad de digitos: ");
 		         int numero = scanner.nextInt();
 
-		         System.out.println("Ingrese la cantidad de fracciones: ");
+		         System.out.println("Ingrese la serie: ");
 		         String serie = scanner.next();
 		         
 		      
@@ -389,7 +467,7 @@ public class Controller implements ActionListener{
 		    		view.getLogin().getPassword().setText("");
 		    		
 		    		 // Establecer el presupuesto para el juego (ajusta según sea necesario)
-			         model.gestionarPropiedades(2, 150000000);
+			         model.gestionarPropiedades(2, 1500000000);
 
 
 		            // Realizar un sorteo (ajusta según sea necesario)
@@ -418,13 +496,68 @@ public class Controller implements ActionListener{
 		
 		     case "baloto_button": 
 			
-		    	
+		    	 view.setLogin();
+		    	    view.getLogin().getUsername().setText("");
+		    		view.getLogin().getPassword().setText("");
+		    		
+		    		 // Establecer el presupuesto para el juego (ajusta según sea necesario)
+			         model.gestionarPropiedades(2, 1500000000);
+
+
+		            // Realizar un sorteo (ajusta según sea necesario)
+			        int numerobaloto = 12345; 
+			        String nbaloto = "";
+		        	 
+		        	 for (int i = 0; i < 5; i++) {
+		        		 int digito = (numerobaloto / (int) Math.pow(10, i)) % 10;
+		        		    nbaloto = String.format("%02d", digito) + nbaloto;
+		        		
+		        		}
+		          // Convierte el número en una cadena (String) con ceros a la izquierda si es necesario
+			            model.getBaloto().generarNumerosGanadores(nbaloto, 13);
+
+		            // Realizar una apuesta (ajusta según sea necesario)
+		            double premio2 = model.getBaloto().realizarSorteo("Juego2", "Baloto", "13", nbaloto, "Revancha");
+
+		            // Imprimir resultados
+		            System.out.println("Consulta de sorteos:");
+		            System.out.println(model.getBaloto().getConsultarSorteo());
+
+		            System.out.println("\nConsulta de apuestas:");
+		            System.out.println(model.getBaloto().getConsultarApuesta());
+
+		            System.out.println("\nÚltimo sorteo:");
+		            System.out.println(model.getBaloto().obtenerUltimoSorteo());
+
+		            System.out.println("\nÚltima apuesta:");
+		            System.out.println(model.getBaloto().obtenerUltimaApuesta());
+
+		            System.out.println("\nPremio ganado: " + premio2);
+		            System.out.println("Premio acumulado: " +model.getBaloto().getPremioAcumulado());
+		    	 
 			
 		     break;	
 		     
 		     case "betplay_button":  
 					
-		    	
+		    	 // Establece algunos valores para probar
+		         model.gestionarPropiedades(2, 6000000);
+		      
+
+		         // Realiza el sorteo y muestra el resultado
+		         String nombreJuego = "JuegoPrueba";
+		         String tipoJuego = "TipoPrueba";
+		         String equipoApostado = "Local"; // Cambia el equipo según tu necesidad
+		         double valorApostado = 5000; // Cambia el valor según tu necesidad
+
+		         double premioGanadox = model.getBetPlay().realizarSorteo(nombreJuego, tipoJuego, equipoApostado, valorApostado);
+
+		         // Muestra el resultado
+		         System.out.println("Resultado del sorteo: " + premioGanadox);
+		         
+		         
+		         System.out.println("\n\nPremio acumulado: " +model.getBetPlay().getPremioAcumulado());
+
 		    	 
 		     break;
 		     

@@ -9,12 +9,12 @@ public class Baloto {
     private Baloto_DAO baloto_DAO;
 	
 
-    private int nuevoNumeroGanador;  
+    private int nuevoNumeroGanador, nuevonumeroSuperBalotaGanadora;  
     
-    private String numeroGanador, signosZodiacosGanador, ultimosDosDigitosGanador, ultimosDosDigitosApostado, ultimosTresDigitosGanador,ultimosTresDigitosApostado ; 
+    private String numeroGanador, numeroSuperBalotaGanadora,ultimosDigitoGanador ,ultimosDosDigitosGanador, ultimosDosDigitosApostado, ultimosTresDigitosGanador,ultimosTresDigitosApostado ; 
 
     
-    private double premioTOTAL, premioAcumulado, costoBoleto ; // Monto del premio principal
+    private double premioTOTAL, premioAcumulado, premioAcumuladoRenvacha, costoBoleto ; // Monto del premio principal
     private double presupuestoDelJuego; // Almacenar el presupuesto por juego
 
     
@@ -39,31 +39,53 @@ public class Baloto {
           /*--------------------- METODOS PARA QUE GENERES UN NUMERO DE 4 DIGITOS Y UN SERIE GANADORA ------------------------*/
 
     
-    public void generarNumerosGanadores(int numeroApostador, String signoApostador) {
+    public void generarNumerosGanadores(String numeroApostador, int superBalota) {
     
     // daremos la probabilidad 50/50 para que este pueda ganar el premio con los 4 digitos
     	
     	// Generar un número aleatorio entre 1 y 100
-        int probabilidad = random.nextInt(100) + 1;
+        int probabilidadNumero = random.nextInt(100) + 1;
 
-        if (probabilidad <= 50) {
+        if (probabilidadNumero <= 50) {
             // Si la probabilidad es 1-50%, elige el número del apostador
-            nuevoNumeroGanador = numeroApostador;
+        	numeroGanador = numeroApostador;
         } else {
-            // Si la probabilidad es 51-100%, elige un número aleatorio como de 4 digitos cualquiera
-            nuevoNumeroGanador = random.nextInt(10000);
+            // Si la probabilidad es 51-100%, elige un número aleatorio de 5 digitos cualquiera
+        	 int numero = 0;
+             for (int i = 0; i < 5; i++) {
+                 int digito = random.nextInt(45) + 1; // Números entre 1 y 45
+                 String digitoConCeros = String.format("%02d", digito);
+                 numero = numero * 100 + Integer.parseInt(digitoConCeros);
+                 }
+             nuevoNumeroGanador = numero;
+             // Convierte el número en una cadena (String) con ceros a la izquierda si es necesario
+             numeroGanador = String.format("%05d", nuevoNumeroGanador);
         }
 
-        // Convierte el número en una cadena (String) con ceros a la izquierda si es necesario
-        numeroGanador = String.format("%04d", nuevoNumeroGanador);
+       
             
-   
+        int probabilidadSuperBalota = random.nextInt(100) + 1;
 
+        if (probabilidadSuperBalota <= 50) {
+            // Si la probabilidad es 1-50%, elige el número del apostador
+        	nuevonumeroSuperBalotaGanadora = superBalota;
+        } else {
+            // Si la probabilidad es 51-100%, elige un número aleatorio de 5 digitos cualquiera
+        
+             int numero = random.nextInt(16) + 1; // Números entre 1 y 45
+             
+             nuevonumeroSuperBalotaGanadora = numero;
+        }
+        numeroSuperBalotaGanadora = String.format("%02d", nuevonumeroSuperBalotaGanadora);
             
     }
     
     
 public void asignarDigitos(String numeroApostado) {
+	
+	ultimosDigitoGanador = numeroGanador.substring(numeroGanador.length() - 1);
+	ultimosDigitoGanador = numeroApostado.substring(numeroApostado.length() - 1);
+	
     // Obtener los últimos 2 dígitos del número ganador y del número apostado
     ultimosDosDigitosGanador = numeroGanador.substring(numeroGanador.length() - 2);
     ultimosDosDigitosApostado = numeroApostado.substring(numeroApostado.length() - 2);
@@ -78,7 +100,7 @@ public void asignarDigitos(String numeroApostado) {
     /*--------------------------- METODOS PARA COMPROBAR SI GANO Y  LA CANTINDAD DE DINERO DEPENDIENDO LAS CIFRAS-----------------------------------*/
 
     
-    	public double calcularPremio(double premio, String numeroApostado, double valorApostado) {
+    	public double calcularPremio(double premio, String numeroApostado, String tipoDeBaloto) {
 
 
     	    
@@ -87,18 +109,16 @@ public void asignarDigitos(String numeroApostado) {
     	    double premioPorCifra = 0;
     	    double premioDescontado = 0;
     	
-	    	setCostoBoleto(valorApostado);  // en el set pondra el valorApostado con IVA incluido 
+	    	setCostoBoleto(tipoDeBaloto);  // en el set pondra el valorApostado con IVA incluido 
 
 
-    	    // Verificar si los últimos 2 dígitos coinciden
-    	    if (ultimosDosDigitosGanador.equals(ultimosDosDigitosApostado)) {
+    	    // Verificar si el ultimo dígito coinciden
+    	    if (ultimosDigitoGanador.equals(ultimosDigitoGanador)) {
 
-    	    	premioPorCifra = costoBoleto * 100; // se gana cien veces lo apostado si acierta los 2 ultimos digitos 
-    	    	premioDescontado = premioPorCifra * 0.8 ;  // el 20 % del superastro que se queda 
     	    	
-    	    	premioAcumulado += premioPorCifra - premioDescontado;
+    	    	premioAcumulado += premio - costoBoleto ; // gana lo mismo invertido 
     	    	
-    	    	premioTOTAL = premio - premioDescontado;
+    	    	premioTOTAL = costoBoleto;
     	    	
     	    	return premioTOTAL;
     	    }
@@ -147,14 +167,25 @@ public void asignarDigitos(String numeroApostado) {
     
     
 
-    	  public void setCostoBoleto(double valorApuesta) {
+    	  public void setCostoBoleto(String Baloto) {
+    		  
+    		  switch (Baloto) {
+    		     
+    		  case "Baloto":
+    		
+      		        this.costoBoleto = 5700; 
+    			  
+    			  break;
+    		  case "Revancha":
+
+        		    this.costoBoleto = 7800; 
+    			  
+    			  break;
+    			  
+    		  
+    		  }
     		                          
-    		  double valorSinIVA = valorApuesta / 1.19; // Se le aplica el IVA al valor (19%)
-
-    		    // Redondear el valorSinIVA al entero más cercano
-    		    double valorRedondeado = Math.round(valorSinIVA);
-
-    		    this.costoBoleto = valorRedondeado;
+    		 
     		}
 
     
@@ -176,26 +207,26 @@ public void asignarDigitos(String numeroApostado) {
     	
 
 
-		public Double realizarSorteo(String nombreJuego ,String tipoJuego, String signoApostador, String numeroApostado, double valorApostado) {
+		public Double realizarSorteo(String nombreJuego ,String tipoJuego, String superBalotaApostador, String numeroApostado, String TipodeBaloto) {
     	    
 	    	premioAcumulado = baloto_DAO.cargarPremioAcumulado();
 	    	
 	    	double premioReal = presupuestoDelJuego + premioAcumulado; // se suma el premio del argumento con el premioacumulado que se lleva implementado 
 
     		asignarDigitos(numeroApostado);
-    		setCostoBoleto(valorApostado);
+    		setCostoBoleto(TipodeBaloto);
 	    	
     		
     	    // Verificar si hay ganadores
-    	        if (this.signosZodiacosGanador.equals(signoApostador) && this.numeroGanador.equals(numeroApostado) && ultimosDosDigitosGanador.equals(ultimosDosDigitosApostado) && ultimosTresDigitosGanador.equals(ultimosTresDigitosApostado)) {
+    	        if (this.numeroSuperBalotaGanadora.equals(superBalotaApostador) && this.numeroGanador.equals(numeroApostado) && ultimosDosDigitosGanador.equals(ultimosDosDigitosApostado) && ultimosTresDigitosGanador.equals(ultimosTresDigitosApostado)) {
     	            // Hay al menos un ganador
-    	            calcularPremio(premioReal, numeroApostado, valorApostado);
+    	            calcularPremio(premioReal, numeroApostado, TipodeBaloto);
 
     	            premioAcumulado +=  premioReal - premioTOTAL; // acumula lo descontado del premio total y se suma eso para los proximos premios
 
     	            // Guardar números ganadores, series y premio acumulado
-    	            baloto_DAO.guardarJuego(nombreJuego,tipoJuego,numeroGanador, signosZodiacosGanador, premioAcumulado);
-    	            baloto_DAO.guardarApuestaSuperAstro(usernameDelApostador,nombreRealApostador, sede, cedula , "", costoBoleto, numeroApostado, signoApostador);
+    	            baloto_DAO.guardarJuego(nombreJuego,tipoJuego,numeroGanador, numeroSuperBalotaGanadora, premioAcumulado);
+    	            baloto_DAO.guardarApuestaSuperAstro(usernameDelApostador,nombreRealApostador, sede, cedula , "", costoBoleto, numeroApostado, superBalotaApostador);
 
     	            return premioTOTAL;
     	        
@@ -205,8 +236,8 @@ public void asignarDigitos(String numeroApostado) {
     	    	
     	        premioTOTAL = premioAcumulado += presupuestoDelJuego;
 
-    	        baloto_DAO.guardarJuego(nombreJuego,tipoJuego,numeroGanador, signosZodiacosGanador, premioTOTAL);
-    	        baloto_DAO.guardarApuestaSuperAstro(usernameDelApostador,nombreRealApostador, sede,cedula , "", costoBoleto, numeroApostado, signoApostador);
+    	        baloto_DAO.guardarJuego(nombreJuego,tipoJuego,numeroGanador, numeroSuperBalotaGanadora, premioTOTAL);
+    	        baloto_DAO.guardarApuestaSuperAstro(usernameDelApostador,nombreRealApostador, sede,cedula , "", costoBoleto, numeroApostado, superBalotaApostador);
 
     	        
     	        return premioTOTAL;

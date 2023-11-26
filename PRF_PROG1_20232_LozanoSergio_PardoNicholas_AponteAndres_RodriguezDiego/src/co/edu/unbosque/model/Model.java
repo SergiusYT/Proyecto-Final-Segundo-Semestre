@@ -10,6 +10,8 @@ public class Model {
 	private Usuarios usuario; 
 	private Loteria loteria;
 	private SuperAstro superAstro;
+	private Baloto baloto;
+	private BetPlay betPlay;
     private Sedes sede;
 
 //----------------------- contructor -------------------------------	
@@ -21,6 +23,8 @@ public class Model {
     	usuario = new Usuarios();
         loteria = new Loteria();
         superAstro = new SuperAstro();
+        baloto = new Baloto();
+        betPlay = new BetPlay();
         sede = new Sedes();
         
     }
@@ -37,6 +41,8 @@ public class Model {
         loteria.setPresupuestoParaLoteria(presupuestoPorJuego);
         
         superAstro.setPresupuestoParaSuperAstro(presupuestoPorJuego);
+        
+        betPlay.setPresupuestoParaSuperAstro(presupuestoPorJuego);
 	}
     
     
@@ -64,6 +70,21 @@ public class Model {
     	    	superAstro.setNombreRealApostador(usuario.getNombreReal(username));
     	    	superAstro.setCedula(usuario.getCedula(username));	    
     	    	superAstro.setSede(usuario.getSededelApostador(username));
+    	    	
+    	    //-------------------->   Baloto
+    	     	
+    	    	baloto.setUsuarioEnSesion(usuario.buscarNombreDeUsuarioApostador(username));	    	
+    	    	baloto.setNombreRealApostador(usuario.getNombreReal(username));
+    	    	baloto.setCedula(usuario.getCedula(username));	    
+    	    	baloto.setSede(usuario.getSededelApostador(username));
+    	    	
+            //-------------------->   BetPlay
+    	     	
+    	    	betPlay.setUsuarioEnSesion(usuario.buscarNombreDeUsuarioApostador(username));	    	
+    	    	betPlay.setNombreRealApostador(usuario.getNombreReal(username));
+    	    	betPlay.setCedula(usuario.getCedula(username));	    
+    	    	betPlay.setSede(usuario.getSededelApostador(username));
+    	    	
     	    }
     
 
@@ -90,8 +111,21 @@ public class Model {
                   throw new IllegalArgumentException();
               //ocurrido un problema y lanze una excepcion especifica , donde cabe recalcar que esto es una instancia de la clase Throwable*/
 
-              }           
-  }    
+              } 
+    }
+           
+    public void validarNumerocuatroDigitos(String entrada) throws IllegalArgumentException {  
+         		
+               if (!entrada.matches("\\d{4}")){ 
+    	       // \\d: Representa cualquier dígito numérico.	         
+    	       // {10}: Indica que debe haber exactamente 10 dígitos numéricos ya que esos son la cantidad de digitos de un numero de celular.) 
+                  throw new IllegalArgumentException();
+              //ocurrido un problema y lanze una excepcion especifica , donde cabe recalcar que esto es una instancia de la clase Throwable*/
+
+              }    
+        }               
+           
+    
     
     
     
@@ -124,7 +158,14 @@ public class Model {
 	    	return superAstro;
 	    }
 
-	
+	    public Baloto getBaloto() {
+	      
+	    	return baloto;
+	    }
+	    public BetPlay getBetPlay() {
+		      
+	    	return betPlay;
+	    }
 	
 	
 }

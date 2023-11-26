@@ -91,39 +91,39 @@ public class Register extends JPanel {
         // JLabels
         
         texto1.setBounds(610,20,400,50);
-        texto1.setForeground(Color.black);
+        texto1.setForeground(Color.WHITE);
 		texto1.setFont(new Font("Arial" , Font.ITALIC,32));
 		
         texto2.setBounds(30,90,300,50);
-        texto2.setForeground(Color.black);
+        texto2.setForeground(Color.WHITE);
 		texto2.setFont(new Font("Arial" , Font.BOLD,20));
 		
 		texto3.setBounds(30,210,300,50);
-	    texto3.setForeground(Color.black);
+	    texto3.setForeground(Color.WHITE);
         texto3.setFont(new Font("Arial" , Font.BOLD,20));
         
         texto4.setBounds(30,665,300,50);
-	    texto4.setForeground(Color.black);
+	    texto4.setForeground(Color.WHITE);
         texto4.setFont(new Font("Arial" , Font.BOLD,20));
         
         texto5.setBounds(900,90,450,50);
-        texto5.setForeground(Color.black);
+        texto5.setForeground(Color.WHITE);
 		texto5.setFont(new Font("Arial" , Font.BOLD,20));
 		
 		texto6.setBounds(900,210,450,50);
-        texto6.setForeground(Color.black);
+        texto6.setForeground(Color.WHITE);
 		texto6.setFont(new Font("Arial" , Font.BOLD,20));
 		
 		texto7.setBounds(900,320,450,50);
-        texto7.setForeground(Color.black);
+        texto7.setForeground(Color.WHITE);
 		texto7.setFont(new Font("Arial" , Font.BOLD,20));
 		
 		texto8.setBounds(900,430,450,50);
-        texto8.setForeground(Color.black);
+        texto8.setForeground(Color.WHITE);
 		texto8.setFont(new Font("Arial" , Font.BOLD,20));
 		
 		texto9.setBounds(900,540,450,50);
-        texto9.setForeground(Color.black);
+        texto9.setForeground(Color.WHITE);
 		texto9.setFont(new Font("Arial" , Font.BOLD,20));
 		
         // JTextFields
@@ -182,6 +182,23 @@ public class Register extends JPanel {
     }
 
    
+    @Override
+    public void paintComponent(Graphics img)	{ // se hace un metodo no retornable donde se le asigna que es tipo graphics y tiene como nombre img
+
+       Image fondo = new ImageIcon("Resources/Imagenes/Fondo_Registro.jpeg").getImage(); //se crea un objeto de fondo tipo imagen para el llamado del gif
+
+
+       img.drawImage(fondo, 0, 0, getWidth(),getHeight(), this/* el this es obligatorio para este caso ya que indicamos que es esta clase para que se ver la animacion del gif */ ); 
+
+
+//el drawaImage es de la parte Graphics que se llama con img que fue el nombre asigando para esta, donde ayudara para asignarle las dimensiones 
+
+
+       setOpaque(false); // para que sea tranparente y se pueda vizualisar la imagen
+
+       super.paintComponent(img); // pintara con los parametros que le dimos
+
+  } 
     
 //-----------------------------------------getters y setters -------------------------------------------
     

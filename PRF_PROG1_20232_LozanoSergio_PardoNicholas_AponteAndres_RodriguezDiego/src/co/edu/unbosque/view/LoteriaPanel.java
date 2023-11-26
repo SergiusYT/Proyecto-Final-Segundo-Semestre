@@ -1,6 +1,8 @@
 package co.edu.unbosque.view;
 
 import java.awt.*;
+import java.util.ArrayList;
+
 import javax.swing.*;
 import com.toedter.calendar.*;
 
@@ -10,10 +12,11 @@ public class LoteriaPanel extends JPanel {
 
 	private static final long serialVersionUID = 1L;
 	private JLabel texto1, texto2, texto3, texto4, texto5, texto6, texto7, texto8, texto9;
-    private JTextField  nombre, cedula, direccion, celular, username , password;
-    private JComboBox<Double> valorApuesta;
+    private JTextField  numero;
+    private JComboBox<Integer> valorApuesta;
+	private JComboBox<String> serie;
 	private JCalendar nacimiento;
-    private JButton cancelar,registrar;
+    private JButton cancelar,apostar;
 
     public LoteriaPanel() {
     	
@@ -26,7 +29,7 @@ public class LoteriaPanel extends JPanel {
         
         texto1 = new JLabel();
         texto2 = new JLabel();
-        texto3 = new JLabel("Fecha de nacimiento:");
+        texto3 = new JLabel("Elija un numero de 4 digitos");
         texto4 = new JLabel();
         texto5 = new JLabel("Sede de casa de apuesta donde jugara:");
         texto6 = new JLabel("Direccion de residencia:");
@@ -41,24 +44,27 @@ public class LoteriaPanel extends JPanel {
 
         // JTextFields
 
-        nombre = new JTextField(); 
-        cedula = new JTextField(); 
-        direccion = new JTextField();
-        celular = new JTextField(); 
+        numero = new JTextField(); 
 
 
-        username = new JTextField(); 
-        password = new JTextField(); 
+
+   
         
         
         // JButtons
 
         cancelar = new JButton("Cancelar");
-        registrar = new JButton("Crear Usuario");
+        apostar = new JButton("Realizar apuesta");
         
         // JComboBox
         
-        valorApuesta = new JComboBox<Double>();
+        valorApuesta = new JComboBox<Integer>();
+        valorApuesta.addItem(1);
+        valorApuesta.addItem(2);
+        valorApuesta.addItem(3);
+
+        serie = new JComboBox<String>();
+
 
 
        //--------------------------------- Propiedades para los componentes --------------------------------- 
@@ -80,7 +86,7 @@ public class LoteriaPanel extends JPanel {
         // JButtons
 
         cancelar.setBounds(1000,700,120,80);
-        registrar.setBounds(1200,700,120,80);
+        apostar.setBounds(1200,700,120,80);
         
 
         // JLabels
@@ -89,7 +95,7 @@ public class LoteriaPanel extends JPanel {
         texto1.setForeground(Color.black);
 		texto1.setFont(new Font("Arial" , Font.ITALIC,32));
 		
-        texto2.setBounds(30,90,700,300);
+        texto2.setBounds(610,500,700,300);
         texto2.setForeground(Color.black);
 		texto2.setFont(new Font("Arial" , Font.ITALIC,32));
 		
@@ -101,47 +107,22 @@ public class LoteriaPanel extends JPanel {
 	    texto4.setForeground(Color.black);
         texto4.setFont(new Font("Arial" , Font.BOLD,20));
         
-        texto5.setBounds(900,90,450,50);
-        texto5.setForeground(Color.black);
-		texto5.setFont(new Font("Arial" , Font.BOLD,20));
-		
-		texto6.setBounds(900,210,450,50);
-        texto6.setForeground(Color.black);
-		texto6.setFont(new Font("Arial" , Font.BOLD,20));
-		
-		texto7.setBounds(900,320,450,50);
-        texto7.setForeground(Color.black);
-		texto7.setFont(new Font("Arial" , Font.BOLD,20));
-		
-		texto8.setBounds(900,430,450,50);
-        texto8.setForeground(Color.black);
-		texto8.setFont(new Font("Arial" , Font.BOLD,20));
-		
-		texto9.setBounds(900,540,450,50);
-        texto9.setForeground(Color.black);
-		texto9.setFont(new Font("Arial" , Font.BOLD,20));
+        texto5.setBounds(100,450,300,600);
+	    texto5.setForeground(Color.black);
+        texto5.setFont(new Font("Arial" , Font.BOLD,20));
+        
+     
 		
         // JTextFields
 
 		
-		nombre.setBounds(40,140,350,50);
-		nombre.setFont(new Font("Arial", Font.PLAIN, 18));	
+		numero.setBounds(40,140,350,50);
+		numero.setFont(new Font("Arial", Font.PLAIN, 18));	
 
-	    cedula.setBounds(40,720,350,50);
-		cedula.setFont(new Font("Arial", Font.PLAIN, 18));	
-		
-		direccion.setBounds(900,260,350,50);
-		direccion.setFont(new Font("Arial", Font.PLAIN, 18));	
-
-		celular.setBounds(900,370,350,50);
-		celular.setFont(new Font("Arial", Font.PLAIN, 18));	
+		serie.setBounds(40,720,350,50);
+		serie.setFont(new Font("Arial", Font.PLAIN, 18));	
 		
 		
-        username.setBounds(900,480,350,50);
-		username.setFont(new Font("Arial", Font.PLAIN, 18));	
-
-        password.setBounds(900,590,350,50);
-		password.setFont(new Font("Arial", Font.PLAIN, 18));	
         
         
         
@@ -150,7 +131,12 @@ public class LoteriaPanel extends JPanel {
 
         add(texto1);
         add(texto2);
+        add (texto3);
         add(texto4);
+        add(texto5);
+        add(numero);
+        add(valorApuesta);
+        add(serie);
 
       
     }
@@ -187,39 +173,80 @@ public class LoteriaPanel extends JPanel {
     
     
     
-    
-    
-    public JTextField getFull_Name() {
-        return nombre;
-    }
+ 
+	
+	
+    public JLabel getTexto3() {
+		return texto3;
+	}
 
-	public JTextField getNewUsername() {
-        return username;
-    }
-	public JTextField getNewPassword() {
-		return password;
+
+
+	public void setTexto3(JLabel texto3) {
+		this.texto3 = texto3;
 	}
-	public JTextField getCedula() {
-	    return cedula;
-    }
-	public JTextField getDireccion() {
-	    return direccion;
-    }
-	public JTextField getCelular() {
-		return celular;
+
+
+
+	public JLabel getTexto5() {
+		return texto5;
 	}
-	
-	
-    public JCalendar getFecha() {
+
+
+
+	public void setTexto5(JLabel texto5) {
+		this.texto5 = texto5;
+	}
+
+
+
+	public JComboBox<Integer> getValorApuesta() {
+		return valorApuesta;
+	}
+
+
+
+	public void setValorApuesta(JComboBox<Integer> valorApuesta) {
+		this.valorApuesta = valorApuesta;
+	}
+
+
+
+	public JComboBox<String> getSerie() {
+		return serie;
+	}
+
+
+
+	public void setSerie(JComboBox<String> ubicaciones) {
+		this.serie = ubicaciones;
+	}
+
+
+
+	public JCalendar getFecha() {
 	    return nacimiento;
 	}
     
 	
-    public JButton getButton_Cancel() {
+	
+    public JTextField getNumero() {
+		return numero;
+	}
+
+
+
+	public void setNumero(JTextField numero) {
+		this.numero = numero;
+	}
+
+
+
+	public JButton getButton_Cancel() {
         return cancelar;
     }
     public JButton getButton_Create_User() {
-        return registrar;
+        return apostar;
     }
 }
 

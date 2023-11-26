@@ -81,6 +81,8 @@ public class SuperAstro {
         // Aumentar la probabilidad de que salga el signo seleccionado por el usuario
         if (probabilidadSigno <= 50 ) {
             // Aumentar la probabilidad en un 50%
+        	signosZodiacosGanador = "";
+        	
         	signosZodiacosGanador.equals(signoApostador);
         }else {
         	 // Generar un índice aleatorio para seleccionar un signo zodiacal
@@ -119,44 +121,73 @@ public void asignarDigitos(String numeroApostado) {
 	    	setCostoBoleto(valorApostado);  // en el set pondra el valorApostado con IVA incluido 
 
 
-    	    // Verificar si los últimos 2 dígitos coinciden
-    	    if (ultimosDosDigitosGanador.equals(ultimosDosDigitosApostado)) {
+	    	// Verificar si todos los dígitos son iguales
+    	    if (numeroApostado.equals(numeroGanador)) {
+    	    	
+    	        premioPorCifra = costoBoleto * 42000; // Se gana cuarenta y dos mil veces lo apostado si todos los dígitos son iguales
 
-    	    	premioPorCifra = costoBoleto * 100; // se gana cien veces lo apostado si acierta los 2 ultimos digitos 
-    	    	premioDescontado = premioPorCifra * 0.8 ;  // el 20 % del superastro que se queda 
-    	    	
-    	    	premioAcumulado += premioPorCifra - premioDescontado;
-    	    	
-    	    	premioTOTAL = premio - premioDescontado;
-    	    	
-    	    	return premioTOTAL;
+    	    	if (premioPorCifra > premio) {
+    	    	 
+    	    	 premioDescontado = premio * 0.2;
+    	    	 
+    	    	 premioTOTAL = 	premio - premioDescontado;
+    	    		
+    	    	}else {	
+    	    		
+
+    	        premioTOTAL = premioPorCifra - premioDescontado;
+
+    	    	}
+       	        return premioTOTAL;
+
     	    }
-
+    	    
     	    // Verificar si los últimos 3 dígitos coinciden
     	    if (ultimosTresDigitosGanador.equals(ultimosTresDigitosApostado)) {
 
     	    	premioPorCifra = costoBoleto * 1000; // se gana cien veces lo apostado si acierta los 2 ultimos digitos 
-    	    	premioDescontado = premioPorCifra * 0.8 ;  // el 20 % del superastro que se queda 
     	    	
-    	    	premioAcumulado += premioPorCifra - premioDescontado;
+    	    	if (premioPorCifra > premio) {
+       	    	 
+       	    	 premioDescontado = premio * 0.2;
+       	    	 
+       	    	 premioTOTAL = 	premio - premioDescontado;
+       	    		
+       	    	}else {	
+       	    		
+
+       	        premioTOTAL = premioPorCifra - premioDescontado;
+
+       	    	}
     	    	
-    	    	premioTOTAL = premio - premioDescontado;
-    	    	
-    	    	return premioTOTAL;
+       	        return premioTOTAL;
+
     	    }
     	    
-    	 // Verificar si todos los dígitos son iguales
-    	    if (numeroApostado.equals(numeroGanador)) {
+    	    
+	    	
+    	    // Verificar si los últimos 2 dígitos coinciden
+    	    if (ultimosDosDigitosGanador.equals(ultimosDosDigitosApostado)) {
+
+    	    	premioPorCifra = costoBoleto * 100; // se gana cien veces lo apostado si acierta los 2 ultimos digitos 
     	    	
-    	        premioPorCifra = costoBoleto * 42000; // Se gana cuarenta y dos mil veces lo apostado si todos los dígitos son iguales
-    	        premioDescontado = premioPorCifra * 0.8;  // El 20 % del superastro que se queda
+    	    	if (premioPorCifra > premio) {
+       	    	 
+       	    	 premioDescontado = premio * 0.2;
+       	    	 
+       	    	 premioTOTAL = 	premio - premioDescontado;
+       	    		
+       	    	}else {	
+       	    		
 
-    	        premioAcumulado += premioPorCifra - premioDescontado;
-    	        premioTOTAL = premio - premioDescontado;
+       	        premioTOTAL = premioPorCifra - premioDescontado;
 
-    	        return premioTOTAL;
-    	        
-    	    }else {
+       	    	}
+       	        return premioTOTAL;
+
+    	    }
+    /*
+    	    else {
     	        // cuenta  la cantidad de dígitos iguales
     	        double digitosIguales = numeroApostado.chars().distinct().filter(c -> c == numeroGanador.charAt(0)).count();
 
@@ -168,8 +199,8 @@ public void asignarDigitos(String numeroApostado) {
     	        	return premioAcumulado;
     	        	
     	        }
-    	    }
-			return 0;
+    	    }  */
+   	        return premioTOTAL;
     	    	   
     	}
     	
@@ -207,27 +238,32 @@ public void asignarDigitos(String numeroApostado) {
 
 		public Double realizarSorteo(String nombreJuego ,String tipoJuego, String signoApostador, String numeroApostado, double valorApostado) {
     	    
-	    	premioAcumulado = superAstro_DAO.cargarPremioAcumulado();
+	    	
+			premioAcumulado = superAstro_DAO.cargarPremioAcumulado();
 	    	
 	    	double premioReal = presupuestoDelJuego + premioAcumulado; // se suma el premio del argumento con el premioacumulado que se lleva implementado 
 
     		asignarDigitos(numeroApostado);
     		setCostoBoleto(valorApostado);
 	    	
+    		signosZodiacosGanador = signoApostador;
+    		numeroGanador = numeroApostado;
     		
     	    // Verificar si hay ganadores
-    	        if (this.signosZodiacosGanador.equals(signoApostador) && this.numeroGanador.equals(numeroApostado) && ultimosDosDigitosGanador.equals(ultimosDosDigitosApostado) && ultimosTresDigitosGanador.equals(ultimosTresDigitosApostado)) {
+    	        if (this.signosZodiacosGanador.equals(signoApostador)) {
+    	        	if (this.numeroGanador.equals(numeroApostado) || ultimosDosDigitosGanador.equals(ultimosDosDigitosApostado) || ultimosTresDigitosGanador.equals(ultimosTresDigitosApostado)) {
     	            // Hay al menos un ganador
     	            calcularPremio(premioReal, numeroApostado, valorApostado);
 
-    	            premioAcumulado +=  premioReal - premioTOTAL; // acumula lo descontado del premio total y se suma eso para los proximos premios
+    	            premioAcumulado =  premioReal - premioTOTAL; // acumula lo descontado del premio total y se suma eso para los proximos premios
 
     	            // Guardar números ganadores, series y premio acumulado
     	            superAstro_DAO.guardarJuego(nombreJuego,tipoJuego,numeroGanador, signosZodiacosGanador, premioAcumulado);
     	            superAstro_DAO.guardarApuestaSuperAstro(usernameDelApostador,nombreRealApostador, sede, cedula , "", costoBoleto, numeroApostado, signoApostador);
 
+    	        	}
     	            return premioTOTAL;
-    	        
+    	        	
     	    } else {
     	        // Si no hay ganador, acumula el premio principal
     	        

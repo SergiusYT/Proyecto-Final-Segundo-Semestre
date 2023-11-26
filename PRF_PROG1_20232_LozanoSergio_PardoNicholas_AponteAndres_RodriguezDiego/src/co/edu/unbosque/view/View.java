@@ -107,6 +107,7 @@ public class View extends JFrame{
     
 	
 	public Login getLogin() {
+		
         return login;
     }
 	
